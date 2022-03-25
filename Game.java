@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,7 +12,10 @@ class Surface extends JPanel {
     private void doDrawing(Graphics g) {
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawString("DA SPIDA LESSGOOOO", 50, 50);
+        g2d.setPaint(Color.PINK);
+        g2d.fillRect(0, 0, 700, 700);
+        g2d.setPaint(Color.BLACK);
+        g2d.drawString("Test 0.1", 350, 350);
     }
 
     @Override
@@ -25,7 +29,12 @@ class Surface extends JPanel {
 
 public class Game extends JFrame{
 
+    public int screenW;
+    public int screenH;
+
     public Game(){
+        screenW = 700;
+        screenH = 700;
         initUI();
     }   
 
@@ -34,7 +43,7 @@ public class Game extends JFrame{
         add(new Surface());
 
         setTitle("Project Pink Spyda");
-        setSize(700, 700);
+        setSize(screenW, screenH);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
