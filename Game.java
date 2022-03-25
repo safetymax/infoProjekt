@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
+
 class Surface extends JPanel {
 
     private void doDrawing(Graphics g) {
@@ -16,6 +17,7 @@ class Surface extends JPanel {
         g2d.fillRect(0, 0, 700, 700);
         g2d.setPaint(Color.BLACK);
         g2d.drawString("Test 0.1", 350, 350);
+
     }
 
     @Override
