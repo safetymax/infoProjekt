@@ -43,13 +43,13 @@ public class Game extends JFrame{
     public static void main(String[] args) {
         System.out.println("Hello World");
 
-        //  EventQueue.invokeLater(new Runnable() {
+         EventQueue.invokeLater(new Runnable() {
 
-        //     @Override
-        //     public void run() {
-        //         BasicEx ex = new BasicEx();
-        //         ex.setVisible(true);
-        //     }
-        // });
+            @Override
+            public void run() {
+                Game game = new Game();
+                game.setVisible(true);
+            }
+        });
     }
 }
