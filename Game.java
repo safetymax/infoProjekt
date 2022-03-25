@@ -11,7 +11,7 @@ class Surface extends JPanel {
     private void doDrawing(Graphics g) {
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawString("Java 2D", 50, 50);
+        g2d.drawString("DA SPIDA LESSGOOOO", 50, 50);
     }
 
     @Override
@@ -33,8 +33,8 @@ public class Game extends JFrame{
 
         add(new Surface());
 
-        setTitle("Simple Java 2D example");
-        setSize(300, 200);
+        setTitle("Project Pink Spyda");
+        setSize(700, 700);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
