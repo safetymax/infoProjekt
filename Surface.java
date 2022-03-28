@@ -7,8 +7,15 @@ import javax.swing.JPanel;
 
 public class Surface extends JPanel implements Runnable {
 
+    KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     int frameCount = 0;
+
+    public Surface() {
+        addKeyListener(keyH);
+        setFocusable(true);
+        setBackground(Color.BLACK);
+    }
 
     private void doDrawing(Graphics g) {
 
@@ -41,9 +48,11 @@ public class Surface extends JPanel implements Runnable {
     public void run() {
         while(gameThread!=null) {
             //game Thread
-            System.out.println("Game Thread is running");
+            //System.out.println("Game Thread is running");
+
             //update information
             update();
+
             //draw the screen
             repaint();
         }
