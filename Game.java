@@ -8,7 +8,9 @@ import javax.swing.JPanel;
 
 
 
-class Surface extends JPanel {
+class Surface extends JPanel implements Runnable {
+
+    Thread gameThread;
 
     private void doDrawing(Graphics g) {
 
@@ -26,41 +28,37 @@ class Surface extends JPanel {
         super.paintComponent(g);
         doDrawing(g);
     }
+
+    public void startGameThread() {
+        gameThread = new Thread(this);
+        gameThread.start();
+    }
+
+    @Override
+    public void run() {
+        while(gameThread!=null) {
+            System.out.println("Game Thread is running");
+        }
+        
+    }
 }
 
 
-public class Game extends JFrame{
+public class Game{
 
-    public int screenW;
-    public int screenH;
-
-    public Game(){
-        screenW = 700;
-        screenH = 700;
-        initUI();
-    }   
-
-    private void initUI() {
-
-        add(new Surface());
-
-        setTitle("Project Pink Spyda");
-        setSize(screenW, screenH);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
-    //Game will run in this class
     public static void main(String[] args) {
-        System.out.println("Hello World");
 
-         EventQueue.invokeLater(new Runnable() {
 
-            @Override
-            public void run() {
-                Game game = new Game();
-                game.setVisible(true);
-            }
-        });
+        JFrame frame = new JFrame();
+        frame.setTitle("Project Pink Spyda");
+        frame.setSize(700,700);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Surface surface = new Surface();
+        frame.add(surface);
+
+        frame.setVisible(true);
+        surface.startGameThread();
+
     }
 }
