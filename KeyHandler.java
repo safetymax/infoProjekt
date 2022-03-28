@@ -10,19 +10,19 @@ public class KeyHandler implements KeyListener{
         int code = e.getKeyCode();
 
         if(code == KeyEvent.VK_W) {
-            System.out.println("W key pressed");
+            //System.out.println("W key pressed");
             upPressed = true;
         }
         if(code == KeyEvent.VK_A) {
-            System.out.println("A key pressed");
+            //System.out.println("A key pressed");
             leftPressed = true;
         }
         if(code == KeyEvent.VK_S) {
-            System.out.println("S key pressed");
+            //System.out.println("S key pressed");
             downPressed = true;
         }
         if(code == KeyEvent.VK_D) {
-            System.out.println("D key pressed");
+            //System.out.println("D key pressed");
             rightPressed = true;
         }
     }
