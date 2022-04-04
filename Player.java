@@ -20,6 +20,7 @@ public class Player {
         speed = 1;
     }
 
+
     public void move(boolean up, boolean down, boolean left, boolean right) {
         if(up) {
             posX += Math.cos(direction) * speed;

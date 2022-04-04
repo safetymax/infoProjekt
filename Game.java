@@ -12,7 +12,7 @@ public class Game{
 
 
         JFrame frame = new JFrame();
-        frame.setTitle("Project Pink Spyda");
+        frame.setTitle("v0.1 Alpha Miracle Genesis -PonZius Inc.");
         frame.setSize(700,700);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
