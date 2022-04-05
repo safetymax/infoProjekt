@@ -10,7 +10,10 @@ public class Surface extends JPanel implements Runnable {
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
 
+    // Game Elements
     Player player = new Player();
+
+    Boundary[] boundaries = new Boundary[256];
 
     int frameCount = 0;
 
@@ -18,19 +21,30 @@ public class Surface extends JPanel implements Runnable {
         addKeyListener(keyH);
         setFocusable(true);
         setBackground(Color.BLACK);
+        for(int i = 0; i < 6; i++) {
+            boundaries[i] = new Wall((int) (Math.random() * 700), (int) (Math.random() * 700), (int) (Math.random() * 700), (int) (Math.random() * 700));
+        }
     }
 
     private void doDrawing(Graphics g) {
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setPaint(Color.PINK);
+        g2d.setPaint(Color.BLACK);
         g2d.fillRect(0, 0, 700, 700);
 
+        if(keyH.shiftPressed){
+        //Enviroment
+        g2d.setPaint(Color.BLUE);
+        for(int i = 0; i < boundaries.length; i++) {
+            if(boundaries[i] != null) {
+                g2d.drawLine(boundaries[i].x1, boundaries[i].y1, boundaries[i].x2, boundaries[i].y2);
+            }
+        }
+
         //Player
-        g2d.setPaint(Color.RED);
-        g2d.fillOval((int) player.posX, (int) player.posY, 20, 20);
-        g2d.setPaint(Color.BLACK);
-        g2d.drawLine((int) player.posX+10, (int) player.posY+10, (int) (player.posX+10 + Math.cos(player.direction) * 20), (int) (player.posY+10 + Math.sin(player.direction) * 20));
+        player.draw(g2d);
+        player.cast(boundaries, g2d);
+    }
 
         //debug
         g2d.dispose();

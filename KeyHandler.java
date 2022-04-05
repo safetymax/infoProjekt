@@ -3,7 +3,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener{
 
-    public boolean upPressed, downPressed, leftPressed, rightPressed, speedUp, speedDown;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed;
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -25,6 +25,10 @@ public class KeyHandler implements KeyListener{
             //System.out.println("D key pressed");
             rightPressed = true;
         }
+        if(code == KeyEvent.VK_SHIFT) {
+            //System.out.println("Tab key pressed");
+            shiftPressed = true;
+        }
     }
 
     @Override
@@ -42,6 +46,9 @@ public class KeyHandler implements KeyListener{
         }
         if(code == KeyEvent.VK_D) {
             rightPressed = false;
+        }
+        if(code == KeyEvent.VK_SHIFT) {
+            shiftPressed = false;
         }
     }
 
