@@ -50,15 +50,22 @@ public class Player {
 
     }
 
-    public void draw(Graphics2D g2d) {
-        g2d.setPaint(Color.WHITE);
-        g2d.fillOval((int) posX-10, (int) posY-10, 20, 20);
+    public void draw(Graphics2D g2d, boolean minimap) {
+        if(minimap == true){
+            g2d.setPaint(Color.WHITE);
+            g2d.fillOval((int) posX-10, (int) posY-10, 20, 20);
+        }
         
     }
 
-    public void cast(Boundary[] boundaries, Graphics2D g2d) {
+    public void cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap) {
         for(int i = 0; i < rays.length; i++) {
-            rays[i].cast(boundaries, g2d);
+            float dist = rays[i].cast(boundaries, g2d, minimap);
+            if(minimap == false){
+                float colour = dist/1000;
+                g2d.setPaint(new Color(colour, colour, colour));
+                g2d.drawLine(rays.length-i, (int) (350-30000/dist), rays.length-i, (int) (350+30000/dist));
+            }
         }
     }
 

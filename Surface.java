@@ -24,6 +24,10 @@ public class Surface extends JPanel implements Runnable {
         for(int i = 0; i < 6; i++) {
             boundaries[i] = new Wall((int) (Math.random() * 700), (int) (Math.random() * 700), (int) (Math.random() * 700), (int) (Math.random() * 700));
         }
+        boundaries[6] = new Wall(0, 0, 700, 0);
+        boundaries[7] = new Wall(0, 0, 0, 700);
+        boundaries[8] = new Wall(700, 0, 700, 700);
+        boundaries[9] = new Wall(0, 700, 700, 700);
     }
 
     private void doDrawing(Graphics g) {
@@ -32,19 +36,19 @@ public class Surface extends JPanel implements Runnable {
         g2d.setPaint(Color.BLACK);
         g2d.fillRect(0, 0, 700, 700);
 
-        if(keyH.shiftPressed){
         //Enviroment
         g2d.setPaint(Color.BLUE);
-        for(int i = 0; i < boundaries.length; i++) {
-            if(boundaries[i] != null) {
-                g2d.drawLine(boundaries[i].x1, boundaries[i].y1, boundaries[i].x2, boundaries[i].y2);
+        if(keyH.shiftPressed){
+            for(int i = 0; i < boundaries.length; i++) {
+                if(boundaries[i] != null) {
+                    g2d.drawLine(boundaries[i].x1, boundaries[i].y1, boundaries[i].x2, boundaries[i].y2);
+                }
             }
         }
 
         //Player
-        player.draw(g2d);
-        player.cast(boundaries, g2d);
-    }
+        player.draw(g2d, keyH.shiftPressed);
+        player.cast(boundaries, g2d, keyH.shiftPressed);
 
         //debug
         g2d.dispose();

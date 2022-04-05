@@ -9,6 +9,7 @@ public class Ray {
 
     float x, y;
     double direction;
+    KeyHandler keyH = new KeyHandler();
     
     public Ray(float x, float y, double direction) {
         this.x = x;
@@ -23,7 +24,7 @@ public class Ray {
         this.direction = direction;
     }
 
-    public int[] cast(Boundary[] boundaries, Graphics2D g2d) {
+    public float cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap) {
         int[] result = new int[2];
         result[0] = -1;
         result[1] = -1;
@@ -69,17 +70,20 @@ public class Ray {
 
         //draw the ray
         g2d.setPaint(Color.WHITE);
-        if(closestDistance != distance){
-            g2d.drawLine((int)x, (int)y, record1, record2);
+            if(minimap){
+            if(closestDistance != distance){
+                g2d.drawLine((int)x, (int)y, record1, record2);
+            }
+            else{
+                g2d.drawLine((int)x, (int)y, (int) ((int)x + (float)Math.cos(direction) * distance), (int) ((int)y + (float)Math.sin(direction) * distance));
+            }
         }
-        else{
-            g2d.drawLine((int)x, (int)y, (int) ((int)x + (float)Math.cos(direction) * distance), (int) ((int)y + (float)Math.sin(direction) * distance));
-        }
+        
 
         result[0] = record1;
         result[1] = record2;
 
-        return result;
+        return closestDistance;
     }
 
 }
