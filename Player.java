@@ -17,8 +17,8 @@ public class Player {
     public Ray[] rays = new Ray[700];
 
     public Player() {   
-        posX = 0;
-        posY = 0;
+        posX = 350;
+        posY = 350;
         direction = 0;
         speed = 2;
 
@@ -71,11 +71,17 @@ public class Player {
             int[] results = rays[i].cast(boundaries, g2d, minimap);
             int dist = results[0];
 
-            //calls isHit() on hit Boundary
-            boundaries[results[3]].isHitByRay();
+            //calls isHitByRay() on hit Boundary
+            if(results[3] != -1){
+                boundaries[results[3]].isHitByRay();
+            }
 
             if(minimap == false){
-                float colour = 1-(dist/1000);
+                //map the distance to a color
+                float colour = (float) dist/1000;
+                colour = 1 - colour;
+                g2d.setPaint(new Color(colour, colour, colour));
+
                 //factor to counteract fish-eye effect
                 double correctionFactor = this.direction - rays[i].direction;
                 
