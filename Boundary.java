@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
+//Everything the player can see extends from this
 public abstract class Boundary {
     
     public int x1, y1, x2, y2;
@@ -17,5 +19,6 @@ public abstract class Boundary {
     }
     
     public abstract void draw(Graphics2D g2d);
+    public abstract void isHit();
     
 }

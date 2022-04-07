@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
+//Wall between two points
 public class Wall extends Boundary{
 
     public int x1, y1, x2, y2;
@@ -18,4 +20,6 @@ public class Wall extends Boundary{
         g2d.setPaint(Color.BLUE);
         g2d.drawLine(x1, y1, x2, y2);
     }
+
+    public void isHit(){}
 }

@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 public class Game{
 
     public static void main(String[] args) {
-
+        //Creating Window
 
         JFrame frame = new JFrame();
         frame.setTitle("v0.1 Alpha Miracle Genesis -PonZius Inc.");
@@ -20,6 +20,8 @@ public class Game{
         frame.add(surface);
 
         frame.setVisible(true);
+
+        //Start Game Loop
         surface.startGameThread();
 
     }

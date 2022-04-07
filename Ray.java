@@ -68,16 +68,16 @@ public class Ray {
             }
         }
 
-        //draw the ray
+        //draw the ray in minimap form
         g2d.setPaint(Color.WHITE);
             if(minimap){
-            if(closestDistance != distance){
-                g2d.drawLine((int)x, (int)y, record1, record2);
+                if(closestDistance != distance){
+                    g2d.drawLine((int)x, (int)y, record1, record2);
+                }
+                else{
+                    g2d.drawLine((int)x, (int)y, (int) ((int)x + (float)Math.cos(direction) * distance), (int) ((int)y + (float)Math.sin(direction) * distance));
+                }
             }
-            else{
-                g2d.drawLine((int)x, (int)y, (int) ((int)x + (float)Math.cos(direction) * distance), (int) ((int)y + (float)Math.sin(direction) * distance));
-            }
-        }
         
 
         result[0] = record1;

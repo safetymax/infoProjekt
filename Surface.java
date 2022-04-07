@@ -18,9 +18,12 @@ public class Surface extends JPanel implements Runnable {
     int frameCount = 0;
 
     public Surface() {
+        //Setup function, runs before game loop
         addKeyListener(keyH);
         setFocusable(true);
         setBackground(Color.BLACK);
+
+        //random walls: debug
         for(int i = 0; i < 6; i++) {
             boundaries[i] = new Wall((int) (Math.random() * 700), (int) (Math.random() * 700), (int) (Math.random() * 700), (int) (Math.random() * 700));
         }
@@ -31,6 +34,7 @@ public class Surface extends JPanel implements Runnable {
     }
 
     private void doDrawing(Graphics g) {
+        //Everything drawing related in here
 
         Graphics2D g2d = (Graphics2D) g;
         g2d.setPaint(Color.BLACK);
@@ -93,6 +97,8 @@ public class Surface extends JPanel implements Runnable {
             lastTime = currentTime;
 
             if(delta >= 1){
+                //Game Loop
+
                 //update information
                 update();
 

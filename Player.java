@@ -58,6 +58,7 @@ public class Player {
         
     }
 
+    //Casts all Rays
     public void cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap) {
         for(int i = 0; i < rays.length; i++) {
             float dist = rays[i].cast(boundaries, g2d, minimap);
@@ -66,6 +67,7 @@ public class Player {
                 //factor to counteract fish-eye effect
                 double correctionFactor = this.direction - rays[i].direction;
                 
+                //Renders pseudo 3d
                 g2d.setPaint(new Color(colour, colour, colour));
                 g2d.drawLine(rays.length-i, (int) (350-30000/(dist*Math.cos(correctionFactor))), rays.length-i, (int) (350+30000/(dist*(Math.cos(correctionFactor)))));
             }
