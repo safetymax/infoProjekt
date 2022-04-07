@@ -21,5 +21,6 @@ public class Wall extends Boundary{
         g2d.drawLine(x1, y1, x2, y2);
     }
 
-    public void isHit(){}
+    //called when a Ray hits the wall
+    public void isHitByRay(){}
 }

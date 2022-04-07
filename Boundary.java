@@ -19,6 +19,6 @@ public abstract class Boundary {
     }
     
     public abstract void draw(Graphics2D g2d);
-    public abstract void isHit();
+    public abstract void isHitByRay();
     
 }

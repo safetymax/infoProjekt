@@ -24,13 +24,15 @@ public class Ray {
         this.direction = direction;
     }
 
-    public float cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap) {
-        int[] result = new int[2];
-        result[0] = -1;
+    public int[] cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap) {
+        int[] result = new int[4];
         result[1] = -1;
+        result[2] = -1;
         float distance = 1000;
 
         float closestDistance = distance;
+        result[0] = (int) closestDistance;
+        int closestIndex = -1;
         int record1 = -1;
         int record2 = -1;
 
@@ -45,6 +47,7 @@ public class Ray {
                 float x4 = x + (float)Math.cos(direction) * distance*-1;
                 float y4 = y + (float)Math.sin(direction) * distance*-1;
 
+                //Explain: http://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect
                 float denom = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4);
                 float t = ((x1-x3)*(y3-y4) - (y1-y3)*(x3-x4)) / denom;
                 float u = ((x1-x2)*(y1-y3) - (y1-y2)*(x1-x3)) / denom;
@@ -63,6 +66,7 @@ public class Ray {
                         closestDistance = distanceToWall;
                         record1 = result[0];
                         record2 = result[1];
+                        closestIndex = i;
                     }
                 }
             }
@@ -80,10 +84,12 @@ public class Ray {
             }
         
 
-        result[0] = record1;
-        result[1] = record2;
+        result[0] = (int) closestDistance;
+        result[1] = record1;
+        result[2] = record2;
+        result[3] = closestIndex;
 
-        return closestDistance;
+        return result;
     }
 
 }

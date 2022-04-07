@@ -54,6 +54,8 @@ public class Player {
     }
 
     public void draw(Graphics2D g2d, boolean minimap) {
+
+        //Draw Player on minimap
         if(minimap == true){
             g2d.setPaint(Color.WHITE);
             g2d.fillOval((int) posX-10, (int) posY-10, 20, 20);
@@ -64,7 +66,14 @@ public class Player {
     //Casts all Rays
     public void cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap) {
         for(int i = 0; i < rays.length; i++) {
-            float dist = rays[i].cast(boundaries, g2d, minimap);
+
+            //results: [0] = distance, [1] = x, [2] = y, [3] = index of closest boundary
+            int[] results = rays[i].cast(boundaries, g2d, minimap);
+            int dist = results[0];
+
+            //calls isHit() on hit Boundary
+            boundaries[results[3]].isHitByRay();
+
             if(minimap == false){
                 float colour = 1-(dist/1000);
                 //factor to counteract fish-eye effect
