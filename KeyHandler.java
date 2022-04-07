@@ -3,8 +3,10 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener{
 
+    //Key pressed variables
     public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed;
 
+    //Key Pressed (If new Key Added, dont forget to turn off in keyReleased)
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
@@ -31,6 +33,7 @@ public class KeyHandler implements KeyListener{
         }
     }
 
+    //Key Released
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();

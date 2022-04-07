@@ -42,7 +42,8 @@ public class Surface extends JPanel implements Runnable {
 
         //Enviroment
         g2d.setPaint(Color.BLUE);
-        if(keyH.shiftPressed){
+        if(keyH.shiftPressed){  //shiftPressed = minimap
+            //Loop through all game entities
             for(int i = 0; i < boundaries.length; i++) {
                 if(boundaries[i] != null) {
                     g2d.drawLine(boundaries[i].x1, boundaries[i].y1, boundaries[i].x2, boundaries[i].y2);

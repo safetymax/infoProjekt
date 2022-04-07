@@ -22,13 +22,15 @@ public class Player {
         direction = 0;
         speed = 2;
 
+        //create Rays
         for(int i = 0; i < rays.length; i++) {
             rays[i] = new Ray(posX, posY, direction+Math.toRadians(fov)/2-Math.toRadians(fov)/(rays.length-1)*i);
         }
     }
 
-
+    //Player move function
     public void move(boolean up, boolean down, boolean left, boolean right) {
+        //Forwards and back
         if(up) {
             posX += Math.cos(direction) * speed;
             posY += Math.sin(direction) * speed;
@@ -37,6 +39,7 @@ public class Player {
             posX -= Math.cos(direction) * speed;
             posY -= Math.sin(direction) * speed;
         }
+        //Turning
         if(left) {
             direction -= 0.05f;
         }
