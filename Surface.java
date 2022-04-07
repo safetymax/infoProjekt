@@ -18,7 +18,7 @@ public class Surface extends JPanel implements Runnable {
     int frameCount = 0;
 
     public Surface() {
-        //Setup function, runs before game loop
+        //Setup function, runs before game loop (Put everything in here that is only supposed to run once)
         addKeyListener(keyH);
         setFocusable(true);
         setBackground(Color.BLACK);
@@ -73,6 +73,7 @@ public class Surface extends JPanel implements Runnable {
     }
 
     public void startGameThread() {
+        //Start the game thread
         gameThread = new Thread(this);
         gameThread.start();
     }
@@ -80,6 +81,7 @@ public class Surface extends JPanel implements Runnable {
     @Override
     public void run() {
 
+        //Determines how often the game updates (FPS)
         double drawInterval = 1000000000/60;
         double delta = 0;
         long lastTime = System.nanoTime();
