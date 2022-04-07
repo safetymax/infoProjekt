@@ -73,7 +73,7 @@ public class Player {
 
             //calls isHitByRay() on hit Boundary
             if(results[3] != -1){
-                boundaries[results[3]].isHitByRay();
+                boundaries[results[3]].isHitByRay(results[1], results[2]);
             }
 
             if(minimap == false){

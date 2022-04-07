@@ -22,5 +22,5 @@ public class Wall extends Boundary{
     }
 
     //called when a Ray hits the wall
-    public void isHitByRay(){}
+    public void isHitByRay(int x, int y){}
 }
