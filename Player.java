@@ -62,9 +62,12 @@ public class Player {
         for(int i = 0; i < rays.length; i++) {
             float dist = rays[i].cast(boundaries, g2d, minimap);
             if(minimap == false){
-                float colour = dist/1000;
+                float colour = 1-(dist/1000);
+                //factor to counteract fish-eye effect
+                double correctionFactor = this.direction - rays[i].direction;
+                
                 g2d.setPaint(new Color(colour, colour, colour));
-                g2d.drawLine(rays.length-i, (int) (350-30000/dist), rays.length-i, (int) (350+30000/dist));
+                g2d.drawLine(rays.length-i, (int) (350-30000/(dist*Math.cos(correctionFactor))), rays.length-i, (int) (350+30000/(dist*(Math.cos(correctionFactor)))));
             }
         }
     }
