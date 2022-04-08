@@ -19,7 +19,7 @@ public class Surface extends JPanel implements Runnable {
     
     //Empty level Information
     String[] info;
-    Boundary[] boundaries = new Boundary[256];
+    Boundary[] boundaries = new Boundary[2048];
 
     int frameCount = 0;
 
@@ -28,16 +28,7 @@ public class Surface extends JPanel implements Runnable {
         addKeyListener(keyH);
         setFocusable(true);
         setBackground(Color.BLACK);
-
-        //random walls: debug
-        /*for(int i = 0; i < 6; i++) {
-            boundaries[i] = new Wall((int) (Math.random() * 700), (int) (Math.random() * 700), (int) (Math.random() * 700), (int) (Math.random() * 700));
-        }
-        boundaries[6] = new Wall(0, 0, 700, 0);
-        boundaries[7] = new Wall(0, 0, 0, 700);
-        boundaries[8] = new Wall(700, 0, 700, 700);
-        boundaries[9] = new Wall(0, 700, 700, 700);
-        */
+        
         try {
             info = LevelGeneration.readFile("level1.txt");
         } catch (FileNotFoundException e) {
