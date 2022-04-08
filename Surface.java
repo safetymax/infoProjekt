@@ -47,13 +47,11 @@ public class Surface extends JPanel implements Runnable {
             
             e.printStackTrace();
         }
-        Wall[] walls = LevelGeneration.generateLevel(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), Integer.parseInt(info[4]), Integer.parseInt(info[5]));
+        Boundary[] walls = LevelGeneration.generateLevel(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), Integer.parseInt(info[4]), Integer.parseInt(info[5]));
         
-        /*for(int i = 0; i < walls.length; i++) {
-            if(walls[i] !=null){
-            System.out.println(walls[i].x1 + " " + walls[i].y1 + " " + walls[i].x2 + " " + walls[i].y2);
-            }
-        }*/
+        for(int i = 0;i < walls.length; i++){
+            boundaries[i] = walls[i];
+        }
     }
 
     private void doDrawing(Graphics g) {

@@ -42,11 +42,11 @@ public class LevelGeneration {
     
     }
 
-    public static Wall[] generateLevel(String level, int startx, int starty, int size, int rows, int columns) {
+    public static Boundary[] generateLevel(String level, int startx, int starty, int size, int rows, int columns) {
     
         // du structurer levelInfo:
                 
-        Wall[] walls = new Wall[rows * columns*4]; 
+        Boundary[] walls = new Wall[rows * columns*4]; 
         //generate Walls from starting x, changes y when x*colums is reached
         int x = startx;
         int y = starty;
@@ -58,7 +58,6 @@ public class LevelGeneration {
             System.out.println("Size: "+ size);
             if(level.charAt(i) == 'W'){
                 walls[c] = new Wall(x,y,x,y+size);  //top left to bot left
-                System.out.println(walls[c].x1);
                 walls[c+1] = new Wall(x,y,x+size,y); //top left to top right
                 walls[c+2] = new Wall(x+size,y,x+size,y+size); //top right to bot right
                 walls[c+3] = new Wall(x,y+size,x+size,y+size); //bot left to bot right
