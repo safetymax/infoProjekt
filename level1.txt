@@ -1,0 +1,6 @@
+Level: WOWOWWOWOWWOWOWWOWOWWOWOW
+Start X: 0
+Start Y: 0
+Size: 50
+Rows: 5
+Colums: 5
