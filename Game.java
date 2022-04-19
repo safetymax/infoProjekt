@@ -13,7 +13,7 @@ public class Game{
         //Creating Window
         JFrame frame = new JFrame();
         frame.setTitle("v0.1 Alpha Miracle Genesis -PonZius Inc.");
-        frame.setSize(700,700);
+        frame.setSize(900,900);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Surface surface = new Surface();

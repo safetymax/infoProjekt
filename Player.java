@@ -14,7 +14,7 @@ public class Player {
     public float speed;
 
     public int fov = 90;
-    public Ray[] rays = new Ray[700];
+    public Ray[] rays = new Ray[900];
 
     public Player() {   
         posX = 350;
@@ -87,7 +87,7 @@ public class Player {
                 
                 //Renders pseudo 3d
                 g2d.setPaint(new Color(colour, colour, colour));
-                g2d.drawLine(rays.length-i, (int) (350-30000/(dist*Math.cos(correctionFactor))), rays.length-i, (int) (350+30000/(dist*(Math.cos(correctionFactor)))));
+                g2d.drawLine(rays.length-i, (int) (450-30000/(dist*Math.cos(correctionFactor))), rays.length-i, (int) (450+30000/(dist*(Math.cos(correctionFactor)))));
             }
         }
     }

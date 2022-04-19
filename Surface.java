@@ -50,7 +50,7 @@ public class Surface extends JPanel implements Runnable {
 
         Graphics2D g2d = (Graphics2D) g;
         g2d.setPaint(Color.BLACK);
-        g2d.fillRect(0, 0, 700, 700);
+        g2d.fillRect(0, 0, 900, 900);
 
         //Enviroment
         g2d.setPaint(Color.BLUE);
