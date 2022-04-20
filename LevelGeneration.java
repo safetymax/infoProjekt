@@ -84,6 +84,7 @@ public class LevelGeneration {
                             //check indices to avoid checks with itself
                             if(i!=j){
                                 b[j] = null;
+                                b[i] = null;
                             }
                         }
                     }
