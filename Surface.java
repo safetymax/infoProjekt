@@ -40,6 +40,8 @@ public class Surface extends JPanel implements Runnable {
         }
         Boundary[] walls = LevelGeneration.generateLevel(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), Integer.parseInt(info[4]), Integer.parseInt(info[5]));
         
+        walls =LevelGeneration.removeDuplicateWalls(walls);
+        
         for(int i = 0;i < walls.length; i++){
             boundaries[i] = walls[i];
         }

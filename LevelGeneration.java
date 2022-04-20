@@ -66,7 +66,40 @@ public class LevelGeneration {
                 y+=size;
             }
         }
+        
         return walls;
-    
+        
     }
+    //removes walls which are on top of each other
+    public static Boundary[] removeDuplicateWalls(Boundary[] b){
+        
+        for(int i = 0; i<b.length; i++){
+            for(int j = 0; j<b.length; j++){
+                if(b[i] != null && b[j] != null){
+                    //split x and y coordinate check for more clarity
+                    //check if x coordinates match
+                    if(b[i].x1 == b[j].x1 && b[i].x2 == b[j].x2){
+                        //check if y coordinates match
+                        if(b[i].y1 == b[j].y1 && b[i].y2 == b[j].y2){
+                            //check indices to avoid checks with itself
+                            if(i!=j){
+                                b[j] = null;
+                            }
+                        }
+                    }
+
+
+                    
+                }
+            }
+        }
+       
+    
+
+        return b;
+
+
+
+    }
+
 }
