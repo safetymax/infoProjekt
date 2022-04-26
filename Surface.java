@@ -16,6 +16,8 @@ public class Surface extends JPanel implements Runnable {
 
     // Game Elements
     Player player = new Player();
+
+    Overlay overlay = new Overlay();
     
     //Empty level Information
     String[] info;
@@ -71,7 +73,7 @@ public class Surface extends JPanel implements Runnable {
 
 
         //overlay
-        //overlay.draw(g2d, keyH);
+        overlay.draw(g2d, keyH);
         
         //debug
         g2d.dispose();
