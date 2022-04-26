@@ -9,8 +9,10 @@ import java.util.logging.Level;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class overlay{
+public class Overlay{
 
-    public void draw(Graphics2D g2d, )
+    public void draw(Graphics2D g2d, KeyHandler keyH){
+        
+    }
     
 }
