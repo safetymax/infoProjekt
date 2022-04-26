@@ -24,17 +24,17 @@ public class Ray {
         this.direction = direction;
     }
 
-    public int[] cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap) {
-        int[] result = new int[4];
+    public float[] cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap) {
+        float[] result = new float[4];
         result[1] = -1;
         result[2] = -1;
         float distance = 1000;
 
         float closestDistance = distance;
         result[0] = (int) closestDistance;
-        int closestIndex = -1;
-        int record1 = -1;
-        int record2 = -1;
+        float closestIndex = -1;
+        float record1 = -1;
+        float record2 = -1;
 
         for(int i = 0; i < boundaries.length; i++){
             if(boundaries[i] != null){
@@ -76,7 +76,7 @@ public class Ray {
         g2d.setPaint(Color.WHITE);
             if(minimap){
                 if(closestDistance != distance){
-                    g2d.drawLine((int)x, (int)y, record1, record2);
+                    g2d.drawLine((int)x, (int)y, (int)record1, (int)record2);
                 }
                 else{
                     g2d.drawLine((int)x, (int)y, (int) ((int)x + (float)Math.cos(direction) * distance), (int) ((int)y + (float)Math.sin(direction) * distance));
@@ -84,7 +84,7 @@ public class Ray {
             }
         
 
-        result[0] = (int) closestDistance;
+        result[0] = closestDistance;
         result[1] = record1;
         result[2] = record2;
         result[3] = closestIndex;

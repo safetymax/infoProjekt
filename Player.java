@@ -68,12 +68,12 @@ public class Player {
         for(int i = 0; i < rays.length; i++) {
 
             //results: [0] = distance, [1] = x, [2] = y, [3] = index of closest boundary
-            int[] results = rays[i].cast(boundaries, g2d, minimap);
-            int dist = results[0];
+            float[] results = rays[i].cast(boundaries, g2d, minimap);
+            float dist = results[0];
 
             //calls isHitByRay() on hit Boundary
             if(results[3] != -1){
-                boundaries[results[3]].isHitByRay(results[1], results[2]);
+                boundaries[(int)results[3]].isHitByRay((int)results[1], (int)results[2]);
             }
 
             if(minimap == false){
