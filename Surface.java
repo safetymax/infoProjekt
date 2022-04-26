@@ -69,6 +69,10 @@ public class Surface extends JPanel implements Runnable {
         player.draw(g2d, keyH.shiftPressed);
         player.cast(boundaries, g2d, keyH.shiftPressed);
 
+
+        //overlay
+        //overlay.draw(g2d, keyH);
+        
         //debug
         g2d.dispose();
     }
