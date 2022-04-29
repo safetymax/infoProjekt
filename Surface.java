@@ -16,6 +16,7 @@ public class Surface extends JPanel implements Runnable {
 
     // Game Elements
     Player player = new Player();
+    boolean overlayActive = true;
 
     Overlay overlay = new Overlay();
     
@@ -73,7 +74,8 @@ public class Surface extends JPanel implements Runnable {
 
 
         //overlay
-        overlay.draw(g2d, keyH);
+      
+      overlay.draw(g2d, keyH.downPressed, keyH.rightPressed, keyH.upPressed, keyH.leftPressed, keyH.enterPressed);
         
         //debug
         g2d.dispose();
