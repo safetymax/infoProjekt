@@ -38,8 +38,6 @@ public class Overlay{
         if(enterA <= 0){
             enterA = 0;
         }
-        
-        System.out.println(enterA);
         if(enterA == 0){
             Image img1 = Toolkit.getDefaultToolkit().getImage("Bild.png");
             g2d.drawImage(img1, 0, 0, null);
@@ -123,6 +121,7 @@ public class Overlay{
                 button3.selectedChange(g2d,475 ,410,125,45);
             }
         }
+        
         if(enterA == 5){
             System.exit(0);
         }

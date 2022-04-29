@@ -18,7 +18,7 @@ public class Player {
 
     public Player() {   
         posX = 350;
-        posY = 350;
+        posY = 400;
         direction = 0;
         speed = 2;
 
