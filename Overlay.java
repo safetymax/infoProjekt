@@ -21,7 +21,10 @@ public class Overlay{
     Button button4 = new Button();
     Button button5 = new Button();
 
-    public void draw(Graphics2D g2d, Boolean down,Boolean right,Boolean up, Boolean left,boolean enter){
+    public void draw(Graphics2D g2d, Boolean down,Boolean right,Boolean up, Boolean left,boolean enter,boolean menue){
+        if(menue){
+            enterA=0;
+        }
         if(enter && !i && !j){
             i = true;
             j = true;
@@ -38,6 +41,8 @@ public class Overlay{
         if(enterA <= 0){
             enterA = 0;
         }
+        
+            
         if(enterA == 0){
             Image img1 = Toolkit.getDefaultToolkit().getImage("Bild.png");
             g2d.drawImage(img1, 0, 0, null);
