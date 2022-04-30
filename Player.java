@@ -5,6 +5,11 @@ import java.awt.Graphics2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.Raster;
+import java.io.File;
+import javax.imageio.ImageIO;
+
 public class Player {
     
     public float posX;
@@ -16,6 +21,9 @@ public class Player {
     public int fov = 90;
     public Ray[] rays = new Ray[900];
 
+    File f1 = new File("wall.png");
+    BufferedImage wallImage = null;
+
     public Player() {   
         posX = 350;
         posY = 400;
@@ -25,6 +33,14 @@ public class Player {
         //create Rays
         for(int i = 0; i < rays.length; i++) {
             rays[i] = new Ray(posX, posY, direction+Math.toRadians(fov)/2-Math.toRadians(fov)/(rays.length-1)*i);
+        }
+
+        //loading textures
+        try{
+            wallImage = ImageIO.read(f1);
+        }
+        catch(Exception e){
+            System.out.println("Error");
         }
     }
 
@@ -65,6 +81,7 @@ public class Player {
 
     //Casts all Rays
     public void cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap) {
+        int[] samples;
         for(int i = 0; i < rays.length; i++) {
 
             //results: [0] = distance, [1] = x, [2] = y, [3] = index of closest boundary
@@ -80,14 +97,24 @@ public class Player {
                 //map the distance to a color
                 float colour = (float) dist/1000;
                 colour = 1 - colour;
-                g2d.setPaint(new Color(colour, colour, colour));
 
                 //factor to counteract fish-eye effect
                 double correctionFactor = this.direction - rays[i].direction;
                 
                 //Renders pseudo 3d
-                g2d.setPaint(new Color(colour, colour, colour));
-                g2d.drawLine(rays.length-i, (int) (450-30000/(dist*Math.cos(correctionFactor))), rays.length-i, (int) (450+30000/(dist*(Math.cos(correctionFactor)))));
+                if(results[3] != -1){
+                    if(boundaries[(int)results[3]].type == 1) {             
+                        samples = wallImage.getData().getPixel((int)(results[1]%64), 0, (int[]) null);
+                        g2d.setPaint(new Color(colour, (results[1]%64)/64, 1));
+                    }
+                    else if(boundaries[(int)results[3]].type == 2) {
+                        samples = wallImage.getData().getPixel((int)(results[2]%64), 0, (int[]) null);
+                        g2d.setPaint(new Color(0, (results[2]%64)/64, colour));
+                    }
+                }
+
+                //                                     pixels/distance*correctionFactor*projection plane distance
+                g2d.drawLine(rays.length-i, (int) (450-64/(dist*Math.cos(correctionFactor))*277), rays.length-i, (int) (450+64/(dist*(Math.cos(correctionFactor)))*277));
             }
         }
     }
