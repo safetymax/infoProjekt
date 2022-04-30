@@ -75,7 +75,7 @@ public class Surface extends JPanel implements Runnable {
 
         //overlay
       
-      overlay.draw(g2d, keyH.downPressed, keyH.rightPressed, keyH.upPressed, keyH.leftPressed, keyH.enterPressed, keyH.escapePressed);
+        overlay.draw(g2d, keyH.downPressed, keyH.rightPressed, keyH.upPressed, keyH.leftPressed, keyH.enterPressed, keyH.escapePressed);
         
         //debug
         g2d.dispose();
