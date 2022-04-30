@@ -111,10 +111,11 @@ public class Player {
                         samples = wallImage.getData().getPixel((int)(results[2]%64), 0, (int[]) null);
                         g2d.setPaint(new Color(0, (results[2]%64)/64, colour));
                     }
+
+                    //                                     pixels/distance*correctionFactor*projection plane distance
+                g2d.drawLine(rays.length-i, (int) (450-64/(dist*Math.cos(correctionFactor))*277), rays.length-i, (int) (450+64/(dist*(Math.cos(correctionFactor)))*277));
                 }
 
-                //                                     pixels/distance*correctionFactor*projection plane distance
-                g2d.drawLine(rays.length-i, (int) (450-64/(dist*Math.cos(correctionFactor))*277), rays.length-i, (int) (450+64/(dist*(Math.cos(correctionFactor)))*277));
             }
         }
     }
