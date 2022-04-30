@@ -116,11 +116,11 @@ public class Player {
                             g2d.setPaint(new Color((float)(wallData[(int)results[1]%64][j][0])/255*colour, (float)(wallData[(int)results[1]%64][j][1])/255*colour, (float)(wallData[(int)results[1]%64][j][2])/255*colour));
                         }
                         else if(boundaries[(int)results[3]].type == 2) {
-                            g2d.setPaint(new Color((float)(wallData[j][(int)results[2]%64][0])/255*colour, (float)(wallData[j][(int)results[2]%64][1])/255*colour, (float)(wallData[j][(int)results[2]%64][2])/255*colour));
+                            g2d.setPaint(new Color((float)(wallData[(int)results[2]%64][j][0])/255*colour, (float)(wallData[(int)results[2]%64][j][1])/255*colour, (float)(wallData[(int)results[2]%64][j][2])/255*colour));
                         }
                         
                         //                                     pixels/distance*correctionFactor*projection plane distance
-                        g2d.drawLine(rays.length-i, (int) (450-(64-j)/(dist*Math.cos(correctionFactor))*277), rays.length-i, (int) (450+(64-j)/(dist*(Math.cos(correctionFactor)))*277));
+                        g2d.drawLine(rays.length-i, (int) (450-(64-j*2)/(dist*Math.cos(correctionFactor))*277), rays.length-i, (int) (450-(64-(j+1)*2)/(dist*(Math.cos(correctionFactor)))*277));
                      }
                 }
 
