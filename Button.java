@@ -41,4 +41,9 @@ public class Button{
       isSelected = true;
     }
   }
+  
+  public void write(Graphics2D g2d,int x,int y,String text){
+    g2d.setFont(new Font("Consolas",Font.BOLD,28));
+    g2d.drawString(text, x, y);
+  }
 }

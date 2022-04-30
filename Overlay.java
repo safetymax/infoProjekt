@@ -14,7 +14,7 @@ import java.awt.Toolkit;
 public class Overlay{
     private int downA,enterA;
     private boolean a,b,c,d,e,f,g,h,i,j;
-
+    Image img1 = Toolkit.getDefaultToolkit().getImage("Bild.png");
     Button button1 = new Button();
     Button button2 = new Button();
     Button button3 = new Button();
@@ -24,6 +24,7 @@ public class Overlay{
     public void draw(Graphics2D g2d, Boolean down,Boolean right,Boolean up, Boolean left,boolean enter,boolean menue){
         if(menue){
             enterA=0;
+            downA = 0;
         }
         if(enter && !i && !j){
             i = true;
@@ -44,10 +45,10 @@ public class Overlay{
         
             
         if(enterA == 0){
-            Image img1 = Toolkit.getDefaultToolkit().getImage("Bild.png");
+           
             g2d.drawImage(img1, 0, 0, null);
-            button1.draw(g2d,300,170,300,45,400, "New Game" );
-            button2.draw(g2d,300,250,300,45,425, "Load" );
+            button1.draw(g2d,300,170 ,300,45,400, "New Game" );
+            button2.draw(g2d,300,250 ,300,45,425, "Load" );
             button3.draw(g2d,300,330,300,45,405, "Options");
             button4.draw(g2d,300,410,125,45,310, "Credits");
             button5.draw(g2d,475,410,125,45,510, "Quit");
@@ -125,6 +126,20 @@ public class Overlay{
             }else if(downA == 4){
                 button3.selectedChange(g2d,475 ,410,125,45);
             }
+        }
+        if(enterA == 2){
+            g2d.drawImage(img1, 0, 0, null);
+        }
+        if(enterA == 3){
+            g2d.drawImage(img1, 0, 0, null);
+        }
+        if(enterA == 4){
+            g2d.drawImage(img1, 0, 0, null);
+            button1.draw(g2d,300,100,300,90,430, "Max" );
+            button2.draw(g2d,300,220,300,90,410, "Moritz" );
+            button3.draw(g2d,300,340,300,90,405, "Mattis");
+            button4.draw(g2d,300,460,300,90,420, "Luca");
+            button5.draw(g2d,300,580,300,90,397, "Jonathan");
         }
         
         if(enterA == 5){
