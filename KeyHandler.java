@@ -4,7 +4,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener{
 
     //Key pressed variables
-    public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed, enterPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed, enterPressed,escapePressed;
 
     //Key Pressed (If new Key Added, dont forget to turn off in keyReleased)
     @Override
@@ -35,6 +35,10 @@ public class KeyHandler implements KeyListener{
             //System.out.println("Tab key pressed");
             enterPressed = true;
         }
+        if(code == KeyEvent.VK_ESCAPE) {
+            //System.out.println("Tab key pressed");
+            escapePressed = true;
+        }
     }
 
     //Key Released
@@ -59,6 +63,9 @@ public class KeyHandler implements KeyListener{
         }
         if(code == KeyEvent.VK_ENTER) {
             enterPressed = false;
+        }
+        if(code == KeyEvent.VK_ESCAPE) {
+            escapePressed = false;
         }
     }
 
