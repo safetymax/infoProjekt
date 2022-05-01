@@ -42,8 +42,9 @@ public class Button{
     }
   }
   
-  public void write(Graphics2D g2d,int x,int y,String text){
-    g2d.setFont(new Font("Consolas",Font.BOLD,28));
+  public void write(Graphics2D g2d,int x,int y,String text,int size){
+    g2d.setPaint(new Color((float)0.99999,(float)0.99990,(float)0.9999990));
+    g2d.setFont(new Font("Consolas",Font.BOLD,size));
     g2d.drawString(text, x, y);
   }
 }

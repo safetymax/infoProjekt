@@ -135,11 +135,33 @@ public class Overlay{
         }
         if(enterA == 4){
             g2d.drawImage(img1, 0, 0, null);
-            button1.draw(g2d,300,100,300,90,430, "Max" );
-            button2.draw(g2d,300,220,300,90,410, "Moritz" );
-            button3.draw(g2d,300,340,300,90,405, "Mattis");
-            button4.draw(g2d,300,460,300,90,420, "Luca");
-            button5.draw(g2d,300,580,300,90,397, "Jonathan");
+            button1.draw(g2d,35,150+20,250,130,163-25, "" );
+            button2.draw(g2d,325,150+20,250,130,433-25, "" );
+            button3.draw(g2d,615,150+20,250,130,718-25, "");
+            button4.draw(g2d,160,270+50+25,250,130,278-25, "");
+            button5.draw(g2d,490,270+50+25,250,130,585-25, "");
+            //Max
+            button1.write(g2d, 163-30,170+29 , "Max:" ,33);
+            button1.write(g2d, 163-85,170+29+29, "Game-Engine,",28 );
+            button1.write(g2d, 163-50,170+29+29+29, "Texture",28 );
+            button1.write(g2d, 163-107,170+29+29+29+29, "implementation",28 );
+            //Moritz
+            button2.write(g2d, 433-30,170+29 , "Moritz:" ,33);
+            button2.write(g2d, 433-85,170+29+29, "Level Loading,",28 );
+            button2.write(g2d, 433-25,170+29+29+29, "Weapons,",28 );
+            button2.write(g2d, 433-105,170+29+29+29+29, "Sounds and Music",28 );
+            //Mattis
+            button3.write(g2d, 718-30,170+29 , "Mattis:" ,33);
+            button3.write(g2d, 718-35,170+29+29+20, "Enemy AI",28);
+            //Luca
+            button4.write(g2d, 278-30,345+29 , "Luca:" ,33);
+            button4.write(g2d, 278-60,345+29+29+15, "Main Menu,",28 );
+            button4.write(g2d, 278-100,345+29+29+29+15, "User Interface",28 );
+            
+            //Jonathan
+            button5.write(g2d, 585-45,345+29 , "Jonathan:" ,33);
+            button5.write(g2d, 585-10,345+29+29+15, "Story,",28 );
+            button5.write(g2d, 585-10,345+29+29+29+15, "Design",28 );
         }
         
         if(enterA == 5){
