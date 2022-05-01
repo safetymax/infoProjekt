@@ -18,6 +18,7 @@ public class Wall extends Boundary{
 
     @Override
     public void draw(Graphics2D g2d) {
+        //g2d.setPaint(new Color(60f/255f,60f/255f,60f/255f));
         g2d.setPaint(Color.BLUE);
         g2d.drawLine(x1, y1, x2, y2);
     }

@@ -99,7 +99,7 @@ public class Player {
         for(int i = 0; i < rays.length; i++) {
 
             //results: [0] = distance, [1] = x, [2] = y, [3] = index of closest boundary
-            float[] results = rays[i].cast(boundaries, g2d, minimap);
+            float[] results = rays[i].cast(boundaries, g2d, minimap, i==0 || i==rays.length-1);
             float dist = results[0];
 
             //calls isHitByRay() on hit Boundary

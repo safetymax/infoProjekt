@@ -54,7 +54,7 @@ public class Surface extends JPanel implements Runnable {
         //Everything drawing related in here
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setPaint(Color.BLACK);
+        g2d.setPaint(new Color(30,30,30));
         g2d.fillRect(0, 0, 900, 900);
 
         //Enviroment
@@ -63,6 +63,7 @@ public class Surface extends JPanel implements Runnable {
             //Loop through all game entities
             for(int i = 0; i < boundaries.length; i++) {
                 if(boundaries[i] != null) {
+                    g2d.setPaint(new Color(90f/255f,90f/255f,90f/255f));
                     g2d.drawLine(boundaries[i].x1, boundaries[i].y1, boundaries[i].x2, boundaries[i].y2);
                 }
             }
