@@ -53,7 +53,7 @@ public class Player {
     }
 
     //Player move function
-    public void move(boolean up, boolean down, boolean left, boolean right) {
+    public void move(boolean up, boolean down, boolean left, boolean right, boolean sprint) {
         //Forwards and back
         if(up) {
             posX += Math.cos(direction) * speed;
@@ -69,6 +69,12 @@ public class Player {
         }
         if(right) {
             direction += 0.05f;
+        }
+        if(sprint) {
+            speed = 4;
+        }
+        else {
+            speed = 2;
         }
 
         for(int i = 0; i < rays.length; i++) {

@@ -59,7 +59,7 @@ public class Surface extends JPanel implements Runnable {
 
         //Enviroment
         g2d.setPaint(Color.BLUE);
-        if(keyH.shiftPressed){  //shiftPressed = minimap
+        if(keyH.controlPressed){  //controlPressed = minimap
             //Loop through all game entities
             for(int i = 0; i < boundaries.length; i++) {
                 if(boundaries[i] != null) {
@@ -68,9 +68,19 @@ public class Surface extends JPanel implements Runnable {
             }
         }
 
+        if(!keyH.controlPressed){  //controlPressed = minimap
+            //Himmel
+            g2d.setPaint(new Color(240f/255f, 140f/255f, 140f/255f));
+            g2d.fillRect(0, 0, 900, 450);
+
+            //Boden
+            g2d.setPaint(new Color(30, 30, 30));
+            g2d.fillRect(0, 450, 900, 450);
+        }
+
         //Player
-        player.draw(g2d, keyH.shiftPressed);
-        player.cast(boundaries, g2d, keyH.shiftPressed);
+        player.draw(g2d, keyH.controlPressed);
+        player.cast(boundaries, g2d, keyH.controlPressed);
 
 
         //overlay
@@ -91,7 +101,7 @@ public class Surface extends JPanel implements Runnable {
     public void update() {
         //update the game
         frameCount++;
-        player.move(keyH.upPressed, keyH.downPressed, keyH.leftPressed, keyH.rightPressed);
+        player.move(keyH.upPressed, keyH.downPressed, keyH.leftPressed, keyH.rightPressed, keyH.shiftPressed);
     }
 
     public void startGameThread() {
