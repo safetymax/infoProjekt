@@ -14,6 +14,7 @@ import java.awt.Font;
 
 public class Button{
   private boolean isSelected;
+  
     
   public void draw(Graphics2D g2d,int x,int y,int widht,int hight,int bT, String text){
     g2d.setPaint(new Color((float)0.58,(float)0.58,(float)0.58));
@@ -25,6 +26,7 @@ public class Button{
     g2d.setPaint(new Color((float)0.40,(float)0.40,(float)0.40));
     g2d.setStroke(new BasicStroke(6));
     g2d.drawRect(x,y-1,widht,hight);
+    
   }
   
   public void selectedChange(Graphics2D g2d,int x,int y,int widht,int hight){
@@ -47,4 +49,8 @@ public class Button{
     g2d.setFont(new Font("Consolas",Font.BOLD,size));
     g2d.drawString(text, x, y);
   }
+  
+
+
+
 }
