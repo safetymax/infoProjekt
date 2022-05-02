@@ -161,7 +161,7 @@ public class Overlay{
         }
         if(enterA == 4){
 
-        button4.clickedSet(true);
+   
             g2d.drawImage(img1, 0, 0, null);
             button7.draw(g2d,35,150+20,250,130,163-25, "" );
             button8.draw(g2d,325,150+20,250,130,433-25, "" );
