@@ -95,7 +95,6 @@ public class Player {
 
     //Casts all Rays
     public void cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap) {
-        int[] samples;
         for(int i = 0; i < rays.length; i++) {
 
             //results: [0] = distance, [1] = x, [2] = y, [3] = index of closest boundary
