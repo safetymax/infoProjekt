@@ -48,6 +48,20 @@ public class Surface extends JPanel implements Runnable {
         for(int i = 0;i < walls.length; i++){
             boundaries[i] = walls[i];
         }
+
+        //fill holes in boundaries array
+        for(int i = 0; i < boundaries.length; i++){
+            if(boundaries[i] == null){
+                for(int j = i; j < boundaries.length; j++){
+                    if(boundaries[j] != null){
+                        boundaries[i] = boundaries[j];
+                        boundaries[j] = null;
+                        break;
+                    }
+                }
+            }
+        }
+        
     }
 
     private void doDrawing(Graphics g) {
