@@ -4,7 +4,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener{
 
     //Key pressed variables
-    public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed, controlPressed, enterPressed, escapePressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, lookLeftPressed, lookRightPressed, shiftPressed, controlPressed, enterPressed, escapePressed;
 
     //Key Pressed (If new Key Added, dont forget to turn off in keyReleased)
     @Override
@@ -42,6 +42,22 @@ public class KeyHandler implements KeyListener{
         if(code == KeyEvent.VK_RIGHT) {
             //System.out.println("RIGHT key pressed");
             rightPressed = true;
+        }
+        if(code == KeyEvent.VK_NUMPAD4) {
+            //System.out.println("4 key pressed");
+            lookLeftPressed = true;
+        }
+        if(code == KeyEvent.VK_NUMPAD6) {
+            //System.out.println("6 key pressed");
+            lookRightPressed = true;
+        }
+        if(code == KeyEvent.VK_J) {
+            //System.out.println("J key pressed");
+            lookLeftPressed = true;
+        }
+        if(code == KeyEvent.VK_L) {
+            //System.out.println("L key pressed");
+            lookRightPressed = true;
         }
 
 
@@ -91,6 +107,18 @@ public class KeyHandler implements KeyListener{
         }
         if(code == KeyEvent.VK_RIGHT) {
             rightPressed = false;
+        }
+        if(code == KeyEvent.VK_NUMPAD4) {
+            lookLeftPressed = false;
+        }
+        if(code == KeyEvent.VK_NUMPAD6) {
+            lookRightPressed = false;
+        }
+        if(code == KeyEvent.VK_J) {
+            lookLeftPressed = false;
+        }
+        if(code == KeyEvent.VK_L) {
+            lookRightPressed = false;
         }
         if(code == KeyEvent.VK_SHIFT) {
             shiftPressed = false;

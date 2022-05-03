@@ -102,7 +102,7 @@ public class Surface extends JPanel implements Runnable {
     public void update() {
         //update the game
         frameCount++;
-        player.move(keyH.upPressed, keyH.downPressed, keyH.leftPressed, keyH.rightPressed, keyH.shiftPressed);
+        player.move(keyH.upPressed, keyH.downPressed, keyH.leftPressed, keyH.rightPressed, keyH.lookLeftPressed, keyH.lookRightPressed, keyH.shiftPressed);
     }
 
     public void startGameThread() {

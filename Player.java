@@ -53,7 +53,7 @@ public class Player {
     }
 
     //Player move function
-    public void move(boolean up, boolean down, boolean left, boolean right, boolean sprint) {
+    public void move(boolean up, boolean down, boolean left, boolean right,boolean lookLeft, boolean lookRight, boolean sprint) {
         //Forwards and back
         if(up) {
             posX += Math.cos(direction) * speed;
@@ -63,11 +63,20 @@ public class Player {
             posX -= Math.cos(direction) * speed;
             posY -= Math.sin(direction) * speed;
         }
-        //Turning
+        //Left and right
         if(left) {
-            direction -= 0.05f;
+            posX += Math.cos(direction-Math.PI/2) * speed;
+            posY += Math.sin(direction-Math.PI/2) * speed;
         }
         if(right) {
+            posX += Math.cos(direction+Math.PI/2) * speed;
+            posY += Math.sin(direction+Math.PI/2) * speed;
+        }
+        //Turning
+        if(lookLeft) {
+            direction -= 0.05f;
+        }
+        if(lookRight) {
             direction += 0.05f;
         }
         if(sprint) {
