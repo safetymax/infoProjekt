@@ -31,7 +31,7 @@ public class Ray {
         float distance = 1000;
 
         float closestDistance = distance;
-        result[0] = (int) closestDistance;
+        result[0] = closestDistance;
         float closestIndex = -1;
         float record1 = -1;
         float record2 = -1;
@@ -55,8 +55,8 @@ public class Ray {
                 if(t > 0 && t < 1 && u > 0){
                     float ix = x1 + t*(x2-x1);
                     float iy = y1 + t*(y2-y1);
-                    result[0] = (int) ix;
-                    result[1] = (int) iy;               
+                    result[0] = ix;
+                    result[1] = iy;               
                   
                 }
 
