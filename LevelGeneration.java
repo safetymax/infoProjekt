@@ -70,6 +70,30 @@ public class LevelGeneration {
         return walls;
         
     }
+
+    //int array of walls
+    public static int[][] generateLevelInt(String level, int startx, int starty, int size, int rows, int columns) {
+        int[][] walls = new int[rows][columns];
+        int x = startx;
+        int y = starty;
+        for(int i = 0; i<level.length(); i++){
+            if(level.charAt(i) == 'W'){
+                walls[y][x] = 1;
+            }
+            else if(level.charAt(i) == 'O'){
+                walls[y][x] = 0;
+            }
+
+            x += 1;
+            if(x>=columns){
+                x = startx;
+                y += 1;
+            }
+        }
+
+        return walls;
+    }
+
     //removes walls which are on top of each other
     public static Boundary[] removeDuplicateWalls(Boundary[] b){
         

@@ -23,6 +23,7 @@ public class Surface extends JPanel implements Runnable {
     //Empty level Information
     String[] info;
     Boundary[] boundaries = new Boundary[2048];
+    int collisions[][];
 
     int frameCount = 0;
 
@@ -42,7 +43,9 @@ public class Surface extends JPanel implements Runnable {
             e.printStackTrace();
         }
         Boundary[] walls = LevelGeneration.generateLevel(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), Integer.parseInt(info[4]), Integer.parseInt(info[5]));
+        collisions = LevelGeneration.generateLevelInt(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), Integer.parseInt(info[4]), Integer.parseInt(info[5]));
         
+
         walls =LevelGeneration.removeDuplicateWalls(walls);
         
         for(int i = 0;i < walls.length; i++){
@@ -116,7 +119,7 @@ public class Surface extends JPanel implements Runnable {
     public void update() {
         //update the game
         frameCount++;
-        player.move(keyH.upPressed, keyH.downPressed, keyH.leftPressed, keyH.rightPressed, keyH.lookLeftPressed, keyH.lookRightPressed, keyH.shiftPressed);
+        player.move(keyH.upPressed, keyH.downPressed, keyH.leftPressed, keyH.rightPressed, keyH.lookLeftPressed, keyH.lookRightPressed, keyH.shiftPressed, collisions);
     }
 
     public void startGameThread() {

@@ -18,6 +18,8 @@ public class Player {
 
     public float speed;
 
+    float[] currentPos;
+
     public int fov = 90;
     public Ray[] rays = new Ray[900];
 
@@ -30,6 +32,8 @@ public class Player {
         posY = 400;
         direction = 0;
         speed = 2;
+
+        currentPos = new float[2];
 
         //create Rays
         for(int i = 0; i < rays.length; i++) {
@@ -53,7 +57,8 @@ public class Player {
     }
 
     //Player move function
-    public void move(boolean up, boolean down, boolean left, boolean right,boolean lookLeft, boolean lookRight, boolean sprint) {
+    public void move(boolean up, boolean down, boolean left, boolean right,boolean lookLeft, boolean lookRight, boolean sprint, int[][] map) {
+
         //Forwards and back
         if(up) {
             posX += Math.cos(direction) * speed;
@@ -86,9 +91,20 @@ public class Player {
             speed = 2;
         }
 
+        //collision detection
+        if(map[(int)posY/64][(int)posX/64] == 1) {
+            posY = currentPos[0];
+            posX = currentPos[1];
+        }
+        else{
+            currentPos[0] = posY;
+            currentPos[1] = posX;
+        }
+
         for(int i = 0; i < rays.length; i++) {
             rays[i].update(posX, posY, direction+Math.toRadians(fov)/2-Math.toRadians(fov)/(rays.length-1)*i);
         }
+        
 
     }
 
