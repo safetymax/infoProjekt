@@ -92,13 +92,19 @@ public class Player {
         }
 
         //collision detection
+        if((int)posY/64 >= map.length || (int)posX/64 >= map[0].length || (int)posY/64 < 0 || (int)posX/64 < 0) {
+            posX = currentPos[0];
+            posY = currentPos[1];
+            System.out.println("Collision");
+        }
+
         if(map[(int)posY/64][(int)posX/64] == 1) {
-            posY = currentPos[0];
-            posX = currentPos[1];
+            posX = currentPos[0];
+            posY = currentPos[1];
         }
         else{
-            currentPos[0] = posY;
-            currentPos[1] = posX;
+            currentPos[0] = posX;
+            currentPos[1] = posY;
         }
 
         for(int i = 0; i < rays.length; i++) {
