@@ -148,10 +148,10 @@ public class Surface extends JPanel implements Runnable {
 
             if(delta >= 1){
                 //Game Loop
-
+                if(Overlay.getMove()){
                 //update information
                 update();
-
+                }
                 //draw the screen
                 repaint();
                 
