@@ -97,12 +97,20 @@ public class Player {
             posY = currentPos[1];
             System.out.println("Collision");
         }
-
         if(map[(int)posY/64][(int)posX/64] == 1) {
-            posX = currentPos[0];
-            posY = currentPos[1];
+            //slide on walls / ignore one axis
+            if(map[(int)currentPos[1]/64][(int)posX/64] == 0) {
+                posY = currentPos[1];
+            }
+            else if(map[(int)posY/64][(int)currentPos[0]/64] == 0) {
+                posX = currentPos[0];
+            }
+            else {
+                posX = currentPos[0];
+                posY = currentPos[1];
+            }
         }
-        else{
+        if(map[(int)posY/64][(int)posX/64] == 0) {
             currentPos[0] = posX;
             currentPos[1] = posY;
         }
