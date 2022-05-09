@@ -20,9 +20,14 @@ public class Surface extends JPanel implements Runnable {
     //TEMP
      
 
+    boolean overlayActive = true;
+
+    Overlay overlay = new Overlay();
+    
     //Empty level Information
     String[] info;
     Boundary[] boundaries = new Boundary[2048];
+    int collisions[][];
 
     int frameCount = 0;
 
@@ -42,27 +47,44 @@ public class Surface extends JPanel implements Runnable {
             e.printStackTrace();
         }
         Boundary[] walls = LevelGeneration.generateLevel(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), Integer.parseInt(info[4]), Integer.parseInt(info[5]));
+        collisions = LevelGeneration.generateLevelInt(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), Integer.parseInt(info[4]), Integer.parseInt(info[5]));
         
+
         walls =LevelGeneration.removeDuplicateWalls(walls);
         
         for(int i = 0;i < walls.length; i++){
             boundaries[i] = walls[i];
         }
+
+        //fill holes in boundaries array
+        for(int i = 0; i < boundaries.length; i++){
+            if(boundaries[i] == null){
+                for(int j = i; j < boundaries.length; j++){
+                    if(boundaries[j] != null){
+                        boundaries[i] = boundaries[j];
+                        boundaries[j] = null;
+                        break;
+                    }
+                }
+            }
+        }
+        
     }
 
     private void doDrawing(Graphics g) {
         //Everything drawing related in here
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setPaint(Color.BLACK);
+        g2d.setPaint(new Color(30,30,30));
         g2d.fillRect(0, 0, 900, 900);
 
         //Enviroment
         g2d.setPaint(Color.BLUE);
-        if(keyH.shiftPressed){  //shiftPressed = minimap
+        if(keyH.controlPressed){  //controlPressed = minimap
             //Loop through all game entities
             for(int i = 0; i < boundaries.length; i++) {
                 if(boundaries[i] != null) {
+                    g2d.setPaint(new Color(90f/255f,90f/255f,90f/255f));
                     g2d.drawLine(boundaries[i].x1, boundaries[i].y1, boundaries[i].x2, boundaries[i].y2);
                 }
             }
@@ -70,10 +92,24 @@ public class Surface extends JPanel implements Runnable {
             weapons.drawWeapons(g2d);
         }
 
+        if(!keyH.controlPressed){  //controlPressed = minimap
+            //Himmel
+            g2d.setPaint(new Color(240f/255f, 140f/255f, 140f/255f));
+            g2d.fillRect(0, 0, 900, 450);
+
+            //Boden
+            g2d.setPaint(new Color(30, 30, 30));
+            g2d.fillRect(0, 450, 900, 450);
+        }
+
         //Player
-        player.draw(g2d, keyH.shiftPressed);
-        player.cast(boundaries, g2d, keyH.shiftPressed);
-        
+        player.draw(g2d, keyH.controlPressed);
+        player.cast(boundaries, g2d, keyH.controlPressed);
+
+
+        //overlay
+      
+        overlay.draw(g2d, keyH.downPressed, keyH.rightPressed, keyH.upPressed, keyH.leftPressed, keyH.enterPressed, keyH.escapePressed);
         
         //debug
         g2d.dispose();
@@ -89,7 +125,7 @@ public class Surface extends JPanel implements Runnable {
     public void update() {
         //update the game
         frameCount++;
-        player.move(keyH.upPressed, keyH.downPressed, keyH.leftPressed, keyH.rightPressed);
+        
         weapons.updateWeapons(player);
         
 
@@ -98,6 +134,7 @@ public class Surface extends JPanel implements Runnable {
         if (frameCount % cooldown == 0) {
         player.shootKey(keyH.ePressed,weapons);
         }
+        player.move(keyH.upPressed, keyH.downPressed, keyH.leftPressed, keyH.rightPressed, keyH.lookLeftPressed, keyH.lookRightPressed, keyH.shiftPressed, collisions);
     }
 
     public void startGameThread() {
@@ -129,10 +166,10 @@ public class Surface extends JPanel implements Runnable {
 
             if(delta >= 1){
                 //Game Loop
-
+                if(Overlay.getMove()){
                 //update information
                 update();
-
+                }
                 //draw the screen
                 repaint();
                 

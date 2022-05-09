@@ -24,14 +24,14 @@ public class Ray {
         this.direction = direction;
     }
 
-    public float[] cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap) {
+    public float[] cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap, boolean drawRay) {
         float[] result = new float[4];
         result[1] = -1;
         result[2] = -1;
         float distance = 1000;
 
         float closestDistance = distance;
-        result[0] = (int) closestDistance;
+        result[0] = closestDistance;
         float closestIndex = -1;
         float record1 = -1;
         float record2 = -1;
@@ -55,8 +55,8 @@ public class Ray {
                 if(t > 0 && t < 1 && u > 0){
                     float ix = x1 + t*(x2-x1);
                     float iy = y1 + t*(y2-y1);
-                    result[0] = (int) ix;
-                    result[1] = (int) iy;               
+                    result[0] = ix;
+                    result[1] = iy;               
                   
                 }
 
@@ -74,7 +74,7 @@ public class Ray {
 
         //draw the ray in minimap form
         g2d.setPaint(Color.WHITE);
-            if(minimap){
+            if(minimap && drawRay){
                 if(closestDistance != distance){
                     g2d.drawLine((int)x, (int)y, (int)record1, (int)record2);
                 }

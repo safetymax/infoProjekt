@@ -54,10 +54,10 @@ public class LevelGeneration {
         for(int i = 0; i<level.length(); i++){
             int c = i*4;
             if(level.charAt(i) == 'W'){
-                walls[c] = new Wall(x,y,x,y+size);  //top left to bot left
-                walls[c+1] = new Wall(x,y,x+size,y); //top left to top right
-                walls[c+2] = new Wall(x+size,y,x+size,y+size); //top right to bot right
-                walls[c+3] = new Wall(x,y+size,x+size,y+size); //bot left to bot right
+                walls[c] = new Wall(x,y,x,y+size,2);  //top left to bot left
+                walls[c+1] = new Wall(x,y,x+size,y,1); //top left to top right
+                walls[c+2] = new Wall(x+size,y,x+size,y+size,2); //top right to bot right
+                walls[c+3] = new Wall(x,y+size,x+size,y+size,1); //bot left to bot right
             }
             x= x+size;
             if(x>=startx+size*columns){
@@ -70,6 +70,30 @@ public class LevelGeneration {
         return walls;
         
     }
+
+    //int array of walls
+    public static int[][] generateLevelInt(String level, int startx, int starty, int size, int rows, int columns) {
+        int[][] walls = new int[rows][columns];
+        int x = startx;
+        int y = starty;
+        for(int i = 0; i<level.length(); i++){
+            if(level.charAt(i) == 'W'){
+                walls[y][x] = 1;
+            }
+            else if(level.charAt(i) == 'O'){
+                walls[y][x] = 0;
+            }
+
+            x += 1;
+            if(x>=columns){
+                x = startx;
+                y += 1;
+            }
+        }
+
+        return walls;
+    }
+
     //removes walls which are on top of each other
     public static Boundary[] removeDuplicateWalls(Boundary[] b){
         
