@@ -12,13 +12,13 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 public class Overlay{
-    private int downA,enterA,optionsA,counter,BindingsA;
+    private int downA,enterA,optionsA,counter,BindingsA,SoundA,VolumeA,SFXA,MusicA;
     
-    private boolean a,b,c,d,e,f,g,h,i,j;
+    private boolean a,b,c,d,e,f,g,h,i,j,VolumeB,SFXB,MusicB;
 
     private static boolean move;
     Image img1 = Toolkit.getDefaultToolkit().getImage("Bild.png");
-  
+   
     Image img5 = Toolkit.getDefaultToolkit().getImage("Sound 3.png");
     Image img6 = Toolkit.getDefaultToolkit().getImage("Tastatur.png");
    
@@ -36,7 +36,7 @@ public class Overlay{
     Button button12 = new Button();
     Button button13 = new Button();
     public void draw(Graphics2D g2d, Boolean down,Boolean right,Boolean up, Boolean left,boolean enter,boolean menue){
-       
+        
         if(menue){
             enterA=0;
             downA = 0;
@@ -73,8 +73,8 @@ public class Overlay{
       
       
         if(enterA == 0){
-           
             g2d.drawImage(img1, 0, 0, null);
+           
             button1.draw(g2d,300,170 ,300,45,0, "New Game" );
             button2.draw(g2d,300,250 ,300,45,0, "Load" );
             button3.draw(g2d,300,330,300,45,0, "Options");
@@ -164,11 +164,13 @@ public class Overlay{
         }
         //new Game
         if(enterA == 1){
+        
             move = true;
         }
         //Load
         if(enterA == 2){
             g2d.drawImage(img1, 0, 0, null);
+            
             //exit
     
             button6.draw(g2d, 20, 20, 100, 45,0,  "<Exit");   
@@ -225,8 +227,9 @@ public class Overlay{
         
         //Optiones
         if(enterA == 3){
-          
             g2d.drawImage(img1, 0, 0, null);
+          
+           
             //Exit
             button6.draw(g2d, 20, 20, 100, 45,0, "<Exit");    
             //Bindings
@@ -288,6 +291,7 @@ public class Overlay{
         //Bindings 1mm = 5 pixel
         if(enterA == 6){
             g2d.drawImage(img1, 0, 0, null);
+          
             button6.draw(g2d, 20, 20, 100, 45,0,  "<Exit");
             button1.draw(g2d,300,80 ,300,45,-45, "Move Forward" );
             button1.draw(g2d,515,80,85,45,0,"W");
@@ -367,12 +371,83 @@ public class Overlay{
         //Sound
         if(enterA == 7){
             
+            g2d.drawImage(img1, 0, 0, null);
+            button6.draw(g2d, 20, 20, 100, 45,0,  "<Exit");
+            button1.draw(g2d,300,320-80-80 ,300,90, 0,"Volume" );
+            g2d.setPaint(new Color((float)0.99999,(float)0.99990,(float)0.9999990));
+            g2d.drawRect(360, 400+10+45+15-240, 180, 2);
+            button2.draw(g2d,300,400-80+45-80 ,300,90,0, "Music" );
+            g2d.setPaint(new Color((float)0.99999,(float)0.99990,(float)0.9999990));
+            g2d.drawRect(360, 400+10+45+15-120, 180, 2);           
+             button3.draw(g2d,300,480-80+90-80,300,90,0, "Sound Effects");
+            g2d.setPaint(new Color((float)0.99999,(float)0.99990,(float)0.9999990));
+            g2d.drawRect(360, 400+10+45+15, 180, 2);
+
+            if(down && !a && !b){
+                a = true;
+                b = true;
+            }
+            
+            if(a){
+                SoundA++;
+            }
+            if(down && b){
+                a = false;
+            }
+            if(!down){
+                b = false;
+            }
+            if(up && !c && !d  ){
+                c = true;
+                d = true;
+            }
+            if(c){
+                SoundA--;
+            }
+            if(up && d){
+                c = false;
+            }
+            if(!up){
+                d = false;
+            }
+            if(SoundA <= 0){
+                SoundA = 0;
+            }
+            if(SoundA >= 3){
+                SoundA = 3;
+            }
+            if(SoundA == 0){
+                button6.selectedChange(g2d, 20, 20, 100, 45);
+                downA = 2;
+                optionsA = 0;
+            }else if(SoundA == 1){
+                button1.selectedChange(g2d, 300, 320-80-80, 300, 90);
+                
+                SFXB = false;
+                MusicB = false;
+                VolumeB = true;
+            }else if(SoundA == 2){
+                button1.selectedChange(g2d, 300, 400-80+45-80, 300, 90);
+              
+                SFXB = false;
+                MusicB = true;
+                VolumeB = false;
+            }else if(SoundA == 3){
+                button1.selectedChange(g2d,300, 480-80+90-80, 300, 90);
+                SFXB = true;
+                MusicB = false;
+                VolumeB = false;
+                
+            }
+           
         }
+        
         //Credits
         if(enterA == 4){
+            g2d.drawImage(img1, 0, 0, null);
 
    
-            g2d.drawImage(img1, 0, 0, null);
+            
             button7.draw(g2d,35,150+20,250,130,0, "" );
             button8.draw(g2d,325,150+20,250,130,0, "" );
             button9.draw(g2d,615,150+20,250,130,0, "");
