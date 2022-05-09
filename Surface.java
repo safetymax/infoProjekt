@@ -16,7 +16,10 @@ public class Surface extends JPanel implements Runnable {
 
     // Game Elements
     Player player = new Player();
-    
+    MachineGun weapons = new MachineGun(150);
+    //TEMP
+     
+
     //Empty level Information
     String[] info;
     Boundary[] boundaries = new Boundary[2048];
@@ -63,12 +66,15 @@ public class Surface extends JPanel implements Runnable {
                     g2d.drawLine(boundaries[i].x1, boundaries[i].y1, boundaries[i].x2, boundaries[i].y2);
                 }
             }
+            //Draw bullets on minimap
+            weapons.drawWeapons(g2d);
         }
 
         //Player
         player.draw(g2d, keyH.shiftPressed);
         player.cast(boundaries, g2d, keyH.shiftPressed);
-
+        
+        
         //debug
         g2d.dispose();
     }
@@ -84,6 +90,14 @@ public class Surface extends JPanel implements Runnable {
         //update the game
         frameCount++;
         player.move(keyH.upPressed, keyH.downPressed, keyH.leftPressed, keyH.rightPressed);
+        weapons.updateWeapons(player);
+        
+
+        //RPM = 60/cooldown*60
+        int cooldown = 3;
+        if (frameCount % cooldown == 0) {
+        player.shootKey(keyH.ePressed,weapons);
+        }
     }
 
     public void startGameThread() {

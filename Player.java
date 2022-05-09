@@ -52,7 +52,14 @@ public class Player {
         }
 
     }
+    //shoot function
+    public void shootKey(boolean shoot, Weapons w){
 
+        if(shoot){
+            w.shoot();
+        }
+
+    }
     public void draw(Graphics2D g2d, boolean minimap) {
 
         //Draw Player on minimap
@@ -91,7 +98,5 @@ public class Player {
             }
         }
     }
-
-
 
 }
