@@ -22,6 +22,7 @@ public class Player {
 
     public int fov = 90;
     public Ray[] rays = new Ray[900];
+    public double DV = (900/Math.tan(Math.toRadians(fov)/2));
 
     File f1 = new File("wall.png");
     BufferedImage wallImage = null;
@@ -37,7 +38,7 @@ public class Player {
 
         //create Rays
         for(int i = 0; i < rays.length; i++) {
-            rays[i] = new Ray(posX, posY, direction+Math.toRadians(fov)/2-Math.toRadians(fov)/(rays.length-1)*i);
+            rays[i] = new Ray(posX, posY, direction+Math.atan((i-rays.length/2)/DV));
         }
 
         //loading textures
@@ -116,7 +117,7 @@ public class Player {
         }
 
         for(int i = 0; i < rays.length; i++) {
-            rays[i].update(posX, posY, direction+Math.toRadians(fov)/2-Math.toRadians(fov)/(rays.length-1)*i);
+            rays[i].update(posX, posY, direction+Math.atan((rays.length/2-i)/(450/Math.tan(Math.toRadians(fov)/2))));
         }
         
 
@@ -171,7 +172,7 @@ public class Player {
                         }
                         
                         //                                     pixels/distance*correctionFactor*projection plane distance
-                        g2d.drawLine(rays.length-i, (int) (450-(64-j*2)/(dist*Math.cos(correctionFactor))*277), rays.length-i, (int) (450-(64-(j+1)*2)/(dist*(Math.cos(correctionFactor)))*277));
+                        g2d.drawLine(rays.length-i, (int) (450-((64-j*2)*DV/4)/(dist*Math.cos(correctionFactor))), rays.length-i, (int) (450-((64-(j+1)*2)*DV/4)/(dist*(Math.cos(correctionFactor)))));
                      }
                 }
 
