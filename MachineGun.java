@@ -31,15 +31,23 @@ public class MachineGun extends Weapons {
        
         for(int i = 0; i < b.length; i++){
             if(b[i] != null){
-                b[i].moveBullet();
+                b[i].moveBullet(player);
                 b[i] = b[i].isOutOfBounds(b[i]);
             }
        }
     }
-    public void shoot(){
+    public void shoot(Boundary[] boundaries){
+        Bullet bullet = new Bullet((int)x,(int) y, direction, 5f,5f);
         for(int i = 0; i < b.length; i++){
             if(b[i] == null){
-                b[i] = new Bullet((int)x,(int) y, direction, 5f,5f);
+                b[i] = bullet;
+                break;
+            }
+        }
+
+        for(int i = 0; i < boundaries.length; i++){
+            if(boundaries[i] != null){
+                boundaries[i] = bullet;
                 break;
             }
         }

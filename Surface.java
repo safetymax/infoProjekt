@@ -130,9 +130,9 @@ public class Surface extends JPanel implements Runnable {
         
 
         //RPM = 60/cooldown*60
-        int cooldown = 3;
+        int cooldown = 20;
         if (frameCount % cooldown == 0) {
-        player.shootKey(keyH.ePressed,weapons);
+            player.shootKey(keyH.ePressed, weapons, boundaries);
         }
         player.move(keyH.upPressed, keyH.downPressed, keyH.leftPressed, keyH.rightPressed, keyH.lookLeftPressed, keyH.lookRightPressed, keyH.shiftPressed, collisions);
     }

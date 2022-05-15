@@ -26,7 +26,7 @@ public class Player {
 
     File f1 = new File("wall.png");
     BufferedImage wallImage = null;
-    int[][][] wallData = new int[64][64][3];
+    int[][][] wallData = new int[64][64][4];
 
     public Player() {   
         posX = 350;
@@ -123,10 +123,10 @@ public class Player {
 
     }
     //shoot function
-    public void shootKey(boolean shoot, Weapons w){
+    public void shootKey(boolean shoot, Weapons w, Boundary[] boundaries) {
 
         if(shoot){
-            w.shoot();
+            w.shoot(boundaries);
         }
 
     }
@@ -145,37 +145,42 @@ public class Player {
         for(int i = 0; i < rays.length; i++) {
 
             //results: [0] = distance, [1] = x, [2] = y, [3] = index of closest boundary
-            float[] results = rays[i].cast(boundaries, g2d, minimap, i==0 || i==rays.length-1);
-            float dist = results[0];
+            float[][] results = rays[i].cast(boundaries, g2d, minimap, i==0 || i==rays.length-1);
+            for(int j = 0; j < results.length; j++){
+                float dist = results[j][0];
 
-            //calls isHitByRay() on hit Boundary
-            if(results[3] != -1){
-                boundaries[(int)results[3]].isHitByRay((int)results[1], (int)results[2]);
-            }
-
-            if(minimap == false){
-                //map the distance to a color
-                float colour = (float) dist/1000;
-                colour = 1 - colour;
-
-                //factor to counteract fish-eye effect
-                double correctionFactor = this.direction - rays[i].direction;
-                
-                //Renders pseudo 3d
-                if(results[3] != -1){
-                    for(int j = 0; j < 64; j++){
-                        if(boundaries[(int)results[3]].type == 1) {             
-                            g2d.setPaint(new Color((float)(wallData[(int)results[1]%64][j][0])/255*colour, (float)(wallData[(int)results[1]%64][j][1])/255*colour, (float)(wallData[(int)results[1]%64][j][2])/255*colour));
-                        }
-                        else if(boundaries[(int)results[3]].type == 2) {
-                            g2d.setPaint(new Color((float)(wallData[(int)results[2]%64][j][0])/255*colour, (float)(wallData[(int)results[2]%64][j][1])/255*colour, (float)(wallData[(int)results[2]%64][j][2])/255*colour));
-                        }
-                        
-                        //                                     pixels/distance*correctionFactor*projection plane distance
-                        g2d.drawLine(rays.length-i, (int) (450-((64-j*2)*DV/4)/(dist*Math.cos(correctionFactor))), rays.length-i, (int) (450-((64-(j+1)*2)*DV/4)/(dist*(Math.cos(correctionFactor)))));
-                     }
+                //calls isHitByRay() on hit Boundary
+                if(results[j][3] != -1){
+                    boundaries[(int)results[j][3]].isHitByRay((int)results[j][1], (int)results[j][2]);
                 }
 
+                if(minimap == false){
+                    //map the distance to a color
+                    float colour = (float) dist/1000;
+                    colour = 1 - colour;
+
+                    //factor to counteract fish-eye effect
+                    double correctionFactor = this.direction - rays[i].direction;
+                    
+                    //Renders pseudo 3d
+                    if(results[j][3] != -1){
+                        for(int k = 0; k < 64; k++){
+                            if(boundaries[(int)results[j][3]].type == 1 || boundaries[(int)results[j][3]].type == 2) {             
+                                g2d.setPaint(new Color(
+                                (float)(wallData[(int)Math.sqrt(Math.pow(results[j][1]-boundaries[(int)results[j][3]].x1,2) + Math.pow(results[j][2]-boundaries[(int)results[j][3]].y1,2))%64][k][0])/255*colour,
+                                (float)(wallData[(int)Math.sqrt(Math.pow(results[j][1]-boundaries[(int)results[j][3]].x1,2) + Math.pow(results[j][2]-boundaries[(int)results[j][3]].y1,2))%64][k][1])/255*colour,
+                                (float)(wallData[(int)Math.sqrt(Math.pow(results[j][1]-boundaries[(int)results[j][3]].x1,2) + Math.pow(results[j][2]-boundaries[(int)results[j][3]].y1,2))%64][k][2])/255*colour,
+                                (float)(wallData[(int)Math.sqrt(Math.pow(results[j][1]-boundaries[(int)results[j][3]].x1,2) + Math.pow(results[j][2]-boundaries[(int)results[j][3]].y1,2))%64][k][3])/255));
+                            }
+                            // else if(boundaries[(int)results[j][3]].type == 2) {
+                            //     g2d.setPaint(new Color((float)(wallData[(int)results[j][2]%64][k][0])/255*colour, (float)(wallData[(int)results[j][2]%64][k][1])/255*colour, (float)(wallData[(int)results[j][2]%64][k][2])/255*colour, (float)(wallData[(int)results[j][2]%64][k][3])/255));
+                            // }
+                            
+                            //                                     pixels/distance*correctionFactor*projection plane distance
+                            g2d.drawLine(rays.length-i, (int) (450-((64-k*2)*DV/4)/(dist*Math.cos(correctionFactor))), rays.length-i, (int) (450-((64-(k+1)*2)*DV/4)/(dist*(Math.cos(correctionFactor)))));
+                        }
+                    }
+                }
 
             }
         }
