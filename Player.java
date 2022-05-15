@@ -164,13 +164,15 @@ public class Player {
                     
                     //Renders pseudo 3d
                     if(results[j][3] != -1){
+                        //The point on the wall mod 64
+                        int pointOnWall = (int)Math.sqrt(Math.pow(results[j][1]-boundaries[(int)results[j][3]].x1,2) + Math.pow(results[j][2]-boundaries[(int)results[j][3]].y1,2))%64;
                         for(int k = 0; k < 64; k++){
                             if(boundaries[(int)results[j][3]].type == 1 || boundaries[(int)results[j][3]].type == 2) {             
                                 g2d.setPaint(new Color(
-                                (float)(wallData[(int)Math.sqrt(Math.pow(results[j][1]-boundaries[(int)results[j][3]].x1,2) + Math.pow(results[j][2]-boundaries[(int)results[j][3]].y1,2))%64][k][0])/255*colour,
-                                (float)(wallData[(int)Math.sqrt(Math.pow(results[j][1]-boundaries[(int)results[j][3]].x1,2) + Math.pow(results[j][2]-boundaries[(int)results[j][3]].y1,2))%64][k][1])/255*colour,
-                                (float)(wallData[(int)Math.sqrt(Math.pow(results[j][1]-boundaries[(int)results[j][3]].x1,2) + Math.pow(results[j][2]-boundaries[(int)results[j][3]].y1,2))%64][k][2])/255*colour,
-                                (float)(wallData[(int)Math.sqrt(Math.pow(results[j][1]-boundaries[(int)results[j][3]].x1,2) + Math.pow(results[j][2]-boundaries[(int)results[j][3]].y1,2))%64][k][3])/255));
+                                (float)(wallData[pointOnWall][k][0])/255*colour,
+                                (float)(wallData[pointOnWall][k][1])/255*colour,
+                                (float)(wallData[pointOnWall][k][2])/255*colour,
+                                (float)(wallData[pointOnWall][k][3])/255));
                             }
                             // else if(boundaries[(int)results[j][3]].type == 2) {
                             //     g2d.setPaint(new Color((float)(wallData[(int)results[j][2]%64][k][0])/255*colour, (float)(wallData[(int)results[j][2]%64][k][1])/255*colour, (float)(wallData[(int)results[j][2]%64][k][2])/255*colour, (float)(wallData[(int)results[j][2]%64][k][3])/255));
