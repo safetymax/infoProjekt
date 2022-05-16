@@ -15,7 +15,9 @@ public class Surface extends JPanel implements Runnable {
     Thread gameThread;
 
     // Game Elements
-    Player player = new Player();
+    Player player = new Player();   
+    boolean weaponShootable = false;
+    double weaponCooldown = 0;
     MachineGun weapons = new MachineGun(150);
     //TEMP
      
@@ -127,12 +129,15 @@ public class Surface extends JPanel implements Runnable {
         frameCount++;
         
         weapons.updateWeapons(player);
-        
 
         //RPM = 60/cooldown*60
-        int cooldown = 20;
-        if (frameCount % cooldown == 0) {
+        if (frameCount % 20 == (0 + weaponCooldown) && !weaponShootable) {
+            weaponShootable = true;
+        }
+        if(weaponShootable && keyH.ePressed){
             player.shootKey(keyH.ePressed, weapons, boundaries);
+            weaponShootable = false;
+            weaponCooldown = frameCount%20;
         }
         player.move(keyH.upPressed, keyH.downPressed, keyH.leftPressed, keyH.rightPressed, keyH.lookLeftPressed, keyH.lookRightPressed, keyH.shiftPressed, collisions);
     }
