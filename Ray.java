@@ -24,14 +24,19 @@ public class Ray {
         this.direction = direction;
     }
 
-    public float[] cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap, boolean drawRay) {
-        float[] result = new float[4];
-        result[1] = -1;
-        result[2] = -1;
+    public float[][] cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap, boolean drawRay) {
+        float[][] allResults = new float[20][4];
+        int count = 0;
         float distance = 1000;
 
+        for(int i = 0; i < allResults.length; i++) {
+            allResults[i][0] = -1;
+            allResults[i][1] = -1;
+            allResults[i][2] = -1;
+            allResults[i][3] = -1;
+        }
+
         float closestDistance = distance;
-        result[0] = closestDistance;
         float closestIndex = -1;
         float record1 = -1;
         float record2 = -1;
@@ -55,19 +60,33 @@ public class Ray {
                 if(t > 0 && t < 1 && u > 0){
                     float ix = x1 + t*(x2-x1);
                     float iy = y1 + t*(y2-y1);
-                    result[0] = ix;
-                    result[1] = iy;               
-                  
+                    allResults[count][0] = (float)Math.sqrt(Math.pow(ix-x, 2) + Math.pow(iy-y, 2));
+                    allResults[count][1] = ix;
+                    allResults[count][2] = iy;
+                    allResults[count][3] = i;
+                    if(count<50){
+                        count++;
+                    }             
                 }
+            }
+        }
 
-                if(result[0]!=-1&&result[1]!=-1){
-                    float distanceToWall = (float)Math.sqrt(Math.pow(result[0]-x, 2) + Math.pow(result[1]-y, 2));
-                    if(distanceToWall < closestDistance){
-                        closestDistance = distanceToWall;
-                        record1 = result[0];
-                        record2 = result[1];
-                        closestIndex = i;
-                    }
+        //sort allResults by distance
+        for(int i = 0; i < count; i++){
+            for(int j = i+1; j < count; j++){
+                if(allResults[i][0] < allResults[j][0]){
+                    float temp = allResults[i][0];
+                    allResults[i][0] = allResults[j][0];
+                    allResults[j][0] = temp;
+                    temp = allResults[i][1];
+                    allResults[i][1] = allResults[j][1];
+                    allResults[j][1] = temp;
+                    temp = allResults[i][2];
+                    allResults[i][2] = allResults[j][2];
+                    allResults[j][2] = temp;
+                    temp = allResults[i][3];
+                    allResults[i][3] = allResults[j][3];
+                    allResults[j][3] = temp;
                 }
             }
         }
@@ -82,14 +101,10 @@ public class Ray {
                     g2d.drawLine((int)x, (int)y, (int) ((int)x + (float)Math.cos(direction) * distance), (int) ((int)y + (float)Math.sin(direction) * distance));
                 }
             }
-        
 
-        result[0] = closestDistance;
-        result[1] = record1;
-        result[2] = record2;
-        result[3] = closestIndex;
+        //allResults[0] = result;
 
-        return result;
+        return allResults;
     }
 
 }

@@ -54,9 +54,9 @@ public class LevelGeneration {
         for(int i = 0; i<level.length(); i++){
             int c = i*4;
             if(level.charAt(i) == 'W'){
-                walls[c] = new Wall(x,y,x,y+size,2);  //top left to bot left
+                walls[c] = new Wall(x,y,x,y+size,1);  //top left to bot left
                 walls[c+1] = new Wall(x,y,x+size,y,1); //top left to top right
-                walls[c+2] = new Wall(x+size,y,x+size,y+size,2); //top right to bot right
+                walls[c+2] = new Wall(x+size,y,x+size,y+size,1); //top right to bot right
                 walls[c+3] = new Wall(x,y+size,x+size,y+size,1); //bot left to bot right
             }
             x= x+size;

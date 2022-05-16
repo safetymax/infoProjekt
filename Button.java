@@ -23,19 +23,20 @@ public class Button{
     g2d.setPaint(new Color((float)0.58,(float)0.58,(float)0.58));
    g2d.fillRect(x, y, widht, hight);
     isSelected = false; 
-    g2d.setPaint(new Color((float)0.99999,(float)0.99990,(float)0.9999990));
-    Font font = new Font("Arial",Font.BOLD,28);
-    g2d.setFont(font);
     
-    AffineTransform affinetransform = new AffineTransform();     
-FontRenderContext frc = new FontRenderContext(affinetransform,true,true);     
-int textwidth = (int)(font.getStringBounds(text, frc).getWidth());
-g2d.drawString(text, x-(textwidth/2)+(widht /2)+bt, y+(32));
+    
+
+
     g2d.setPaint(new Color((float)0.40,(float)0.40,(float)0.40));
     g2d.setStroke(new BasicStroke(6));
     g2d.drawRect(x,y-1,widht,hight);
-  
- 
+    g2d.setPaint(new Color((float)0.99999,(float)0.99990,(float)0.9999990));
+    Font font = new Font("Arial",Font.BOLD,28);
+    g2d.setFont(font);
+    AffineTransform affinetransform = new AffineTransform();     
+    FontRenderContext frc = new FontRenderContext(affinetransform,true,true);     
+    int textwidth = (int)(font.getStringBounds(text, frc).getWidth());
+    g2d.drawString(text, x-(textwidth/2)+(widht /2)+bt, y+(32));
   }
   
   public void selectedChange(Graphics2D g2d,int x,int y,int widht,int hight){

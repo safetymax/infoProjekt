@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 public abstract class Boundary {
     
     public int x1, y1, x2, y2;
-    public int type;//1 = horizontal wall, 2 = vertical wall
+    public int type;//1 = wall; 2 = bullet; 3 = enemy
     
     public Boundary(int x1, int y1, int x2, int y2, int type) {
         this.x1 = x1;
