@@ -127,6 +127,7 @@ public class Player {
 
         if(shoot){
             w.shoot(boundaries);
+            SoundHandler.playSound("laserShoot.wav");
         }
 
     }
