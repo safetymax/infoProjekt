@@ -24,9 +24,14 @@ public class Player {
     public Ray[] rays = new Ray[900];
     public double DV = (900/Math.tan(Math.toRadians(fov)/2));
 
+    //DONT FORGET TO LOAD PIXELS INTO ARRAY
     File f1 = new File("wall.png");
     BufferedImage wallImage = null;
     int[][][] wallData = new int[64][64][4];
+
+    File f2 = new File("Alien1.png");
+    BufferedImage alien1Image = null;
+    int[][][] alien1Data = new int[64][64][4];
 
     public Player() {   
         posX = 350;
@@ -41,6 +46,8 @@ public class Player {
             rays[i] = new Ray(posX, posY, direction+Math.atan((i-rays.length/2)/DV));
         }
 
+        
+        
         //loading textures
         try{
             wallImage = ImageIO.read(f1);
@@ -49,9 +56,23 @@ public class Player {
             System.out.println("Error");
         }
 
+        try{
+            alien1Image = ImageIO.read(f2);
+        }
+        catch(Exception e){
+            System.out.println("Error");
+        }
+
+        //Loading pixels into array
         for(int i = 0; i < wallImage.getWidth(); i++) {
             for(int j = 0; j < wallImage.getHeight(); j++) {
                 wallData[i][j] = wallImage.getData().getPixel(i, j, (int[]) null);
+            }
+        }
+
+        for(int i = 0; i < alien1Image.getWidth(); i++) {
+            for(int j = 0; j < alien1Image.getHeight(); j++) {
+                alien1Data[i][j] = alien1Image.getData().getPixel(i, j, (int[]) null);
             }
         }
         
@@ -174,6 +195,13 @@ public class Player {
                                 (float)(wallData[pointOnWall][k][1])/255*colour,
                                 (float)(wallData[pointOnWall][k][2])/255*colour,
                                 (float)(wallData[pointOnWall][k][3])/255));
+                            }
+                            if(boundaries[(int)results[j][3]].type == 3) {             
+                                g2d.setPaint(new Color(
+                                (float)(alien1Data[pointOnWall][k][0])/255*colour,
+                                (float)(alien1Data[pointOnWall][k][1])/255*colour,
+                                (float)(alien1Data[pointOnWall][k][2])/255*colour,
+                                (float)(alien1Data[pointOnWall][k][3])/255));
                             }
                             // else if(boundaries[(int)results[j][3]].type == 2) {
                             //     g2d.setPaint(new Color((float)(wallData[(int)results[j][2]%64][k][0])/255*colour, (float)(wallData[(int)results[j][2]%64][k][1])/255*colour, (float)(wallData[(int)results[j][2]%64][k][2])/255*colour, (float)(wallData[(int)results[j][2]%64][k][3])/255));
