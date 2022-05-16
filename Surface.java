@@ -16,6 +16,7 @@ public class Surface extends JPanel implements Runnable {
 
     // Game Elements
     Player player = new Player();
+    Enemy enemy = new Enemy(100, 100);
     MachineGun weapons = new MachineGun(150);
     //TEMP
      
@@ -69,6 +70,12 @@ public class Surface extends JPanel implements Runnable {
             }
         }
         
+        for(int i = 0; i < boundaries.length; i++){
+            if(boundaries[i] == null){
+                boundaries[i] = enemy;
+                break;
+            }
+        }
     }
 
     private void doDrawing(Graphics g) {
@@ -128,6 +135,13 @@ public class Surface extends JPanel implements Runnable {
         
         weapons.updateWeapons(player);
         
+        for(int i = 0; i < boundaries.length; i++){
+            if(boundaries[i] != null){
+                if(boundaries[i].type == 4){
+                    ((Enemy) (boundaries[i])).move(boundaries);
+                }
+            }
+        }
 
         //RPM = 60/cooldown*60
         int cooldown = 3;
