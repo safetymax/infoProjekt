@@ -8,18 +8,25 @@ import javax.swing.JPanel;
 public class Enemy extends Boundary{
 
     public int posX, posY;
-    public int x1, y1, x2, y2;
+    
     public int type;//1 = horizontal wall, 2 = vertical wall
 
     public Enemy(int x, int y) {
-        super(x, y, x+100, y+100, 4);
+        super(x, y, x+100, y+100, 3);
         posX = x;
         posY = y;
     }
 
-    public void move(Boundary[] boundaries){
-        posX = posX+1;
+    public void move(Boundary[] boundaries, Player player){
         x1 = posX;
+        double alpha;
+
+        alpha = Math.atan((posX-player.posX)/(posY-player.posY));
+
+        x1 = (int) (Math.cos(Math.PI-alpha) * (-32) + posX);
+        y1 = (int) (Math.sin(Math.PI-alpha) * (-32) + posY);
+        x2 = (int) (Math.cos(Math.PI-alpha) * 32 + posX);
+        y2 = (int) (Math.sin(Math.PI-alpha) * 32 + posY);
     }
 
     @Override
