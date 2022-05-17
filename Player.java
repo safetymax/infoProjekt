@@ -33,6 +33,10 @@ public class Player {
     BufferedImage alien1Image = null;
     int[][][] alien1Data = new int[64][64][4];
 
+    File f3 = new File("Bullet.png");
+    BufferedImage bulletImage = null;
+    int[][][] bulletData = new int[64][64][4];
+
     public Player() {   
         posX = 350;
         posY = 400;
@@ -57,6 +61,13 @@ public class Player {
         }
 
         try{
+            bulletImage = ImageIO.read(f3);
+        }
+        catch(Exception e){
+            System.out.println("Error");
+        }
+
+        try{
             alien1Image = ImageIO.read(f2);
         }
         catch(Exception e){
@@ -67,12 +78,9 @@ public class Player {
         for(int i = 0; i < wallImage.getWidth(); i++) {
             for(int j = 0; j < wallImage.getHeight(); j++) {
                 wallData[i][j] = wallImage.getData().getPixel(i, j, (int[]) null);
-            }
-        }
-
-        for(int i = 0; i < alien1Image.getWidth(); i++) {
-            for(int j = 0; j < alien1Image.getHeight(); j++) {
                 alien1Data[i][j] = alien1Image.getData().getPixel(i, j, (int[]) null);
+                bulletData[i][j] = bulletImage.getData().getPixel(i, j, (int[]) null);
+
             }
         }
         
@@ -189,12 +197,19 @@ public class Player {
                         //The point on the wall mod 64
                         int pointOnWall = (int)Math.sqrt(Math.pow(results[j][1]-boundaries[(int)results[j][3]].x1,2) + Math.pow(results[j][2]-boundaries[(int)results[j][3]].y1,2))%64;
                         for(int k = 0; k < 64; k++){
-                            if(boundaries[(int)results[j][3]].type == 1 || boundaries[(int)results[j][3]].type == 2) {             
+                            if(boundaries[(int)results[j][3]].type == 1) {             
                                 g2d.setPaint(new Color(
                                 (float)(wallData[pointOnWall][k][0])/255*colour,
                                 (float)(wallData[pointOnWall][k][1])/255*colour,
                                 (float)(wallData[pointOnWall][k][2])/255*colour,
                                 (float)(wallData[pointOnWall][k][3])/255));
+                            }
+                            if(boundaries[(int)results[j][3]].type == 2) {             
+                                g2d.setPaint(new Color(
+                                (float)(bulletData[pointOnWall][k][0])/255*colour,
+                                (float)(bulletData[pointOnWall][k][1])/255*colour,
+                                (float)(bulletData[pointOnWall][k][2])/255*colour,
+                                (float)(bulletData[pointOnWall][k][3])/255));
                             }
                             if(boundaries[(int)results[j][3]].type == 3) {             
                                 g2d.setPaint(new Color(
