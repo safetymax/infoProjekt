@@ -37,6 +37,10 @@ public class Player {
     BufferedImage bulletImage = null;
     int[][][] bulletData = new int[64][64][4];
 
+    File f4 = new File("Alien2.png");
+    BufferedImage alien2Image = null;
+    int[][][] alien2Data = new int[64][64][4];
+
     public Player() {   
         posX = 350;
         posY = 400;
@@ -55,20 +59,11 @@ public class Player {
         //loading textures
         try{
             wallImage = ImageIO.read(f1);
-        }
-        catch(Exception e){
-            System.out.println("Error");
-        }
-
-        try{
             bulletImage = ImageIO.read(f3);
-        }
-        catch(Exception e){
-            System.out.println("Error");
-        }
-
-        try{
             alien1Image = ImageIO.read(f2);
+            alien2Image = ImageIO.read(f4);
+
+
         }
         catch(Exception e){
             System.out.println("Error");
@@ -80,6 +75,7 @@ public class Player {
                 wallData[i][j] = wallImage.getData().getPixel(i, j, (int[]) null);
                 alien1Data[i][j] = alien1Image.getData().getPixel(i, j, (int[]) null);
                 bulletData[i][j] = bulletImage.getData().getPixel(i, j, (int[]) null);
+                alien2Data[i][j] = alien2Image.getData().getPixel(i, j, (int[]) null);
 
             }
         }
@@ -176,62 +172,74 @@ public class Player {
 
             //results: [0] = distance, [1] = x, [2] = y, [3] = index of closest boundary
             float[][] results = rays[i].cast(boundaries, g2d, minimap, i==0 || i==rays.length-1);
+            try {
             for(int j = 0; j < results.length; j++){
-                float dist = results[j][0];
+                    float dist = results[j][0];
 
-                //calls isHitByRay() on hit Boundary
-                if(results[j][3] != -1){
-                    boundaries[(int)results[j][3]].isHitByRay((int)results[j][1], (int)results[j][2]);
-                }
-
-                if(minimap == false){
-                    //map the distance to a color
-                    float colour = (float) dist/1000;
-                    colour = 1 - colour;
-
-                    if(colour < 0){
-                        colour = 0;
+                    //calls isHitByRay() on hit Boundary
+                    if(results[j][3] != -1){
+                        boundaries[(int)results[j][3]].isHitByRay((int)results[j][1], (int)results[j][2]);
                     }
 
-                    //factor to counteract fish-eye effect
-                    double correctionFactor = this.direction - rays[i].direction;
-                    
-                    //Renders pseudo 3d
-                    if(results[j][3] != -1){
-                        //The point on the wall mod 64
-                        int pointOnWall = (int)Math.sqrt(Math.pow(results[j][1]-boundaries[(int)results[j][3]].x1,2) + Math.pow(results[j][2]-boundaries[(int)results[j][3]].y1,2))%64;
-                        for(int k = 0; k < 64; k++){
-                            if(boundaries[(int)results[j][3]].type == 1) {             
-                                g2d.setPaint(new Color(
-                                (float)(wallData[pointOnWall][k][0])/255*colour,
-                                (float)(wallData[pointOnWall][k][1])/255*colour,
-                                (float)(wallData[pointOnWall][k][2])/255*colour,
-                                (float)(wallData[pointOnWall][k][3])/255));
+                    if(minimap == false){
+                        //map the distance to a color
+                        float colour = (float) dist/1000;
+                        colour = 1 - colour;
+
+                        if(colour < 0){
+                            colour = 0;
+                        }
+
+                        //factor to counteract fish-eye effect
+                        double correctionFactor = this.direction - rays[i].direction;
+                        
+                        //Renders pseudo 3d
+                        if(results[j][3] != -1){
+                            //The point on the wall mod 64
+                            int pointOnWall = (int)Math.sqrt(Math.pow(results[j][1]-boundaries[(int)results[j][3]].x1,2) + Math.pow(results[j][2]-boundaries[(int)results[j][3]].y1,2))%64;
+                            for(int k = 0; k < 64; k++){
+                                if(boundaries[(int)results[j][3]].type == 1) {             
+                                    g2d.setPaint(new Color(
+                                    (float)(wallData[pointOnWall][k][0])/255*colour,
+                                    (float)(wallData[pointOnWall][k][1])/255*colour,
+                                    (float)(wallData[pointOnWall][k][2])/255*colour,
+                                    (float)(wallData[pointOnWall][k][3])/255));
+                                }
+                                if(boundaries[(int)results[j][3]].type == 2) {             
+                                    g2d.setPaint(new Color(
+                                    (float)(bulletData[pointOnWall][k][0])/255*colour,
+                                    (float)(bulletData[pointOnWall][k][1])/255*colour,
+                                    (float)(bulletData[pointOnWall][k][2])/255*colour,
+                                    (float)(bulletData[pointOnWall][k][3])/255));
+                                }
+                                if(boundaries[(int)results[j][3]].type == 3) {             
+                                    g2d.setPaint(new Color(
+                                    (float)(alien1Data[pointOnWall][k][0])/255*colour,
+                                    (float)(alien1Data[pointOnWall][k][1])/255*colour,
+                                    (float)(alien1Data[pointOnWall][k][2])/255*colour,
+                                    (float)(alien1Data[pointOnWall][k][3])/255));
+                                }
+                                if(boundaries[(int)results[j][3]].type == 4) {             
+                                    g2d.setPaint(new Color(
+                                    (float)(alien2Data[pointOnWall][k][0])/255*colour,
+                                    (float)(alien2Data[pointOnWall][k][1])/255*colour,
+                                    (float)(alien2Data[pointOnWall][k][2])/255*colour,
+                                    (float)(alien2Data[pointOnWall][k][3])/255));
+                                }
+                                // else if(boundaries[(int)results[j][3]].type == 2) {
+                                //     g2d.setPaint(new Color((float)(wallData[(int)results[j][2]%64][k][0])/255*colour, (float)(wallData[(int)results[j][2]%64][k][1])/255*colour, (float)(wallData[(int)results[j][2]%64][k][2])/255*colour, (float)(wallData[(int)results[j][2]%64][k][3])/255));
+                                // }
+                                
+                                //                                     pixels/distance*correctionFactor*projection plane distance
+                                g2d.drawLine(rays.length-i, (int) (450-((64-k*2)*DV/4)/(dist*Math.cos(correctionFactor))), rays.length-i, (int) (450-((64-(k+1)*2)*DV/4)/(dist*(Math.cos(correctionFactor)))));
                             }
-                            if(boundaries[(int)results[j][3]].type == 2) {             
-                                g2d.setPaint(new Color(
-                                (float)(bulletData[pointOnWall][k][0])/255*colour,
-                                (float)(bulletData[pointOnWall][k][1])/255*colour,
-                                (float)(bulletData[pointOnWall][k][2])/255*colour,
-                                (float)(bulletData[pointOnWall][k][3])/255));
-                            }
-                            if(boundaries[(int)results[j][3]].type == 3) {             
-                                g2d.setPaint(new Color(
-                                (float)(alien1Data[pointOnWall][k][0])/255*colour,
-                                (float)(alien1Data[pointOnWall][k][1])/255*colour,
-                                (float)(alien1Data[pointOnWall][k][2])/255*colour,
-                                (float)(alien1Data[pointOnWall][k][3])/255));
-                            }
-                            // else if(boundaries[(int)results[j][3]].type == 2) {
-                            //     g2d.setPaint(new Color((float)(wallData[(int)results[j][2]%64][k][0])/255*colour, (float)(wallData[(int)results[j][2]%64][k][1])/255*colour, (float)(wallData[(int)results[j][2]%64][k][2])/255*colour, (float)(wallData[(int)results[j][2]%64][k][3])/255));
-                            // }
-                            
-                            //                                     pixels/distance*correctionFactor*projection plane distance
-                            g2d.drawLine(rays.length-i, (int) (450-((64-k*2)*DV/4)/(dist*Math.cos(correctionFactor))), rays.length-i, (int) (450-((64-(k+1)*2)*DV/4)/(dist*(Math.cos(correctionFactor)))));
                         }
                     }
-                }
 
+                }
+            }
+            catch(Exception e){
+                System.out.println("Error: " + e);
             }
         }
     }

@@ -20,7 +20,8 @@ public class Surface extends JPanel implements Runnable {
     double weaponCooldown = 0;
     MachineGun weapons = new MachineGun(150);
 
-    Enemy enemy = new Enemy(250, 250);
+    Enemy enemy1 = new Enemy(250, 250, 3);
+    Enemy enemy2 = new Enemy(350, 250, 4);
     //TEMP
     SoundHandler sound = new SoundHandler();
 
@@ -75,7 +76,13 @@ public class Surface extends JPanel implements Runnable {
         
         for(int i = 0; i < boundaries.length; i++){
             if(boundaries[i] == null){
-                boundaries[i] = enemy;
+                boundaries[i] = enemy1;
+                break;
+            }
+        }
+        for(int i = 0; i < boundaries.length; i++){
+            if(boundaries[i] == null){
+                boundaries[i] = enemy2;
                 break;
             }
         }
@@ -137,7 +144,7 @@ public class Surface extends JPanel implements Runnable {
         //update the game
         frameCount++;
         
-        weapons.updateWeapons(player);
+        weapons.updateWeapons(player, boundaries);
 
         //RPM = 60/cooldown*60
         if (frameCount % 20 == (0 + weaponCooldown) && !weaponShootable) {
@@ -152,7 +159,7 @@ public class Surface extends JPanel implements Runnable {
 
         for(int i = 0; i < boundaries.length; i++){
             if(boundaries[i] != null){
-                if(boundaries[i].type == 3){
+                if(boundaries[i].type == 3 || boundaries[i].type == 4){
                     ((Enemy)boundaries[i]).move(boundaries, player);
                 }
             }

@@ -54,9 +54,16 @@ public class Bullet extends Boundary{
         
     }
     // 900 is window size
-    public Bullet isOutOfBounds(Bullet b){
+    public Bullet isOutOfBounds(Bullet b, Boundary[] boundaries){
         if(b.x < 0 || b.x > 900 || b.y < 0 || b.y > 900){
-            
+
+            for(int i = 0; i < boundaries.length; i++){
+                if(boundaries[i] == this){
+                    boundaries[i] = null;
+                    break;
+                }
+            }
+
             return null;
         }
         else{
