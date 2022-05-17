@@ -20,7 +20,7 @@ public class SoundHandler{
             Clip clip = AudioSystem.getClip();
             if(fileName == "laserShoot"){
             clip.open(laserShoot);
-            System.out.println("Pew pew");
+            
         }
             clip.start();
         }catch(Exception e){
