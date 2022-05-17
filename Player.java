@@ -144,11 +144,11 @@ public class Player {
 
     }
     //shoot function
-    public void shootKey(boolean shoot, Weapons w, Boundary[] boundaries) {
+    public void shootKey(boolean shoot, Weapons w, Boundary[] boundaries, SoundHandler s) {
 
         if(shoot){
             w.shoot(boundaries);
-            SoundHandler.playSound("laserShoot.wav");
+            s.playSound("laserShoot");
         }
 
     }

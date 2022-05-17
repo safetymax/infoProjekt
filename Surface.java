@@ -22,7 +22,7 @@ public class Surface extends JPanel implements Runnable {
 
     Enemy enemy = new Enemy(250, 250);
     //TEMP
-     
+    SoundHandler sound = new SoundHandler();
 
     boolean overlayActive = true;
 
@@ -144,7 +144,7 @@ public class Surface extends JPanel implements Runnable {
             weaponShootable = true;
         }
         if(weaponShootable && keyH.ePressed){
-            player.shootKey(keyH.ePressed, weapons, boundaries);
+            player.shootKey(keyH.ePressed, weapons, boundaries, sound);
             weaponShootable = false;
             weaponCooldown = frameCount%20;
         }
