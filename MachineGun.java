@@ -24,7 +24,7 @@ public class MachineGun extends Weapons {
         
 
     }
-    public void updateWeapons(Player player){
+    public void updateWeapons(Player player, Boundary[] boundaries){
       x = player.posX;
       y = player.posY;
         direction = player.direction;
@@ -32,12 +32,14 @@ public class MachineGun extends Weapons {
         for(int i = 0; i < b.length; i++){
             if(b[i] != null){
                 b[i].moveBullet(player);
-                b[i] = b[i].isOutOfBounds(b[i]);
+                b[i] = b[i].isOutOfBounds(b[i], boundaries);
             }
        }
     }
     public void shoot(Boundary[] boundaries){
+
         Bullet bullet = new Bullet((int)x,(int) y, direction, 5f,5f);
+
         for(int i = 0; i < b.length; i++){
             if(b[i] == null){
                 b[i] = bullet;
@@ -46,7 +48,7 @@ public class MachineGun extends Weapons {
         }
 
         for(int i = 0; i < boundaries.length; i++){
-            if(boundaries[i] != null){
+            if(boundaries[i] == null){
                 boundaries[i] = bullet;
                 break;
             }
