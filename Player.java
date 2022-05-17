@@ -152,11 +152,11 @@ public class Player {
 
     }
     //shoot function
-    public void shootKey(boolean shoot, Weapons w, Boundary[] boundaries) {
+    public void shootKey(boolean shoot, Weapons w, Boundary[] boundaries, SoundHandler s) {
 
         if(shoot){
             w.shoot(boundaries);
-            SoundHandler.playSound("laserShoot.wav");
+            s.playSound("laserShoot");
         }
 
     }
@@ -188,6 +188,10 @@ public class Player {
                     //map the distance to a color
                     float colour = (float) dist/1000;
                     colour = 1 - colour;
+
+                    if(colour < 0){
+                        colour = 0;
+                    }
 
                     //factor to counteract fish-eye effect
                     double correctionFactor = this.direction - rays[i].direction;
