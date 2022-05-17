@@ -14,8 +14,7 @@ import java.awt.Toolkit;
 public class Overlay {
     private int downA, enterA, optionsA, counter, BindingsA, SoundA, VolumeA, SFXA, MusicA;
 
-    private boolean a, b, c, d, e, f, g, h, i, j, downB, optionsB, BindingsB, SoundB, VolumeB, SFXB, MusicB,
-            enterVolume, enterSFX, enterMusic;
+    private boolean a, b, c, d, e, f, g, h, i, j, downB, optionsB, BindingsB, SoundB, VolumeB, SFXB, MusicB,counterB,counterC,enterVolume, enterSFX, enterMusic;
 
     private static boolean move;
     Image img1 = Toolkit.getDefaultToolkit().getImage("Bild.png");
@@ -39,10 +38,11 @@ public class Overlay {
 
     public void draw(Graphics2D g2d, Boolean down, Boolean right, Boolean up, Boolean left, boolean enter,
             Boolean menue) {
-
+System.out.println(counter);
+System.out.print(counterB);
         // enter
-        if (menue) {
-
+        if (enter && counter > 10) {
+            
             VolumeB = false;
             SoundB = true;
             enterVolume = false;
@@ -50,8 +50,11 @@ public class Overlay {
             MusicB = false;
             enterSFX = false;
             enterMusic = false;
-
+            counterB = false    ;
+counter = 0;
+SoundA = 0;
         }
+       
         if (enter && !i && !j) {
             i = true;
             j = true;
@@ -261,7 +264,16 @@ public class Overlay {
             VolumeA = 5;
         }
        // System.out.println(downA + " ;" + optionsA + " ;" + BindingsA + " ;" + SoundA + " ;" + VolumeA + " ;" + SFXA+ " ;" + MusicA + " ;");
-        // counter++;
+        if(counterB){
+            
+            counter++;
+                    if(counter >= 100)
+           
+            counter = 10;
+        }
+
+       
+
 
         if (enterA == 0) {
             downB = true;
@@ -466,40 +478,44 @@ public class Overlay {
             } else if (SoundA == 1) {
                 button1.selectedChange(g2d, 300, 320 - 80 - 80, 300, 90);
                 downA = 6;
-                if (enter) {
+                if (enter && counter < 10) {
                     enterVolume = true;
+                    
                 }
-                if (enterVolume) {
+                if (enterVolume ) {
                     SFXB = false;
                     MusicB = false;
                     VolumeB = true;
                     SoundB = false;
+                    counterB = true;
 
                 }
 
             } else if (SoundA == 2) {
                 button1.selectedChange(g2d, 300, 400 - 80 + 45 - 80, 300, 90);
                 downA = 6;
-                if (enter) {
+                if (enter && counter < 10) {
                     enterMusic = true;
                 }
-                if (enterMusic) {
+                if (enterMusic ) {
                     SFXB = false;
                     MusicB = true;
                     VolumeB = false;
                     SoundB = false;
+                    counterB =true;
                 }
             } else if (SoundA == 3) {
                 button1.selectedChange(g2d, 300, 480 - 80 + 90 - 80, 300, 90);
                 downA = 6;
-                if (enter) {
+                if (enter && counter < 10) {
                     enterSFX = true;
                 }
-                if (enterSFX) {
+                if (enterSFX ) {
                     SFXB = true;
                     MusicB = false;
                     VolumeB = false;
                     SoundB = false;
+                    counterB = true;
                 }
 
             }
