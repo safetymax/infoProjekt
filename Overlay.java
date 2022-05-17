@@ -38,8 +38,7 @@ public class Overlay {
 
     public void draw(Graphics2D g2d, Boolean down, Boolean right, Boolean up, Boolean left, boolean enter,
             Boolean menue) {
-System.out.println(counter);
-System.out.print(counterB);
+
         // enter
         if (enter && counter > 10) {
             
