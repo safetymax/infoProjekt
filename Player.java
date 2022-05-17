@@ -181,6 +181,10 @@ public class Player {
                     float colour = (float) dist/1000;
                     colour = 1 - colour;
 
+                    if(colour < 0){
+                        colour = 0;
+                    }
+
                     //factor to counteract fish-eye effect
                     double correctionFactor = this.direction - rays[i].direction;
                     
