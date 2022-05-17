@@ -25,7 +25,7 @@ public class Ray {
     }
 
     public float[][] cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap, boolean drawRay) {
-        float[][] allResults = new float[20][4];
+        float[][] allResults = new float[10][4];
         int count = 0;
         float distance = 1000;
 
@@ -64,7 +64,7 @@ public class Ray {
                     allResults[count][1] = ix;
                     allResults[count][2] = iy;
                     allResults[count][3] = i;
-                    if(count<50){
+                    if(count<allResults.length-1){
                         count++;
                     }             
                 }
