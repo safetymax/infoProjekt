@@ -176,11 +176,6 @@ public class Player {
             for(int j = 0; j < results.length; j++){
                     float dist = results[j][0];
 
-                    //calls isHitByRay() on hit Boundary
-                    if(results[j][3] != -1){
-                        boundaries[(int)results[j][3]].isHitByRay((int)results[j][1], (int)results[j][2]);
-                    }
-
                     if(minimap == false){
                         //map the distance to a color
                         float colour = (float) dist/1000;
