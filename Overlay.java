@@ -313,6 +313,7 @@ if(enterA == 13){
             SFXB = false;
             MusicB = false;
             pauseMenueB = false;
+            options = false;
             g2d.drawImage(img1, 0, 0, null);
 
             button1.draw(g2d, 300, 170, 300, 45, 0, "New Game");
