@@ -15,7 +15,7 @@ public class Bullet extends Boundary{
     public float damage;
 
     public Bullet(int x, int y, double direction, float s, float d) {
-        super(x, y, x+5, y+5,2);
+        super(x, y ,x, y, x+5, y+5,2);
         this.x = x;
         this.y = y;
         this.direction = direction;
@@ -27,6 +27,8 @@ public class Bullet extends Boundary{
 
         x +=  (Math.cos(direction) * speed);
         y +=  (Math.sin(direction) * speed);
+        posX = (int) x;
+        posY = (int) y;
 
         alpha = Math.atan((x-player.posX)/(y-player.posY));
 

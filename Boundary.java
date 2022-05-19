@@ -9,10 +9,13 @@ import javax.swing.JPanel;
 //Everything the player can see extends from this
 public abstract class Boundary {
     
+    public int posX, posY;
     public int x1, y1, x2, y2;
     public int type;//1 = wall; 2 = bullet; 3 = enemy
     
-    public Boundary(int x1, int y1, int x2, int y2, int type) {
+    public Boundary(int posX, int posY, int x1, int y1, int x2, int y2, int type) {
+        this.posX = posX;
+        this.posY = posY;
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;

@@ -41,6 +41,11 @@ public class Player {
     BufferedImage alien2Image = null;
     int[][][] alien2Data = new int[64][64][4];
 
+    int[][][][] textureData = new int[5][64][64][4];
+
+    int[] ZBuffer = new int[900];
+
+
     public Player() {   
         posX = 350;
         posY = 400;
@@ -79,6 +84,12 @@ public class Player {
 
             }
         }
+
+        //Loading textures into array
+        textureData[1] = wallData;
+        textureData[2] = bulletData;
+        textureData[3] = alien1Data;
+        textureData[4] = alien2Data;
         
     }
 
@@ -167,8 +178,9 @@ public class Player {
     }
 
     //Casts all Rays
-    public void cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap) {
+    public void cast(Boundary[] boundaries,Boundary[] sprites, Graphics2D g2d, boolean minimap) {
         for(int i = 0; i < rays.length; i++) {
+            double DVprime = Math.sqrt(Math.pow(DV,2)+Math.pow(i-450,2));
 
             //results: [0] = distance, [1] = x, [2] = y, [3] = index of closest boundary
             float[][] results = rays[i].cast(boundaries, g2d, minimap, i==0 || i==rays.length-1);
@@ -190,43 +202,70 @@ public class Player {
                         
                         //Renders pseudo 3d
                         if(results[j][3] != -1){
+                            ZBuffer[899-i] = (int)dist;
                             //The point on the wall mod 64
                             int pointOnWall = (int)Math.sqrt(Math.pow(results[j][1]-boundaries[(int)results[j][3]].x1,2) + Math.pow(results[j][2]-boundaries[(int)results[j][3]].y1,2))%64;
                             for(int k = 0; k < 64; k++){
-                                if(boundaries[(int)results[j][3]].type == 1) {             
-                                    g2d.setPaint(new Color(
-                                    (float)(wallData[pointOnWall][k][0])/255*colour,
-                                    (float)(wallData[pointOnWall][k][1])/255*colour,
-                                    (float)(wallData[pointOnWall][k][2])/255*colour,
-                                    (float)(wallData[pointOnWall][k][3])/255));
-                                }
-                                if(boundaries[(int)results[j][3]].type == 2) {             
-                                    g2d.setPaint(new Color(
-                                    (float)(bulletData[pointOnWall][k][0])/255*colour,
-                                    (float)(bulletData[pointOnWall][k][1])/255*colour,
-                                    (float)(bulletData[pointOnWall][k][2])/255*colour,
-                                    (float)(bulletData[pointOnWall][k][3])/255));
-                                }
-                                if(boundaries[(int)results[j][3]].type == 3) {             
-                                    g2d.setPaint(new Color(
-                                    (float)(alien1Data[pointOnWall][k][0])/255*colour,
-                                    (float)(alien1Data[pointOnWall][k][1])/255*colour,
-                                    (float)(alien1Data[pointOnWall][k][2])/255*colour,
-                                    (float)(alien1Data[pointOnWall][k][3])/255));
-                                }
-                                if(boundaries[(int)results[j][3]].type == 4) {             
-                                    g2d.setPaint(new Color(
-                                    (float)(alien2Data[pointOnWall][k][0])/255*colour,
-                                    (float)(alien2Data[pointOnWall][k][1])/255*colour,
-                                    (float)(alien2Data[pointOnWall][k][2])/255*colour,
-                                    (float)(alien2Data[pointOnWall][k][3])/255));
-                                }
+                                g2d.setPaint(new Color(
+                                (float)(textureData[boundaries[(int)results[j][3]].type][pointOnWall][k][0])/255*colour,
+                                (float)(textureData[boundaries[(int)results[j][3]].type][pointOnWall][k][1])/255*colour,
+                                (float)(textureData[boundaries[(int)results[j][3]].type][pointOnWall][k][2])/255*colour,
+                                (float)(textureData[boundaries[(int)results[j][3]].type][pointOnWall][k][3])/255));
+                                
                                 // else if(boundaries[(int)results[j][3]].type == 2) {
                                 //     g2d.setPaint(new Color((float)(wallData[(int)results[j][2]%64][k][0])/255*colour, (float)(wallData[(int)results[j][2]%64][k][1])/255*colour, (float)(wallData[(int)results[j][2]%64][k][2])/255*colour, (float)(wallData[(int)results[j][2]%64][k][3])/255));
                                 // }
                                 
                                 //                                     pixels/distance*correctionFactor*projection plane distance
                                 g2d.drawLine(rays.length-i, (int) (450-((64-k*2)*DV/4)/(dist*Math.cos(correctionFactor))), rays.length-i, (int) (450-((64-(k+1)*2)*DV/4)/(dist*(Math.cos(correctionFactor)))));
+                            }
+
+                            //floor
+                            for(int y = (int)(450+(64*DV/4)/(dist*Math.cos(correctionFactor))); y < 900; y+=2){
+                                double alpha = Math.atan((y-449)/DVprime);
+                                double hypotenuse = Math.abs(16/(Math.tan(alpha)*Math.cos(correctionFactor)));
+                                double xFloor = hypotenuse*Math.cos(rays[i].direction) + posX;
+                                double yFloor = hypotenuse*Math.sin(rays[i].direction) + posY;
+
+                                colour = (float) hypotenuse/1000;
+                                colour = 1 - colour;
+
+                                if(xFloor < 0){
+                                    xFloor = 64 - xFloor%64;
+                                }
+                                if(yFloor < 0){
+                                    yFloor = 64 - yFloor%64;
+                                }
+
+                                g2d.setPaint(new Color(
+                                (float)(textureData[1][(int)xFloor%64][(int)yFloor%64][0])/255*colour,
+                                (float)(textureData[1][(int)xFloor%64][(int)yFloor%64][1])/255*colour,
+                                (float)(textureData[1][(int)xFloor%64][(int)yFloor%64][2])/255*colour));
+                                
+                                g2d.drawLine(rays.length-i, y, rays.length-i, y+5);
+                            }
+                            for(int y = (int)(450-(64*DV/4)/(dist*Math.cos(correctionFactor))); y >= 0; y-=2){
+                                double alpha = Math.atan((451-y)/DVprime);
+                                double hypotenuse = Math.abs(16/(Math.tan(alpha)*Math.cos(correctionFactor)));
+                                double xFloor = hypotenuse*Math.cos(rays[i].direction) + posX;
+                                double yFloor = hypotenuse*Math.sin(rays[i].direction) + posY;
+
+                                colour = (float) hypotenuse/1000;
+                                colour = 1 - colour;
+
+                                if(xFloor < 0){
+                                    xFloor = 64 - xFloor%64;
+                                }
+                                if(yFloor < 0){
+                                    yFloor = 64 - yFloor%64;
+                                }
+
+                                g2d.setPaint(new Color(
+                                (float)(textureData[1][(int)xFloor%64][(int)yFloor%64][0])/255*colour,
+                                (float)(textureData[1][(int)xFloor%64][(int)yFloor%64][1])/255*colour,
+                                (float)(textureData[1][(int)xFloor%64][(int)yFloor%64][2])/255*colour));
+                                
+                                g2d.drawLine(rays.length-i, y, rays.length-i, y+5);
                             }
                         }
                     }
@@ -235,8 +274,49 @@ public class Player {
             }
             catch(Exception e){
                 System.out.println("Error: " + e);
+                System.exit(0);
+            }
+        }
+
+        //sprites
+        for(int i = 0; i < sprites.length; i++){
+            if(sprites[i] != null){
+                double alpha = Math.atan2(sprites[i].posY-posY, sprites[i].posX-posX);
+                alpha += Math.PI;
+                double radius = Math.abs((sprites[i].posY-posY)/Math.sin(alpha));
+                double dir = (direction%(Math.PI*2));
+                if(dir < 0){
+                    dir = Math.PI*2 + dir;
+                }
+                // if(posY>sprites[i].posY){
+                //     alpha += Math.PI*2;
+                // }
+                int a = 1;
+                if(posY < sprites[i].posY && alpha > dir){
+                    a = -1;
+                }
+                double offset = (int)((alpha-dir+a*Math.PI) / Math.toRadians(fov)*900+450);
+
+                if(alpha-dir+a*Math.PI > -Math.toRadians(fov)/2 && alpha-dir+a*Math.PI < Math.toRadians(fov)/2){
+                    for(int x = 0; x<64; x++){
+                        int offsetX = (int) (450-((64-(x)*2)*DV/4)/(radius)-450+offset);
+                        if(offsetX < 900 && offsetX >= 0 && ZBuffer[offsetX] > radius){
+                            for(int y = 0; y<64; y++){
+                                if(x+offset<900 && x+offset>0){
+                                    g2d.setPaint(new Color(
+                                    (float)(textureData[sprites[i].type][x][y][0])/255,
+                                    (float)(textureData[sprites[i].type][x][y][1])/255,
+                                    (float)(textureData[sprites[i].type][x][y][2])/255,
+                                    (float)(textureData[sprites[i].type][x][y][3])/255));
+                                    g2d.fillRect(offsetX, (int) (450-((64-y*2)*DV/4)/(radius)), (int)((450-((64-(x+1)*2)*DV/4)/(radius))-(450-((64-x*2)*DV/4)/(radius)))+1, (int)((450-((64-(y+1)*2)*DV/4)/(radius))-(450-((64-y*2)*DV/4)/(radius)))+1);
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
+
 
 }

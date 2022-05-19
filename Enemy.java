@@ -6,15 +6,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Enemy extends Boundary{
-
-    public int posX, posY;
     
     public int type;//1 = horizontal wall, 2 = vertical wall
 
     public Enemy(int x, int y, int type) {
-        super(x, y, x+100, y+100, type);
-        posX = x;
-        posY = y;
+        super(x,y, x, y, x+100, y+100, type);
     }
 
     public void move(Boundary[] boundaries, Player player){

@@ -13,7 +13,7 @@ public class Wall extends Boundary{
     public int type;//1 = horizontal wall, 2 = vertical wall
 
     public Wall(int x1, int y1, int x2, int y2, int type) {
-        super(x1, y1, x2, y2, type);
+        super(x1, y1, x1, y1, x2, y2, type);
     }
 
     @Override

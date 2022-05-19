@@ -31,7 +31,12 @@ public class Surface extends JPanel implements Runnable {
     
     //Empty level Information
     String[] info;
+
     Boundary[] boundaries = new Boundary[2048];
+    Boundary[] sprites = new Boundary[2048];
+    int[] spriteOrder = new int[2048];
+    double[] spriteDistance = new double[2048];
+
     int collisions[][];
 
     int frameCount = 0;
@@ -74,19 +79,19 @@ public class Surface extends JPanel implements Runnable {
             }
         }
         
-        for(int i = 0; i < boundaries.length; i++){
-            if(boundaries[i] == null){
-                boundaries[i] = enemy1;
+        for(int i = 0; i < sprites.length; i++){
+            if(sprites[i] == null){
+                sprites[i] = enemy1;
                 break;
             }
         }
-        for(int i = 0; i < boundaries.length; i++){
-            if(boundaries[i] == null){
-                boundaries[i] = enemy2;
+        for(int i = 0; i < sprites.length; i++){
+            if(sprites[i] == null){
+                sprites[i] = enemy2;
                 break;
             }
         }
-        
+
     }
 
     private void doDrawing(Graphics g) {
@@ -105,6 +110,10 @@ public class Surface extends JPanel implements Runnable {
                     g2d.setPaint(new Color(90f/255f,90f/255f,90f/255f));
                     g2d.drawLine(boundaries[i].x1, boundaries[i].y1, boundaries[i].x2, boundaries[i].y2);
                 }
+                if(sprites[i] != null) {
+                    g2d.setPaint(new Color(255f/255f,255f/255f,255f/255f));
+                    g2d.drawLine(sprites[i].x1, sprites[i].y1, sprites[i].x2, sprites[i].y2);
+                }
             }
             //Draw bullets on minimap
             weapons.drawWeapons(g2d);
@@ -122,7 +131,7 @@ public class Surface extends JPanel implements Runnable {
 
         //Player
         player.draw(g2d, keyH.controlPressed);
-        player.cast(boundaries, g2d, keyH.controlPressed);
+        player.cast(boundaries, sprites, g2d, keyH.controlPressed);
 
 
         //overlay
@@ -144,23 +153,23 @@ public class Surface extends JPanel implements Runnable {
         //update the game
         frameCount++;
         
-        weapons.updateWeapons(player, boundaries);
+        weapons.updateWeapons(player, sprites);
 
         //RPM = 60/cooldown*60
         if (frameCount % 20 == (0 + weaponCooldown) && !weaponShootable) {
             weaponShootable = true;
         }
         if(weaponShootable && keyH.ePressed){
-            player.shootKey(keyH.ePressed, weapons, boundaries, sound);
+            player.shootKey(keyH.ePressed, weapons, sprites, sound);
             weaponShootable = false;
             weaponCooldown = frameCount%20;
         }
         player.move(keyH.upPressed, keyH.downPressed, keyH.leftPressed, keyH.rightPressed, keyH.lookLeftPressed, keyH.lookRightPressed, keyH.shiftPressed, collisions);
 
-        for(int i = 0; i < boundaries.length; i++){
-            if(boundaries[i] != null){
-                if(boundaries[i].type == 3 || boundaries[i].type == 4){
-                    ((Enemy)boundaries[i]).move(boundaries, player);
+        for(int i = 0; i < sprites.length; i++){
+            if(sprites[i] != null){
+                if(sprites[i].type == 3 || sprites[i].type == 4){
+                    ((Enemy)sprites[i]).move(sprites, player);
                 }
             }
         }
