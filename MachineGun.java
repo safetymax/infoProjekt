@@ -47,7 +47,7 @@ public class MachineGun extends Weapons {
             }
         }
 
-        for(int i = 0; i < boundaries.length; i++){
+        for(int i = 1; i < boundaries.length; i++){
             if(boundaries[i] == null){
                 boundaries[i] = bullet;
                 break;

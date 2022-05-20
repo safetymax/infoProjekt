@@ -79,13 +79,13 @@ public class Surface extends JPanel implements Runnable {
             }
         }
         
-        for(int i = 0; i < sprites.length; i++){
+        for(int i = 1; i < sprites.length; i++){
             if(sprites[i] == null){
                 sprites[i] = enemy1;
                 break;
             }
         }
-        for(int i = 0; i < sprites.length; i++){
+        for(int i = 1; i < sprites.length; i++){
             if(sprites[i] == null){
                 sprites[i] = enemy2;
                 break;

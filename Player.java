@@ -44,6 +44,9 @@ public class Player {
     int[][][][] textureData = new int[5][64][64][4];
 
     int[] ZBuffer = new int[900];
+    float[] spriteAngle = new float[1000];
+    float[] spriteDistance = new float[1000];
+    int[] spriteOrder = new int[1000];
 
 
     public Player() {   
@@ -183,10 +186,9 @@ public class Player {
             double DVprime = Math.sqrt(Math.pow(DV,2)+Math.pow(i-450,2));
 
             //results: [0] = distance, [1] = x, [2] = y, [3] = index of closest boundary
-            float[][] results = rays[i].cast(boundaries, g2d, minimap, i==0 || i==rays.length-1);
+            float[] results = rays[i].cast(boundaries, g2d, minimap, i==0 || i==rays.length-1);
             try {
-            for(int j = 0; j < results.length; j++){
-                    float dist = results[j][0];
+                    float dist = results[0];
 
                     if(minimap == false){
                         //map the distance to a color
@@ -201,18 +203,17 @@ public class Player {
                         double correctionFactor = this.direction - rays[i].direction;
                         
                         //Renders pseudo 3d
-                        if(results[j][3] != -1){
+                        if(results[3] != -1){
                             ZBuffer[899-i] = (int)dist;
                             //The point on the wall mod 64
-                            int pointOnWall = (int)Math.sqrt(Math.pow(results[j][1]-boundaries[(int)results[j][3]].x1,2) + Math.pow(results[j][2]-boundaries[(int)results[j][3]].y1,2))%64;
+                            int pointOnWall = (int)Math.sqrt(Math.pow(results[1]-boundaries[(int)results[3]].x1,2) + Math.pow(results[2]-boundaries[(int)results[3]].y1,2))%64;
                             for(int k = 0; k < 64; k++){
                                 g2d.setPaint(new Color(
-                                (float)(textureData[boundaries[(int)results[j][3]].type][pointOnWall][k][0])/255*colour,
-                                (float)(textureData[boundaries[(int)results[j][3]].type][pointOnWall][k][1])/255*colour,
-                                (float)(textureData[boundaries[(int)results[j][3]].type][pointOnWall][k][2])/255*colour,
-                                (float)(textureData[boundaries[(int)results[j][3]].type][pointOnWall][k][3])/255));
+                                (float)(textureData[boundaries[(int)results[3]].type][pointOnWall][k][0])/255*colour,
+                                (float)(textureData[boundaries[(int)results[3]].type][pointOnWall][k][1])/255*colour,
+                                (float)(textureData[boundaries[(int)results[3]].type][pointOnWall][k][2])/255*colour));
                                 
-                                // else if(boundaries[(int)results[j][3]].type == 2) {
+                                // else if(boundaries[(int)results[3]].type == 2) {
                                 //     g2d.setPaint(new Color((float)(wallData[(int)results[j][2]%64][k][0])/255*colour, (float)(wallData[(int)results[j][2]%64][k][1])/255*colour, (float)(wallData[(int)results[j][2]%64][k][2])/255*colour, (float)(wallData[(int)results[j][2]%64][k][3])/255));
                                 // }
                                 
@@ -220,57 +221,48 @@ public class Player {
                                 g2d.drawLine(rays.length-i, (int) (450-((64-k*2)*DV/4)/(dist*Math.cos(correctionFactor))), rays.length-i, (int) (450-((64-(k+1)*2)*DV/4)/(dist*(Math.cos(correctionFactor)))));
                             }
 
-                            //floor
-                            for(int y = (int)(450+(64*DV/4)/(dist*Math.cos(correctionFactor))); y < 900; y+=2){
-                                double alpha = Math.atan((y-449)/DVprime);
-                                double hypotenuse = Math.abs(16/(Math.tan(alpha)*Math.cos(correctionFactor)));
-                                double xFloor = hypotenuse*Math.cos(rays[i].direction) + posX;
-                                double yFloor = hypotenuse*Math.sin(rays[i].direction) + posY;
+                        }
 
-                                colour = (float) hypotenuse/1000;
-                                colour = 1 - colour;
+                        //floor / ceiling
+                        if(results[3] == -1){
+                            dist = 500;
+                        }                         
+                        int wallHeight = (int)(450+(64*DV/4)/(dist*Math.cos(correctionFactor)));
+                        for(int y = wallHeight; y <= 904; y+=4){
+                            double alpha = Math.atan((y-449)/DVprime);
+                            double hypotenuse = Math.abs(16/(Math.tan(alpha)*Math.cos(correctionFactor)));
+                            double xFloor = hypotenuse*Math.cos(rays[i].direction) + posX;
+                            double yFloor = hypotenuse*Math.sin(rays[i].direction) + posY;
 
-                                if(xFloor < 0){
-                                    xFloor = 64 - xFloor%64;
-                                }
-                                if(yFloor < 0){
-                                    yFloor = 64 - yFloor%64;
-                                }
+                            colour = (float) hypotenuse/1000;
+                            colour = 1 - colour;
 
-                                g2d.setPaint(new Color(
-                                (float)(textureData[1][(int)xFloor%64][(int)yFloor%64][0])/255*colour,
-                                (float)(textureData[1][(int)xFloor%64][(int)yFloor%64][1])/255*colour,
-                                (float)(textureData[1][(int)xFloor%64][(int)yFloor%64][2])/255*colour));
-                                
-                                g2d.drawLine(rays.length-i, y, rays.length-i, y+5);
+                            if(xFloor < 0){
+                                xFloor = 64 - xFloor%64;
                             }
-                            for(int y = (int)(450-(64*DV/4)/(dist*Math.cos(correctionFactor))); y >= 0; y-=2){
-                                double alpha = Math.atan((451-y)/DVprime);
-                                double hypotenuse = Math.abs(16/(Math.tan(alpha)*Math.cos(correctionFactor)));
-                                double xFloor = hypotenuse*Math.cos(rays[i].direction) + posX;
-                                double yFloor = hypotenuse*Math.sin(rays[i].direction) + posY;
-
-                                colour = (float) hypotenuse/1000;
-                                colour = 1 - colour;
-
-                                if(xFloor < 0){
-                                    xFloor = 64 - xFloor%64;
-                                }
-                                if(yFloor < 0){
-                                    yFloor = 64 - yFloor%64;
-                                }
-
-                                g2d.setPaint(new Color(
-                                (float)(textureData[1][(int)xFloor%64][(int)yFloor%64][0])/255*colour,
-                                (float)(textureData[1][(int)xFloor%64][(int)yFloor%64][1])/255*colour,
-                                (float)(textureData[1][(int)xFloor%64][(int)yFloor%64][2])/255*colour));
-                                
-                                g2d.drawLine(rays.length-i, y, rays.length-i, y+5);
+                            if(yFloor < 0){
+                                yFloor = 64 - yFloor%64;
                             }
+                            xFloor %= 64;
+                            yFloor %= 64;
+
+                            //floor texture
+                            g2d.setPaint(new Color(
+                            (float)(textureData[1][(int)xFloor][(int)yFloor][0])/255*colour,
+                            (float)(textureData[1][(int)xFloor][(int)yFloor][1])/255*colour,
+                            (float)(textureData[1][(int)xFloor][(int)yFloor][2])/255*colour));
+                            
+                            g2d.drawLine(rays.length-i, y, rays.length-i, y+5);
+
+                            //ceiling texture
+                            g2d.setPaint(new Color(
+                            (float)(textureData[1][(int)xFloor][(int)yFloor][0])/255*colour,
+                            (float)(textureData[1][(int)xFloor][(int)yFloor][1])/255*colour,
+                            (float)(textureData[1][(int)xFloor][(int)yFloor][2])/255*colour));
+
+                            g2d.drawLine(rays.length-i, 900-y, rays.length-i, 900-y+5);
                         }
                     }
-
-                }
             }
             catch(Exception e){
                 System.out.println("Error: " + e);
@@ -278,12 +270,21 @@ public class Player {
             }
         }
 
-        //sprites
         for(int i = 0; i < sprites.length; i++){
             if(sprites[i] != null){
-                double alpha = Math.atan2(sprites[i].posY-posY, sprites[i].posX-posX);
-                alpha += Math.PI;
-                double radius = Math.abs((sprites[i].posY-posY)/Math.sin(alpha));
+                spriteAngle[i] = (float)(Math.atan2(sprites[i].posY-posY, sprites[i].posX-posX) + Math.PI);
+                spriteDistance[i] = (float)Math.abs((sprites[i].posY-posY)/Math.sin(spriteAngle[i]));
+                spriteOrder[i] = i;
+            }
+        }
+        sortSprites(spriteDistance, spriteOrder);
+
+        //sprites
+        for(int i = 0; i < spriteOrder.length; i++){
+            int ii = spriteOrder[i];
+            if(sprites[ii] != null){
+                double alpha = spriteAngle[ii];
+                double radius = spriteDistance[ii];//Math.abs((sprites[i].posY-posY)/Math.sin(alpha));
                 double dir = (direction%(Math.PI*2));
                 if(dir < 0){
                     dir = Math.PI*2 + dir;
@@ -292,8 +293,11 @@ public class Player {
                 //     alpha += Math.PI*2;
                 // }
                 int a = 1;
-                if(posY < sprites[i].posY && alpha > dir){
+                if(posY < sprites[ii].posY && alpha > dir){
                     a = -1;
+                }
+                if(alpha-dir+a*Math.PI > Math.PI){
+                    alpha -= Math.PI*2;
                 }
                 double offset = (int)((alpha-dir+a*Math.PI) / Math.toRadians(fov)*900+450);
 
@@ -304,10 +308,10 @@ public class Player {
                             for(int y = 0; y<64; y++){
                                 if(x+offset<900 && x+offset>0){
                                     g2d.setPaint(new Color(
-                                    (float)(textureData[sprites[i].type][x][y][0])/255,
-                                    (float)(textureData[sprites[i].type][x][y][1])/255,
-                                    (float)(textureData[sprites[i].type][x][y][2])/255,
-                                    (float)(textureData[sprites[i].type][x][y][3])/255));
+                                    (float)(textureData[sprites[ii].type][x][y][0])/255,
+                                    (float)(textureData[sprites[ii].type][x][y][1])/255,
+                                    (float)(textureData[sprites[ii].type][x][y][2])/255,
+                                    (float)(textureData[sprites[ii].type][x][y][3])/255));
                                     g2d.fillRect(offsetX, (int) (450-((64-y*2)*DV/4)/(radius)), (int)((450-((64-(x+1)*2)*DV/4)/(radius))-(450-((64-x*2)*DV/4)/(radius)))+1, (int)((450-((64-(y+1)*2)*DV/4)/(radius))-(450-((64-y*2)*DV/4)/(radius)))+1);
                                 }
                             }
@@ -318,5 +322,16 @@ public class Player {
         }
     }
 
+    void sortSprites(float[] spriteD, int[] spriteO){
+        for(int i = 0; i < spriteO.length-1; i++){
+            for(int j = 0; j < spriteO.length-1; j++){
+                if(spriteD[spriteOrder[j]] < spriteD[spriteO[j+1]]){
+                    int temp = spriteO[j];
+                    spriteO[j] = spriteO[j+1];
+                    spriteO[j+1] = temp;
+                }
+            }
+        }
+    }
 
 }

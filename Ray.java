@@ -24,22 +24,17 @@ public class Ray {
         this.direction = direction;
     }
 
-    public float[][] cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap, boolean drawRay) {
-        float[][] allResults = new float[1][4];
-        int count = 0;
+    public float[] cast(Boundary[] boundaries, Graphics2D g2d, boolean minimap, boolean drawRay) {
+        float[] allResults = new float[4];
         float distance = 1000;
 
-        for(int i = 0; i < allResults.length; i++) {
-            allResults[i][0] = -1;
-            allResults[i][1] = -1;
-            allResults[i][2] = -1;
-            allResults[i][3] = -1;
-        }
+        allResults[0] = -1;
+        allResults[1] = -1;
+        allResults[2] = -1;
+        allResults[3] = -1;
+        
 
         float closestDistance = distance;
-        float closestIndex = -1;
-        float record1 = -1;
-        float record2 = -1;
 
         for(int i = 0; i < boundaries.length; i++){
             if(boundaries[i] != null){
@@ -62,16 +57,12 @@ public class Ray {
                     float iy = y1 + t*(y2-y1);
                     float distanceToWall = (float)Math.abs((ix-x)/Math.cos(direction));
                     if(distanceToWall < closestDistance){
-                        allResults[count][0] = (float)Math.abs((ix-x)/Math.cos(direction));
-                        allResults[count][1] = ix;
-                        allResults[count][2] = iy;
-                        allResults[count][3] = i;
+                        allResults[0] = distanceToWall;
+                        allResults[1] = ix;
+                        allResults[2] = iy;
+                        allResults[3] = i;
                         closestDistance = distanceToWall;
-                    }
-                    
-                    if(count<allResults.length-1){
-                        count++;
-                    }             
+                    }            
                 }
             }
         }
@@ -80,7 +71,7 @@ public class Ray {
         g2d.setPaint(Color.WHITE);
             if(minimap && drawRay){
                 if(closestDistance != distance){
-                    g2d.drawLine((int)x, (int)y, (int)allResults[0][1], (int)allResults[0][2]);
+                    g2d.drawLine((int)x, (int)y, (int)allResults[1], (int)allResults[2]);
                 }
                 else{
                     g2d.drawLine((int)x, (int)y, (int) ((int)x + (float)Math.cos(direction) * distance), (int) ((int)y + (float)Math.sin(direction) * distance));
