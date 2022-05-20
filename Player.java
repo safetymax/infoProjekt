@@ -52,7 +52,7 @@ public class Player {
     public Player() {   
         posX = 350;
         posY = 400;
-        direction = 0;
+        direction = 1;
         speed = 2;
 
         currentPos = new float[2];
