@@ -12,7 +12,7 @@ public class Game{
         
         //Creating Window
         JFrame frame = new JFrame();
-        frame.setTitle("v0.1 Alpha Miracle Genesis -Hyperbolic Tree");//Mattis was here! 2022    und ich auch
+        frame.setTitle("v0.2 Alpha Miracle Genesis -Hyperbolic Tree");//Mattis was here! 2022    und ich auch
         frame.setSize(900,900);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
