@@ -57,6 +57,12 @@ public class Surface extends JPanel implements Runnable {
 
         walls =LevelGeneration.removeDuplicateWalls(walls);
         
+        Enemy[] enemies = LevelGeneration.LoadEnemies(info[6]);
+        System.out.println("Length:" +enemies.length);
+        for(int i = 0; i < enemies.length; i++){
+            System.out.println("X" +enemies[i].posX);
+            System.out.print(",Y" + enemies[i].posY);
+        }
         for(int i = 0;i < walls.length; i++){
             boundaries[i] = walls[i];
         }
@@ -73,13 +79,25 @@ public class Surface extends JPanel implements Runnable {
                 }
             }
         }
-        
-        for(int i = 0; i < boundaries.length; i++){
+        for(int i = 0; i<enemies.length; i++){
+            for(int j = 0; i<boundaries.length; j++){
+                if(boundaries[j] == null){
+                    boundaries[j] = enemies[i];
+                    
+                    break;
+
+
+                }
+
+
+            }
+        }
+        /*for(int i = 0; i < boundaries.length; i++){
             if(boundaries[i] == null){
                 boundaries[i] = enemy1;
                 break;
             }
-        }
+        }*/
         for(int i = 0; i < boundaries.length; i++){
             if(boundaries[i] == null){
                 boundaries[i] = enemy2;
@@ -207,7 +225,7 @@ public class Surface extends JPanel implements Runnable {
             }
 
             if(timer >= 1000000000){
-                System.out.println("FPS: " + drawCount);
+                //System.out.println("FPS: " + drawCount);
                 timer = 0;
                 drawCount = 0;
             }

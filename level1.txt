@@ -4,3 +4,4 @@ Start Y: 0
 Size: 64
 Rows: 14
 Colums: 14
+Enemies: [200,300,3],[300,500,3]
