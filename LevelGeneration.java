@@ -56,6 +56,22 @@ public class LevelGeneration {
                 walls[c + 2] = new Wall(x + size, y, x + size, y + size, 1); // top right to bot right
                 walls[c + 3] = new Wall(x, y + size, x + size, y + size, 1); // bot left to bot right
             }
+            else if(level.charAt(i) == 'E'){
+
+                walls[c] = new Wall(x, y, x, y + size, 5); // top left to bot left
+                walls[c + 1] = new Wall(x, y, x + size, y, 5); // top left to top right
+                walls[c + 2] = new Wall(x + size, y, x + size, y + size, 5); // top right to bot right
+                walls[c + 3] = new Wall(x, y + size, x + size, y + size, 5); // bot left to bot right
+
+
+
+
+            }
+
+
+
+
+            
             x = x + size;
             if (x >= startx + size * columns) {
                 x = startx;
