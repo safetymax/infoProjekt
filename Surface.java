@@ -113,10 +113,13 @@ public class Surface extends JPanel implements Runnable {
                 if(sprites[i] != null) {
                     g2d.setPaint(new Color(255f/255f,255f/255f,255f/255f));
                     g2d.drawLine(sprites[i].x1, sprites[i].y1, sprites[i].x2, sprites[i].y2);
+
                 }
             }
             //Draw bullets on minimap
             weapons.drawWeapons(g2d);
+
+
         }
 
         if(!keyH.controlPressed){  //controlPressed = minimap

@@ -8,21 +8,23 @@ import javax.swing.JPanel;
 public class Enemy extends Boundary{
     
     public int type;//1 = horizontal wall, 2 = vertical wall
+    public double speed;
 
     public Enemy(int x, int y, int type) {
         super(x,y, x, y, x+100, y+100, type);
+        speed = 3.141;
     }
 
     public void move(Boundary[] boundaries, Player player){
-        x1 = posX;
         double alpha;
+        double dist;
 
-        alpha = Math.atan((posX-player.posX)/(posY-player.posY));
-
-        x1 = (int) (Math.cos(Math.PI-alpha) * (-32) + posX);
-        y1 = (int) (Math.sin(Math.PI-alpha) * (-32) + posY);
-        x2 = (int) (Math.cos(Math.PI-alpha) * 32 + posX);
-        y2 = (int) (Math.sin(Math.PI-alpha) * 32 + posY);
+        dist = Math.sqrt(Math.pow(posY-player.posY, 2) + Math.pow(posX-player.posX, 2));
+        if(dist > 64){
+        alpha = Math.atan2((posY-player.posY),(posX-player.posX)) + Math.PI;
+        posX += Math.cos(alpha)*speed;
+        posY += Math.sin(alpha)*speed;
+        }
     }
 
     @Override
@@ -31,6 +33,8 @@ public class Enemy extends Boundary{
         g2d.setPaint(Color.BLUE);
         g2d.drawLine(x1, y1, x2, y2);
     }
+
+    
 
     //called when a Ray hits the wall
     public void isHitByRay(int x, int y){}
