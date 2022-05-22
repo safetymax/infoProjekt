@@ -44,9 +44,9 @@ public class Player {
     int[][][][] textureData = new int[5][64][64][4];
 
     int[] ZBuffer = new int[900];
-    float[] spriteAngle = new float[1000];
-    float[] spriteDistance = new float[1000];
-    int[] spriteOrder = new int[1000];
+    float[] spriteAngle = new float[2048];
+    float[] spriteDistance = new float[2048];
+    int[] spriteOrder = new int[2048];
 
 
     public Player() {   
