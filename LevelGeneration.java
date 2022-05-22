@@ -94,8 +94,12 @@ public class LevelGeneration {
                 walls[y][x] = 1;
             } else if (level.charAt(i) == 'O') {
                 walls[y][x] = 0;
-            }
+            } else if(level.charAt(i) == 'E'){
+                walls[y][x] = 2;
 
+
+            }
+            
             x += 1;
             if (x >= columns) {
                 x = startx;

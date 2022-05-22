@@ -15,7 +15,7 @@ public class Player {
     public float posX;
     public float posY;
     public double direction;
-
+    public boolean isFinished = false;
     public float speed;
 
     float[] currentPos;
@@ -154,7 +154,10 @@ public class Player {
             currentPos[0] = posX;
             currentPos[1] = posY;
         }
-
+        if(map[(int)posY/64][(int)posX/64] == 2 && isFinished) {
+            currentPos[0] = posX;
+            currentPos[1] = posY;
+        }
         for(int i = 0; i < rays.length; i++) {
             rays[i].update(posX, posY, direction+Math.atan((rays.length/2-i)/(450/Math.tan(Math.toRadians(fov)/2))));
         }
@@ -333,5 +336,8 @@ public class Player {
             }
         }
     }
+    public void FinishLevel(){
+        isFinished = true;
 
+    }
 }
