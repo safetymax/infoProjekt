@@ -155,7 +155,7 @@ public class LevelGeneration {
         }
         return enemyArray;
     }
-    public static void loadNextLevel(String levelName, Boundary[] b, Boundary[] s, int[][] cols, Player player){
+    public static int[][] loadNextLevel(String levelName, Boundary[] b, Boundary[] s, int[][] cols, Player player){
         String[] nextLevelInfo = null;
         int[][] nextcols = null;
         try {
@@ -215,6 +215,8 @@ public class LevelGeneration {
             
             s[i] = nextenemies[i-1];
         }
+
+        return cols;
     }
 
 }

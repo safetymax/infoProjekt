@@ -47,8 +47,7 @@ public class Surface extends JPanel implements Runnable {
         setFocusable(true);
         setBackground(Color.BLACK);
         
-        LevelGeneration.loadNextLevel("level1.txt", boundaries, sprites, collisions,player);
-
+        collisions = LevelGeneration.loadNextLevel("level1.txt", boundaries, sprites, collisions, player);
     }
 
     private void doDrawing(Graphics g) {
