@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Surface extends JPanel implements Runnable {
-
+    
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
 
@@ -47,48 +47,7 @@ public class Surface extends JPanel implements Runnable {
         setFocusable(true);
         setBackground(Color.BLACK);
         
-        try {
-            info = LevelGeneration.readFile("level1.txt");
-        } catch (FileNotFoundException e) {
-            
-            e.printStackTrace();
-        } catch (IOException e) {
-            
-            e.printStackTrace();
-        }
-        Boundary[] walls = LevelGeneration.generateLevel(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), Integer.parseInt(info[4]), Integer.parseInt(info[5]));
-        collisions = LevelGeneration.generateLevelInt(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), Integer.parseInt(info[4]), Integer.parseInt(info[5]));
-        
-
-        walls =LevelGeneration.removeDuplicateWalls(walls);
-        
-        Enemy[] enemies = LevelGeneration.LoadEnemies(info[6]);
-        System.out.println("Length:" +enemies.length);
-        for(int i = 0; i < enemies.length; i++){
-            System.out.println("X" +enemies[i].posX);
-            System.out.print(",Y" + enemies[i].posY);
-        }
-        for(int i = 0;i < walls.length; i++){
-            boundaries[i] = walls[i];
-        }
-
-        //fill holes in boundaries array
-        for(int i = 0; i < boundaries.length; i++){
-            if(boundaries[i] == null){
-                for(int j = i; j < boundaries.length; j++){
-                    if(boundaries[j] != null){
-                        boundaries[i] = boundaries[j];
-                        boundaries[j] = null;
-                        break;
-                    }
-                }
-            }
-        }
-        
-        for(int i = 1; i < enemies.length+1; i++){
-            
-            sprites[i] = enemies[i-1];
-        }
+        LevelGeneration.loadNextLevel("level1.txt", boundaries, sprites, collisions);
 
     }
 

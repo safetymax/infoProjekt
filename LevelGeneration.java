@@ -153,7 +153,7 @@ public class LevelGeneration {
         }
         return enemyArray;
     }
-    public static  void loadNextLevel(String levelName, Boundary[] b, Boundary[] s, int[][] cols){
+    public static void loadNextLevel(String levelName, Boundary[] b, Boundary[] s, int[][] cols){
         String[] nextLevelInfo = null;
         int[][] nextcols = null;
         try {
