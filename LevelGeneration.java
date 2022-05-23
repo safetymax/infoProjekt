@@ -153,4 +153,65 @@ public class LevelGeneration {
         }
         return enemyArray;
     }
+    public static  void loadNextLevel(String levelName, Boundary[] b, Boundary[] s, int[][] cols){
+        String[] nextLevelInfo = null;
+        int[][] nextcols = null;
+        try {
+             nextLevelInfo = LevelGeneration.readFile(levelName);
+        } catch (FileNotFoundException e) {
+            
+            e.printStackTrace();
+        } catch (IOException e) {
+            
+            e.printStackTrace();
+        }
+        
+        Boundary[] walls = LevelGeneration.generateLevel(nextLevelInfo[0], Integer.parseInt(nextLevelInfo[1]), Integer.parseInt(nextLevelInfo[2]), Integer.parseInt(nextLevelInfo[3]), Integer.parseInt(nextLevelInfo[4]), Integer.parseInt(nextLevelInfo[5]));
+        walls = LevelGeneration.removeDuplicateWalls(walls);
+        Enemy[] nextenemies = LevelGeneration.LoadEnemies(nextLevelInfo[6]);
+        nextcols = LevelGeneration.generateLevelInt(nextLevelInfo[0],Integer.parseInt(nextLevelInfo[1]), Integer.parseInt(nextLevelInfo[2]), Integer.parseInt(nextLevelInfo[3]), Integer.parseInt(nextLevelInfo[4]), Integer.parseInt(nextLevelInfo[5]));
+        //DEBUG
+        System.out.println(nextcols[0].length);
+        for(int i=0; i<nextcols[0].length;i++){
+            for(int j=0; j<nextcols.length;j++){
+                System.out.print(nextcols[j][i]);
+            }
+            System.out.println();
+        }
+        
+        
+        //DEBUG
+        cols = nextcols;
+        for(int i =0;i< walls.length;i ++){
+            try{
+            b[i] = null;
+            b[i] = walls[i];
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+
+
+        }
+        
+        
+        //fill holes in boundaries array
+        for(int i = 0; i < b.length; i++){
+            if(b[i] == null){
+                for(int j = i; j < b.length; j++){
+                    if(b[j] != null){
+                        b[i] = b[j];
+                        b[j] = null;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        for(int i = 1; i < nextenemies.length+1; i++){
+            
+            s[i] = nextenemies[i-1];
+        }
+    }
+
 }
