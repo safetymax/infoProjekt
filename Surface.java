@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Surface extends JPanel implements Runnable {
-
+    
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
 
@@ -37,7 +37,7 @@ public class Surface extends JPanel implements Runnable {
     int[] spriteOrder = new int[2048];
     double[] spriteDistance = new double[2048];
 
-    int collisions[][];
+    int[][] collisions = new int[2048][2048];
 
     int frameCount = 0;
 
@@ -47,51 +47,7 @@ public class Surface extends JPanel implements Runnable {
         setFocusable(true);
         setBackground(Color.BLACK);
         
-        try {
-            info = LevelGeneration.readFile("level1.txt");
-        } catch (FileNotFoundException e) {
-            
-            e.printStackTrace();
-        } catch (IOException e) {
-            
-            e.printStackTrace();
-        }
-        Boundary[] walls = LevelGeneration.generateLevel(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), Integer.parseInt(info[4]), Integer.parseInt(info[5]));
-        collisions = LevelGeneration.generateLevelInt(info[0], Integer.parseInt(info[1]), Integer.parseInt(info[2]), Integer.parseInt(info[3]), Integer.parseInt(info[4]), Integer.parseInt(info[5]));
-        
-
-        walls =LevelGeneration.removeDuplicateWalls(walls);
-        
-        for(int i = 0;i < walls.length; i++){
-            boundaries[i] = walls[i];
-        }
-
-        //fill holes in boundaries array
-        for(int i = 0; i < boundaries.length; i++){
-            if(boundaries[i] == null){
-                for(int j = i; j < boundaries.length; j++){
-                    if(boundaries[j] != null){
-                        boundaries[i] = boundaries[j];
-                        boundaries[j] = null;
-                        break;
-                    }
-                }
-            }
-        }
-        
-        for(int i = 1; i < sprites.length; i++){
-            if(sprites[i] == null){
-                sprites[i] = enemy1;
-                break;
-            }
-        }
-        for(int i = 1; i < sprites.length; i++){
-            if(sprites[i] == null){
-                sprites[i] = enemy2;
-                break;
-            }
-        }
-
+        collisions = LevelGeneration.loadNextLevel("level1.txt", boundaries, sprites, collisions, player);
     }
 
     private void doDrawing(Graphics g) {
@@ -176,6 +132,23 @@ public class Surface extends JPanel implements Runnable {
                 }
             }
         }
+        if(keyH.pPressed){
+            player.isFinished = true;
+            System.out.println("my pp was touched");
+            for(int i = 0; i<boundaries.length; i++){
+                if(boundaries[i] !=null){
+                    if(boundaries[i].type == 5){
+                        boundaries[i].type = 6;
+                    }
+
+                }
+            }
+            
+        }
+        /*if(player.nextLevel()){
+            loadNextLevel("level2.txt");
+
+        }*/
     }
 
     public void startGameThread() {
@@ -219,11 +192,12 @@ public class Surface extends JPanel implements Runnable {
             }
 
             if(timer >= 1000000000){
-                System.out.println("FPS: " + drawCount);
+                //System.out.println("FPS: " + drawCount);
                 timer = 0;
                 drawCount = 0;
             }
         }
         
     }
+    
 }

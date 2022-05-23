@@ -15,9 +15,9 @@ public class Player {
     public float posX;
     public float posY;
     public double direction;
-
+    public boolean isFinished = false;
     public float speed;
-
+    public boolean touchedDoor = false;
     float[] currentPos;
 
     public int fov = 90;
@@ -41,12 +41,20 @@ public class Player {
     BufferedImage alien2Image = null;
     int[][][] alien2Data = new int[64][64][4];
 
-    int[][][][] textureData = new int[5][64][64][4];
+    File f5 = new File("closedDoor.png");
+    BufferedImage closedDoorImage = null;
+    int[][][] closedDoorData = new int[64][64][4];
+
+    File f6 = new File("openDoor.png");
+    BufferedImage openDoorImage = null;
+    int[][][] openDoorData = new int[64][64][4];
+
+    int[][][][] textureData = new int[7][64][64][4];
 
     int[] ZBuffer = new int[900];
-    float[] spriteAngle = new float[1000];
-    float[] spriteDistance = new float[1000];
-    int[] spriteOrder = new int[1000];
+    float[] spriteAngle = new float[2048];
+    float[] spriteDistance = new float[2048];
+    int[] spriteOrder = new int[2048];
 
 
     public Player() {   
@@ -70,7 +78,8 @@ public class Player {
             bulletImage = ImageIO.read(f3);
             alien1Image = ImageIO.read(f2);
             alien2Image = ImageIO.read(f4);
-
+            closedDoorImage = ImageIO.read(f5);
+            openDoorImage = ImageIO.read(f6);
 
         }
         catch(Exception e){
@@ -84,7 +93,8 @@ public class Player {
                 alien1Data[i][j] = alien1Image.getData().getPixel(i, j, (int[]) null);
                 bulletData[i][j] = bulletImage.getData().getPixel(i, j, (int[]) null);
                 alien2Data[i][j] = alien2Image.getData().getPixel(i, j, (int[]) null);
-
+                closedDoorData[i][j] = closedDoorImage.getData().getPixel(i, j, (int[]) null);
+                openDoorData[i][j] = openDoorImage.getData().getPixel(i, j, (int[]) null);
             }
         }
 
@@ -93,6 +103,8 @@ public class Player {
         textureData[2] = bulletData;
         textureData[3] = alien1Data;
         textureData[4] = alien2Data;
+        textureData[5] = closedDoorData;
+        textureData[6] = openDoorData;
         
     }
 
@@ -154,7 +166,14 @@ public class Player {
             currentPos[0] = posX;
             currentPos[1] = posY;
         }
-
+        if(map[(int)posY/64][(int)posX/64] == 2 && isFinished) {
+            currentPos[0] = posX;
+            currentPos[1] = posY;
+            touchedDoor = true;
+        } else if(map[(int)posY/64][(int)posX/64] == 2 && !isFinished) {
+            posX = currentPos[0];
+            posY = currentPos[1];
+        }
         for(int i = 0; i < rays.length; i++) {
             rays[i].update(posX, posY, direction+Math.atan((rays.length/2-i)/(450/Math.tan(Math.toRadians(fov)/2))));
         }
@@ -333,5 +352,9 @@ public class Player {
             }
         }
     }
+    public boolean nextLevel(){
 
+        return touchedDoor;
+
+    }
 }
