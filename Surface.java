@@ -37,7 +37,7 @@ public class Surface extends JPanel implements Runnable {
     int[] spriteOrder = new int[2048];
     double[] spriteDistance = new double[2048];
 
-    int collisions[][];
+    int[][] collisions = new int[2048][2048];
 
     int frameCount = 0;
 
@@ -47,7 +47,7 @@ public class Surface extends JPanel implements Runnable {
         setFocusable(true);
         setBackground(Color.BLACK);
         
-        LevelGeneration.loadNextLevel("level1.txt", boundaries, sprites, collisions);
+        LevelGeneration.loadNextLevel("level1.txt", boundaries, sprites, collisions,player);
 
     }
 

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class LevelGeneration {
 
     public static String[] readFile(String levelName) throws FileNotFoundException, IOException {
-        String[] levelInfo = new String[7];
+        String[] levelInfo = new String[9];
 
         BufferedReader r = new BufferedReader(new FileReader(levelName));
 
@@ -34,7 +34,9 @@ public class LevelGeneration {
         levelInfo[4] = levelInfo[4].replace("Rows: ", "");
         levelInfo[5] = levelInfo[5].replace("Colums: ", "");
         levelInfo[6] = levelInfo[6].replace("Enemies: ", "");
-
+        levelInfo[7] = levelInfo[7].replace("Player X: ", "");
+        levelInfo[8] = levelInfo[8].replace("Player Y: ", "");
+        
         return levelInfo;
 
     }
@@ -153,7 +155,7 @@ public class LevelGeneration {
         }
         return enemyArray;
     }
-    public static void loadNextLevel(String levelName, Boundary[] b, Boundary[] s, int[][] cols){
+    public static void loadNextLevel(String levelName, Boundary[] b, Boundary[] s, int[][] cols, Player player){
         String[] nextLevelInfo = null;
         int[][] nextcols = null;
         try {
@@ -165,7 +167,8 @@ public class LevelGeneration {
             
             e.printStackTrace();
         }
-        
+        player.posX = Integer.parseInt(nextLevelInfo[7]);
+        player.posY = Integer.parseInt(nextLevelInfo[8]);
         Boundary[] walls = LevelGeneration.generateLevel(nextLevelInfo[0], Integer.parseInt(nextLevelInfo[1]), Integer.parseInt(nextLevelInfo[2]), Integer.parseInt(nextLevelInfo[3]), Integer.parseInt(nextLevelInfo[4]), Integer.parseInt(nextLevelInfo[5]));
         walls = LevelGeneration.removeDuplicateWalls(walls);
         Enemy[] nextenemies = LevelGeneration.LoadEnemies(nextLevelInfo[6]);
