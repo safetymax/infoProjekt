@@ -173,14 +173,6 @@ public class LevelGeneration {
         walls = LevelGeneration.removeDuplicateWalls(walls);
         Enemy[] nextenemies = LevelGeneration.LoadEnemies(nextLevelInfo[6]);
         nextcols = LevelGeneration.generateLevelInt(nextLevelInfo[0],Integer.parseInt(nextLevelInfo[1]), Integer.parseInt(nextLevelInfo[2]), Integer.parseInt(nextLevelInfo[3]), Integer.parseInt(nextLevelInfo[4]), Integer.parseInt(nextLevelInfo[5]));
-        //DEBUG
-        System.out.println(nextcols[0].length);
-        for(int i=0; i<nextcols[0].length;i++){
-            for(int j=0; j<nextcols.length;j++){
-                System.out.print(nextcols[j][i]);
-            }
-            System.out.println();
-        }
         
         
         //DEBUG

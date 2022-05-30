@@ -134,7 +134,6 @@ public class Surface extends JPanel implements Runnable {
         }
         if(keyH.pPressed){
             player.isFinished = true;
-            System.out.println("my pp was touched");
             for(int i = 0; i<boundaries.length; i++){
                 if(boundaries[i] !=null){
                     if(boundaries[i].type == 5){
