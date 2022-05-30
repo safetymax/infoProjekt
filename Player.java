@@ -23,6 +23,11 @@ public class Player {
     public int fov = 90;
     public Ray[] rays = new Ray[900];
     public double DV = (900/Math.tan(Math.toRadians(fov)/2));
+    public double DVprime;
+
+    public double correctionFactor;
+    public double alpha;
+    public double[][] hypotenuse = new double[900][905];
 
     //DONT FORGET TO LOAD PIXELS INTO ARRAY
     File f1 = new File("wall.png");
@@ -50,6 +55,7 @@ public class Player {
     int[][][] openDoorData = new int[64][64][4];
 
     int[][][][] textureData = new int[7][64][64][4];
+
 
     int[] ZBuffer = new int[900];
     float[] spriteAngle = new float[2048];
@@ -105,6 +111,17 @@ public class Player {
         textureData[4] = alien2Data;
         textureData[5] = closedDoorData;
         textureData[6] = openDoorData;
+
+
+        
+    for(int i = 0; i < 900; i++){
+        DVprime = Math.sqrt(Math.pow(DV,2)+Math.pow(i-450,2));
+        correctionFactor = this.direction - rays[i].direction;
+        for(int y = 450; y < 900; y++){
+            alpha = Math.atan((y-449)/DVprime);
+            hypotenuse[i][y] = Math.abs(16/(Math.tan(alpha)*Math.cos(correctionFactor)));
+        }
+    }
         
     }
 
@@ -202,7 +219,6 @@ public class Player {
     //Casts all Rays
     public void cast(Boundary[] boundaries,Boundary[] sprites, Graphics2D g2d, boolean minimap) {
         for(int i = 0; i < rays.length; i++) {
-            double DVprime = Math.sqrt(Math.pow(DV,2)+Math.pow(i-450,2));
 
             //results: [0] = distance, [1] = x, [2] = y, [3] = index of closest boundary
             float[] results = rays[i].cast(boundaries, g2d, minimap, i==0 || i==rays.length-1);
@@ -248,12 +264,10 @@ public class Player {
                         }                         
                         int wallHeight = (int)(450+(64*DV/4)/(dist*Math.cos(correctionFactor)));
                         for(int y = wallHeight; y <= 904; y+=4){
-                            double alpha = Math.atan((y-449)/DVprime);
-                            double hypotenuse = Math.abs(16/(Math.tan(alpha)*Math.cos(correctionFactor)));
-                            double xFloor = hypotenuse*Math.cos(rays[i].direction) + posX;
-                            double yFloor = hypotenuse*Math.sin(rays[i].direction) + posY;
+                            double xFloor = hypotenuse[i][y]*Math.cos(rays[i].direction) + posX;
+                            double yFloor = hypotenuse[i][y]*Math.sin(rays[i].direction) + posY;
 
-                            colour = (float) hypotenuse/1000;
+                            colour = (float) hypotenuse[i][y]/1000;
                             colour = 1 - colour;
 
                             if(xFloor < 0){
