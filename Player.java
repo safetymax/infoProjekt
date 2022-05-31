@@ -73,7 +73,7 @@ public class Player {
 
         //create Rays
         for(int i = 0; i < rays.length; i++) {
-            rays[i] = new Ray(posX, posY, direction+Math.atan((i-rays.length/2)/DV));
+            rays[i] = new Ray(posX, posY, direction+Math.atan((rays.length/2-i)/(450/Math.tan(Math.toRadians(fov)/2))));
         }
 
         
