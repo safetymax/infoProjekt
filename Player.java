@@ -54,7 +54,15 @@ public class Player {
     BufferedImage openDoorImage = null;
     int[][][] openDoorData = new int[64][64][4];
 
-    int[][][][] textureData = new int[7][64][64][4];
+    File f7 = new File("floor.png");
+    BufferedImage floorImage = null;
+    int[][][] floorData = new int[64][64][4];
+
+    File f8 = new File("ceiling.png");
+    BufferedImage ceilingImage = null;
+    int[][][] ceilingData = new int[64][64][4];
+
+    int[][][][] textureData = new int[256][64][64][4];
 
 
     int[] ZBuffer = new int[900];
@@ -86,6 +94,8 @@ public class Player {
             alien2Image = ImageIO.read(f4);
             closedDoorImage = ImageIO.read(f5);
             openDoorImage = ImageIO.read(f6);
+            floorImage = ImageIO.read(f7);
+            ceilingImage = ImageIO.read(f8);
 
         }
         catch(Exception e){
@@ -101,6 +111,8 @@ public class Player {
                 alien2Data[i][j] = alien2Image.getData().getPixel(i, j, (int[]) null);
                 closedDoorData[i][j] = closedDoorImage.getData().getPixel(i, j, (int[]) null);
                 openDoorData[i][j] = openDoorImage.getData().getPixel(i, j, (int[]) null);
+                floorData[i][j] = floorImage.getData().getPixel(i, j, (int[]) null);
+                ceilingData[i][j] = ceilingImage.getData().getPixel(i, j, (int[]) null);
             }
         }
 
@@ -111,6 +123,8 @@ public class Player {
         textureData[4] = alien2Data;
         textureData[5] = closedDoorData;
         textureData[6] = openDoorData;
+        textureData[7] = floorData;
+        textureData[8] = ceilingData;
 
 
         
@@ -281,17 +295,17 @@ public class Player {
 
                             //floor texture
                             g2d.setPaint(new Color(
-                            (float)(textureData[1][(int)xFloor][(int)yFloor][0])/255*colour,
-                            (float)(textureData[1][(int)xFloor][(int)yFloor][1])/255*colour,
-                            (float)(textureData[1][(int)xFloor][(int)yFloor][2])/255*colour));
+                            (float)(textureData[7][(int)xFloor][(int)yFloor][0])/255*colour,
+                            (float)(textureData[7][(int)xFloor][(int)yFloor][1])/255*colour,
+                            (float)(textureData[7][(int)xFloor][(int)yFloor][2])/255*colour));
                             
                             g2d.drawLine(rays.length-i, y, rays.length-i, y+5);
 
                             //ceiling texture
                             g2d.setPaint(new Color(
-                            (float)(textureData[1][(int)xFloor][(int)yFloor][0])/255*colour,
-                            (float)(textureData[1][(int)xFloor][(int)yFloor][1])/255*colour,
-                            (float)(textureData[1][(int)xFloor][(int)yFloor][2])/255*colour));
+                            (float)(textureData[8][(int)xFloor][(int)yFloor][0])/255*colour,
+                            (float)(textureData[8][(int)xFloor][(int)yFloor][1])/255*colour,
+                            (float)(textureData[8][(int)xFloor][(int)yFloor][2])/255*colour));
 
                             g2d.drawLine(rays.length-i, 900-y, rays.length-i, 900-y+5);
                         }
