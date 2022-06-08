@@ -380,9 +380,6 @@ public class Player {
             }
         }
     }
-    public boolean nextLevel(){
-
-        return touchedDoor;
-
-    }
+    
+    
 }

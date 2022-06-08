@@ -5,3 +5,5 @@ Size: 64
 Rows: 14
 Colums: 14
 Enemies: [600,500,3],[300,500,4],[100,200,1]
+Player X: 100
+Player Y: 250

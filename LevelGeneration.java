@@ -155,11 +155,18 @@ public class LevelGeneration {
         }
         return enemyArray;
     }
-    public static int[][] loadNextLevel(String levelName, Boundary[] b, Boundary[] s, int[][] cols, Player player){
+    
+    
+    
+    
+    public static int[][] loadNextLevel(int level, Boundary[] b, Boundary[] s, int[][] cols, Player player){
+        
+        String[] levels = new String[]{"Level1.txt", "Level2.txt"};
+        
         String[] nextLevelInfo = null;
         int[][] nextcols = null;
         try {
-             nextLevelInfo = LevelGeneration.readFile(levelName);
+             nextLevelInfo = LevelGeneration.readFile(levels[level]);
         } catch (FileNotFoundException e) {
             
             e.printStackTrace();

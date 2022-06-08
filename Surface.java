@@ -41,13 +41,16 @@ public class Surface extends JPanel implements Runnable {
 
     int frameCount = 0;
 
+    int currentLevel= 0;
+
+
     public Surface() {
         //Setup function, runs before game loop (Put everything in here that is only supposed to run once)
         addKeyListener(keyH);
         setFocusable(true);
         setBackground(Color.BLACK);
         
-        collisions = LevelGeneration.loadNextLevel("level1.txt", boundaries, sprites, collisions, player);
+        collisions = LevelGeneration.loadNextLevel(currentLevel, boundaries, sprites, collisions, player);
     }
 
     private void doDrawing(Graphics g) {
@@ -144,10 +147,11 @@ public class Surface extends JPanel implements Runnable {
             }
             
         }
-        /*if(player.nextLevel()){
-            loadNextLevel("level2.txt");
-
-        }*/
+        if(player.touchedDoor){
+            currentLevel++;
+            collisions =LevelGeneration.loadNextLevel(currentLevel, boundaries, sprites, collisions, player);
+            player.touchedDoor = false;
+        }
     }
 
     public void startGameThread() {
