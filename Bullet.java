@@ -13,7 +13,6 @@ public class Bullet extends Boundary{
     public double direction;
     public float speed;
     public float damage;
-
     public Bullet(int x, int y, double direction, float s, float d) {
         super(x, y ,x, y, x+5, y+5,2);
         this.x = x;
@@ -21,6 +20,7 @@ public class Bullet extends Boundary{
         this.direction = direction;
         this.speed = s;
         this.damage = d;
+        
     }
     public void moveBullet(Player player){
         double alpha;
@@ -56,15 +56,24 @@ public class Bullet extends Boundary{
         
     }
     // 900 is window size
-    public Bullet isOutOfBounds(Bullet b, Boundary[] boundaries){
-        if(b.x < 0 || b.x > 900 || b.y < 0 || b.y > 900){
+    public Bullet isOutOfBounds(Bullet b, Boundary[] boundaries, int[][] collisions){
+        /*if(b.x < 0 || b.x > 900 || b.y < 0 || b.y > 900){
             destroyBullet(boundaries);
             return null;
-        }
-        else{
+        }*/
+        
+        if(y/64 >= collisions.length || y/64 >= collisions[0].length || y/64 < 0 || y/64 < 0) {
+            destroyBullet(boundaries);
+            System.out.println("Collision");
+            return null;
+        }else if(collisions[(int)y/64][(int)x/64] == 1) {
+            destroyBullet(boundaries);
+            System.out.println("Collision");
+            return null;
+        }else{
             return b;
         }
-
+        
     }
 
     public void destroyBullet(Boundary[] boundaries){

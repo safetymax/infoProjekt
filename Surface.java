@@ -18,7 +18,7 @@ public class Surface extends JPanel implements Runnable {
     Player player = new Player();   
     boolean weaponShootable = false;
     double weaponCooldown = 0;
-    MachineGun weapons = new MachineGun(150);
+    
 
     Enemy enemy1 = new Enemy(250, 250, 3);
     Enemy enemy2 = new Enemy(350, 250, 4);
@@ -75,8 +75,7 @@ public class Surface extends JPanel implements Runnable {
 
                 }
             }
-            //Draw bullets on minimap
-            weapons.drawWeapons(g2d);
+            
 
 
         }
@@ -115,14 +114,14 @@ public class Surface extends JPanel implements Runnable {
         //update the game
         frameCount++;
         
-        weapons.updateWeapons(player, sprites);
+        player.updatePlayer(boundaries, collisions);
 
         //RPM = 60/cooldown*60
         if (frameCount % 20 == (0 + weaponCooldown) && !weaponShootable) {
             weaponShootable = true;
         }
         if(weaponShootable && keyH.ePressed){
-            player.shootKey(keyH.ePressed, weapons, sprites, sound);
+            player.shootKey(keyH.ePressed, boundaries);
             weaponShootable = false;
             weaponCooldown = frameCount%20;
         }

@@ -29,6 +29,8 @@ public class Player {
     public double alpha;
     public double[][] hypotenuse = new double[900][905];
 
+    MachineGun mg = new MachineGun(150);
+    SoundHandler ps = new SoundHandler();
     //DONT FORGET TO LOAD PIXELS INTO ARRAY
     File f1 = new File("wall.png");
     BufferedImage wallImage = null;
@@ -212,11 +214,11 @@ public class Player {
 
     }
     //shoot function
-    public void shootKey(boolean shoot, Weapons w, Boundary[] boundaries, SoundHandler s) {
+    public void shootKey(boolean shoot, Boundary[] boundaries) {
 
         if(shoot){
-            w.shoot(boundaries);
-            s.playSound("laserShoot");
+            mg.shoot(boundaries);
+            ps.playSound("laserShoot");
         }
 
     }
@@ -226,6 +228,7 @@ public class Player {
         if(minimap == true){
             g2d.setPaint(Color.WHITE);
             g2d.fillOval((int) posX-10, (int) posY-10, 20, 20);
+            mg.drawWeapons(g2d);
         }
         
     }
@@ -381,5 +384,11 @@ public class Player {
         }
     }
     
-    
+    public void updatePlayer(Boundary[] boundaries, int[][] collisions){
+        mg.updateWeapons(this, boundaries, collisions);
+
+
+
+
+    }
 }
