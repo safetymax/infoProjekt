@@ -19,7 +19,7 @@ public class Player {
     public float speed;
     public boolean touchedDoor = false;
     float[] currentPos;
-
+    float[] lastPos;
     public int fov = 90;
     public Ray[] rays = new Ray[900];
     public double DV = (900/Math.tan(Math.toRadians(fov)/2));
@@ -80,7 +80,10 @@ public class Player {
         speed = 2;
 
         currentPos = new float[2];
-
+        lastPos = new float[2];
+        lastPos[0] = 10;
+        lastPos[1] = 10;
+        
         //create Rays
         for(int i = 0; i < rays.length; i++) {
             rays[i] = new Ray(posX, posY, direction+Math.atan((rays.length/2-i)/(450/Math.tan(Math.toRadians(fov)/2))));
@@ -211,7 +214,18 @@ public class Player {
             rays[i].update(posX, posY, direction+Math.atan((rays.length/2-i)/(450/Math.tan(Math.toRadians(fov)/2))));
         }
         
+        //update joe Biden's position
+        float distX = posX - lastPos[0];
+        float distY = posY - lastPos[1];
 
+        if(Math.sqrt(Math.pow(distX,2) +Math.pow(distY,2)) > 50)  {
+            lastPos[0] = posX;
+            lastPos[1] = posY;
+            ps.playSound("playerWalking");
+            
+
+        }
+        
     }
     //shoot function
     public void shootKey(boolean shoot, Boundary[] boundaries) {
