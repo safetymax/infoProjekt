@@ -62,7 +62,7 @@ public class Bullet extends Boundary{
             return null;
         }*/
         
-        if(y/64 >= collisions.length || y/64 >= collisions[0].length || y/64 < 0 || y/64 < 0) {
+        if(x >= 800 || y >= 800 || x/64 < 0 || y/64 < 0) {
             destroyBullet(boundaries);
             System.out.println("Collision");
             return null;

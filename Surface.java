@@ -114,14 +114,14 @@ public class Surface extends JPanel implements Runnable {
         //update the game
         frameCount++;
         
-        player.updatePlayer(boundaries, collisions);
+        player.updatePlayer(sprites, collisions);
 
         //RPM = 60/cooldown*60
         if (frameCount % 20 == (0 + weaponCooldown) && !weaponShootable) {
             weaponShootable = true;
         }
         if(weaponShootable && keyH.ePressed){
-            player.shootKey(keyH.ePressed, boundaries);
+            player.shootKey(keyH.ePressed, sprites);
             weaponShootable = false;
             weaponCooldown = frameCount%20;
         }
