@@ -214,14 +214,14 @@ public class Player {
             rays[i].update(posX, posY, direction+Math.atan((rays.length/2-i)/(450/Math.tan(Math.toRadians(fov)/2))));
         }
         
-        //update joe Biden's position
+        
         float distX = posX - lastPos[0];
         float distY = posY - lastPos[1];
 
         if(Math.sqrt(Math.pow(distX,2) +Math.pow(distY,2)) > 50)  {
             lastPos[0] = posX;
             lastPos[1] = posY;
-            ps.playSound("playerWalking");
+            ps.playSound("playerWalking", -1);
             
 
         }
@@ -232,7 +232,7 @@ public class Player {
 
         if(shoot){
             mg.shoot(boundaries);
-            ps.playSound("laserShoot");
+            ps.playSound("laserShoot", -1);
         }
 
     }

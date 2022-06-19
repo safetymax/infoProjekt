@@ -9,10 +9,15 @@ public class Enemy extends Boundary{
     
     public int type;//1 = horizontal wall, 2 = vertical wall
     public double speed;
-
+    float[] lastPos;
+    SoundHandler es = new SoundHandler();
     public Enemy(int x, int y, int type) {
         super(x,y, x, y, x+100, y+100, type);
+        //3.141
         speed = 3.141;
+        lastPos = new float[2];
+        lastPos[0] = 10;
+        lastPos[1] = 10;
     }
 
     public void move(Boundary[] boundaries, Player player){
@@ -25,6 +30,20 @@ public class Enemy extends Boundary{
         posX += Math.cos(alpha)*speed;
         posY += Math.sin(alpha)*speed;
         }
+    
+    
+        float distX = posX - lastPos[0];
+        float distY = posY - lastPos[1];
+
+        if(Math.sqrt(Math.pow(distX,2) +Math.pow(distY,2)) > 50)  {
+            lastPos[0] = posX;
+            lastPos[1] = posY;
+            
+            es.playSound("alien1Walking",(int) dist);
+            
+
+        }
+    
     }
 
     @Override

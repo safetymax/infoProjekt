@@ -136,6 +136,7 @@ public class Surface extends JPanel implements Runnable {
         }
         if(keyH.pPressed){
             player.isFinished = true;
+            sound.playSound("doorOpen", -1);
             for(int i = 0; i<boundaries.length; i++){
                 if(boundaries[i] !=null){
                     if(boundaries[i].type == 5){
