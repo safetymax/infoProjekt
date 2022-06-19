@@ -40,7 +40,7 @@ public class MachineGun extends Weapons {
     }
     public void shoot(Boundary[] boundaries){
         if(magazine >0){
-            Bullet bullet = new Bullet((int)x,(int) y, direction, 5f,5f);
+            Bullet bullet = new Bullet((int)x,(int) y, direction, 5f,5f, 2);
             magazine--;
             for(int i = 0; i < b.length; i++){
                 if(b[i] == null){
