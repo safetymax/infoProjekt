@@ -270,23 +270,23 @@ public class Overlay {
         if (SoundA >= 3) {
             SoundA = 3;
         }
-        if (SFXA <= -5) {
-            SFXA = -5;
+        if (SFXA <= 0) {
+            SFXA = 0;
         }
-        if (SFXA >= 5) {
-            SFXA = 5;
+        if (SFXA >= 10) {
+            SFXA = 10;
         }
-        if (MusicA <= -5) {
-            MusicA = -5;
+        if (MusicA <= 0) {
+            MusicA = 0;
         }
-        if (MusicA >= 5) {
-            MusicA = 5;
+        if (MusicA >= 10) {
+            MusicA = 10;
         }
-        if (VolumeA <= -5) {
-            VolumeA = -5;
+        if (VolumeA <= 0) {
+            VolumeA = 0;
         }
-        if (VolumeA >= 5) {
-            VolumeA = 5;
+        if (VolumeA >= 10) {
+            VolumeA = 10;
         }
          //System.out.println("downA:"+downA+downB + " ;" + optionsA + " ;" + BindingsA + " ;" + SoundA
          //+ " ;" + VolumeA + " ;" + SFXA + " ;" + MusicA + " ;");
@@ -584,17 +584,17 @@ options = true;
             g2d.drawRect(360, 400 + 10 + 45 + 15 - 240, 180, 2);
             button1.write(g2d, 305, 470 - 230, " 0", 28);
             button1.write(g2d, 363 + 180, 470 - 230, " 10", 28);
-            g2d.drawRect((360 + 89) + (18 * VolumeA), 400 + 10 + 45 + 15 - 240 - 10, 2, 20);
+            g2d.drawRect((360 ) + (18 * VolumeA), 400 + 10 + 45 + 15 - 240 - 10, 2, 20);
             button2.draw(g2d, 300, 400 - 80 + 45 - 80, 300, 90, 0, "Music");
             g2d.setPaint(new Color((float) 0.99999, (float) 0.99990, (float) 0.9999990));
             g2d.drawRect(360, 400 + 10 + 45 + 15 - 120, 180, 2);
-            g2d.drawRect((360 + 89) + (18 * MusicA), 400 + 10 + 45 + 15 - 120 - 10, 2, 20);
+            g2d.drawRect((360 ) + (18 * MusicA), 400 + 10 + 45 + 15 - 120 - 10, 2, 20);
             button1.write(g2d, 305, 470 - 230 + 120, " 0", 28);
             button1.write(g2d, 363 + 180, 470 - 230 + 120, " 10", 28);
             button3.draw(g2d, 300, 480 - 80 + 90 - 80, 300, 90, 0, "Sound Effects");
             g2d.setPaint(new Color((float) 0.99999, (float) 0.99990, (float) 0.9999990));
             g2d.drawRect(360, 400 + 10 + 45 + 15, 180, 2);
-            g2d.drawRect((360 + 89) + (18 * SFXA), 460, 2, 20);
+            g2d.drawRect((360 ) + (18 * SFXA), 460, 2, 20);
             button1.write(g2d, 305, 470 - 230 + 240, " 0", 28);
             button1.write(g2d, 363 + 180, 470 - 230 + 240, " 10", 28);
 
