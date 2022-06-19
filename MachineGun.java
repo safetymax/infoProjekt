@@ -16,7 +16,7 @@ public class MachineGun extends Weapons {
     double direction;
     Bullet b[] = new Bullet[1000];
     int totalAmmo = 250;
-    int magazine = 25;
+    static int magazine = 25;
     SoundHandler mgs = new SoundHandler();
     public MachineGun( int size){
         super(size);

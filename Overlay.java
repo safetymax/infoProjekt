@@ -25,7 +25,7 @@ public class Overlay {
     private boolean a, b, c, d, e, f, g, h, i, j, downB, optionsB, BindingsB, SoundB, VolumeB, SFXB, MusicB, counterB,
             enterVolume, enterSFX, enterMusic, loadB, pauseMenueB,options;
 
-    private static boolean move;
+    private static boolean move,mainMenue;
     Image img1 = Toolkit.getDefaultToolkit().getImage("Bild.png");
 
     Image img5 = Toolkit.getDefaultToolkit().getImage("Sound 3.png");
@@ -263,8 +263,8 @@ public class Overlay {
         if (BindingsA <= 0) {
             BindingsA = 0;
         }
-        if (BindingsA >= 9) {
-            BindingsA = 9;
+        if (BindingsA >= 10) {
+            BindingsA = 10;
         }
         if (SoundA <= 0) {
             SoundA = 0;
@@ -351,6 +351,7 @@ if(enterA == 13){
             SFXB = false;
             MusicB = false;
             move = true;
+            mainMenue = true;
            
         }
         // Load
@@ -364,6 +365,7 @@ if(enterA == 13){
             MusicB = false;
             loadScore();
            move = true;
+           mainMenue = true;
         }
 
         // Credits
@@ -422,6 +424,7 @@ options = false;
            
            
             move = false;
+            mainMenue = false;
            
             if(!options){
             button1.draw(g2d, 300, 250, 300, 45, 0, "Continue");
@@ -506,58 +509,63 @@ options = true;
             g2d.drawImage(img1, 0, 0, null);
             }
             button6.draw(g2d, 20, 20, 100, 45, 0, "<Exit");
-            button1.draw(g2d, 300, 80, 300, 45, -45, "Move Forward");
-            button1.draw(g2d, 515, 80, 85, 45, 0, "W");
-            button2.draw(g2d, 300, 160, 300, 45, -55 - 10 - 10, "Move Left");
-            button1.draw(g2d, 515, 160, 85, 45, 0, "A");
-            button3.draw(g2d, 300, 240, 300, 45, -55 - 8 - 5, "Move Back");
-            button1.draw(g2d, 515, 240, 85, 45, 0, "S");
-            button1.draw(g2d, 300, 320, 300, 45, -55 - 8, "Move Right");
-            button1.draw(g2d, 515, 320, 85, 45, 0, "D");
-            button2.draw(g2d, 300, 400, 300, 45, -60 - 15 - 5, "Turn Left");
-            button1.draw(g2d, 515, 400, 85, 45, 0, "J");
-            button3.draw(g2d, 300, 480, 300, 45, -57 - 15 + 5, "Turn Right");
-            button1.draw(g2d, 515, 480, 85, 45, 0, "L");
-            button1.draw(g2d, 300, 560, 300, 45, -75 - 20 - 5, "Sprint");
-            button1.draw(g2d, 515, 560, 85, 45, 0, "Shift");
-            button2.draw(g2d, 300, 640, 300, 45, -85 - 20 - 10, "Map");
-            button1.draw(g2d, 515, 640, 85, 45, 0, "Strg");
-            button3.draw(g2d, 300, 720, 300, 45, -80 - 20, "Shoot");
-            button1.draw(g2d, 515, 720, 85, 45, 0, "Space");
-            
+            button1.draw(g2d, 300, 80-40, 300, 45, -45, "Move Forward");
+            button1.draw(g2d, 515, 80-40, 85, 45, 0, "W");
+            button2.draw(g2d, 300, 160-40, 300, 45, -55 - 10 - 10, "Move Left");
+            button1.draw(g2d, 515, 160-40, 85, 45, 0, "A");
+            button3.draw(g2d, 300, 240-40, 300, 45, -55 - 8 - 5, "Move Back");
+            button1.draw(g2d, 515, 240-40, 85, 45, 0, "S");
+            button1.draw(g2d, 300, 320-40, 300, 45, -55 - 8, "Move Right");
+            button1.draw(g2d, 515, 320-40, 85, 45, 0, "D");
+            button2.draw(g2d, 300, 400-40, 300, 45, -60 - 15 - 5, "Turn Left");
+            button1.draw(g2d, 515, 400-40, 85, 45, 0, "J");
+            button3.draw(g2d, 300, 480-40, 300, 45, -57 - 15 + 5, "Turn Right");
+            button1.draw(g2d, 515, 480-40, 85, 45, 0, "L");
+            button1.draw(g2d, 300, 560-40, 300, 45, -75 - 20 - 5, "Sprint");
+            button1.draw(g2d, 515, 560-40, 85, 45, 0, "Shift");
+            button2.draw(g2d, 300, 640-40, 300, 45, -85 - 20 - 10, "Map");
+            button1.draw(g2d, 515, 640-40, 85, 45, 0, "Strg");
+            button3.draw(g2d, 300, 720-40, 300, 45, -80 - 20, "Shoot");
+            button1.draw(g2d, 515, 720-40, 85, 45, 0, "Space");
+            button3.draw(g2d, 300, 800-40, 300, 45, -80 - 20, "Reload");
+            button1.draw(g2d, 515, 800-40, 85, 45, 0, "R");
 
             if (BindingsA == 0) {
                 button6.selectedChange(g2d, 20, 20, 100, 45);
                 downA = 2;
                 optionsA = 0;
             } else if (BindingsA == 1) {
-                button1.selectedChange(g2d, 515, 80, 85, 45);
+                button1.selectedChange(g2d, 515, 40, 85, 45);
                 downA = 30;
             } else if (BindingsA == 2) {
-                button1.selectedChange(g2d, 515, 80 * 2, 85, 45);
+                button1.selectedChange(g2d, 515, 80 * 2-40, 85, 45);
                 downA = 31;
             } else if (BindingsA == 3) {
-                button1.selectedChange(g2d, 515, 80 * 3, 85, 45);
+                button1.selectedChange(g2d, 515, 80 * 3-40, 85, 45);
                 downA = 32;
             } else if (BindingsA == 4) {
-                button1.selectedChange(g2d, 515, 80 * 4, 85, 45);
+                button1.selectedChange(g2d, 515, 80 * 4-40, 85, 45);
                 downA = 33;
             } else if (BindingsA == 5) {
-                button1.selectedChange(g2d, 515, 80 * 5, 85, 45);
+                button1.selectedChange(g2d, 515, 80 * 5-40, 85, 45);
                 downA = 35;
             } else if (BindingsA == 6) {
-                button1.selectedChange(g2d, 515, 80 * 6, 85, 45);
+                button1.selectedChange(g2d, 515, 80 * 6-40, 85, 45);
                 downA = 36;
             } else if (BindingsA == 7) {
-                button1.selectedChange(g2d, 515, 80 * 7, 85, 45);
+                button1.selectedChange(g2d, 515, 80 * 7-40, 85, 45);
                 downA = 37;
             } else if (BindingsA == 8) {
-                button1.selectedChange(g2d, 515, 80 * 8, 85, 45);
+                button1.selectedChange(g2d, 515, 80 * 8-40, 85, 45);
                 downA = 38;
             } else if (BindingsA == 9) {
-                button1.selectedChange(g2d, 515, 80 * 9, 85, 45);
+                button1.selectedChange(g2d, 515, 80 * 9-40, 85, 45);
+                downA = 39;
+            }else if (BindingsA == 10) {
+                button1.selectedChange(g2d, 515, 80 * 10-40, 85, 45);
                 downA = 39;
             }
+        
 
         }
         if(enterA == 31){
