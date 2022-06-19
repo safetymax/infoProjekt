@@ -43,7 +43,8 @@ public class Surface extends JPanel implements Runnable {
 
     int currentLevel= 0;
 
-
+    int levelScore = 0;
+    int totalScore = 0;
     public Surface() {
         //Setup function, runs before game loop (Put everything in here that is only supposed to run once)
         addKeyListener(keyH);
@@ -150,8 +151,12 @@ public class Surface extends JPanel implements Runnable {
             
         }
         if(player.touchedDoor){
+            levelScore = frameCount/10;
+            System.out.println("Level Score: " + levelScore);
+            totalScore += levelScore;
             currentLevel++;
             collisions =LevelGeneration.loadNextLevel(currentLevel, boundaries, sprites, collisions, player);
+            frameCount = 0;
             player.touchedDoor = false;
         }
     }
