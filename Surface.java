@@ -15,7 +15,7 @@ public class Surface extends JPanel implements Runnable {
     Thread gameThread;
 
     // Game Elements
-    Player player = new Player();   
+    Player player = new Player();  
     boolean weaponShootable = false;
     double weaponCooldown = 0;
     
@@ -52,6 +52,8 @@ public class Surface extends JPanel implements Runnable {
         setBackground(Color.BLACK);
         
         collisions = LevelGeneration.loadNextLevel(currentLevel, boundaries, sprites, collisions, player);
+
+        Overlay.surface = this;
     }
 
     private void doDrawing(Graphics g) {
