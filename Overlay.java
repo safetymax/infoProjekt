@@ -18,6 +18,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 public class Overlay {
+    public static KeyHandler keyH;
     public static int downA, enterA, optionsA, counter, BindingsA, SoundA, VolumeA, SFXA, MusicA;
     public static Surface surface;
 
@@ -561,47 +562,63 @@ options = true;
         }
         if(enterA == 31){
             enterA = 6;
-
+            keyH.setKey = true;
+            keyH.change[0] = true;
+            System.out.println(31);
         }
         if(enterA == 32){
             enterA = 6;
-
+            keyH.setKey = true;
+            keyH.change[2] = true;
+            System.out.println(32);
         }
         if(enterA == 33){
             enterA = 6;
-
+            keyH.setKey = true;
+            keyH.change[1] = true;
+            System.out.println(33);
         }
         if(enterA == 34){
             enterA = 6;
-
-        }
-        if(enterA == 35){
-            enterA = 6;
-
+            keyH.setKey = true;
+            keyH.change[3] = true;
+            System.out.println(34);
         }
         if(enterA == 36){
             enterA = 6;
-
+            keyH.setKey = true;
+            keyH.change[4] = true;
+            System.out.println(36);
         }
         if(enterA == 37){
             enterA = 6;
-
+            keyH.setKey = true;
+            keyH.change[5] = true;
+            System.out.println(37);
         }
         if(enterA == 38){
             enterA = 6;
-
+            keyH.setKey = true;
+            keyH.change[6] = true;
+            System.out.println(38);
         }
         if(enterA == 39){
             enterA = 6;
-
+            keyH.setKey = true;
+            keyH.change[7] = true;
+            System.out.println(39);
         }
         if(enterA == 40){
             enterA = 6;
-
+            keyH.setKey = true;
+            keyH.change[10] = true;
+            System.out.println(40);
         }
         if(enterA == 41){
             enterA = 6;
-
+            keyH.setKey = true;
+            keyH.change[0] = true;
+            System.out.println(41);
         }
         // Sound
         if (enterA == 7) {

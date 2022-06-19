@@ -54,6 +54,7 @@ public class Surface extends JPanel implements Runnable {
         collisions = LevelGeneration.loadNextLevel(currentLevel, boundaries, sprites, collisions, player);
 
         Overlay.surface = this;
+        Overlay.keyH = keyH;
     }
 
     private void doDrawing(Graphics g) {
