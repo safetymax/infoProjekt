@@ -161,12 +161,12 @@ public class LevelGeneration {
     
     public static int[][] loadNextLevel(int level, Boundary[] b, Boundary[] s, int[][] cols, Player player){
         
-        String[] levels = new String[]{"Level1.txt", "Level2.txt"};
+        String[] levels = new String[]{"Level1.txt", "Level2.txt","Level3.txt"};
         
         String[] nextLevelInfo = null;
         int[][] nextcols = null;
         try {
-             nextLevelInfo = LevelGeneration.readFile(levels[level]);
+            nextLevelInfo = LevelGeneration.readFile(levels[level]);
         } catch (FileNotFoundException e) {
             
             e.printStackTrace();

@@ -32,16 +32,16 @@ public class Surface extends JPanel implements Runnable {
     //Empty level Information
     String[] info;
 
-    Boundary[] boundaries = new Boundary[2048];
-    Boundary[] sprites = new Boundary[2048];
-    int[] spriteOrder = new int[2048];
-    double[] spriteDistance = new double[2048];
+    Boundary[] boundaries = new Boundary[10000];
+    Boundary[] sprites = new Boundary[10000];
+    int[] spriteOrder = new int[10000];
+    double[] spriteDistance = new double[10000];
 
-    int[][] collisions = new int[2048][2048];
+    int[][] collisions = new int[10000][10000];
 
     int frameCount = 0;
 
-    int currentLevel= 0;
+    int currentLevel= 1;
 
     int levelScore = 0;
     int totalScore = 0;
