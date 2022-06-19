@@ -13,8 +13,8 @@ public class Bullet extends Boundary{
     public double direction;
     public float speed;
     public float damage;
-    public Bullet(int x, int y, double direction, float s, float d) {
-        super(x, y ,x, y, x+5, y+5,2);
+    public Bullet(int x, int y, double direction, float s, float d, int type) {
+        super(x, y ,x, y, x+5, y+5,type);
         this.x = x;
         this.y = y;
         this.direction = direction;

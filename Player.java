@@ -64,6 +64,10 @@ public class Player {
     BufferedImage ceilingImage = null;
     int[][][] ceilingData = new int[64][64][4];
 
+    File f9 = new File("bullet2.png");
+    BufferedImage bullet2Image = null;
+    int[][][] bullet2Data = new int[64][64][4];
+
     int[][][][] textureData = new int[256][64][64][4];
 
 
@@ -101,6 +105,7 @@ public class Player {
             openDoorImage = ImageIO.read(f6);
             floorImage = ImageIO.read(f7);
             ceilingImage = ImageIO.read(f8);
+            bullet2Image = ImageIO.read(f9);
 
         }
         catch(Exception e){
@@ -118,6 +123,7 @@ public class Player {
                 openDoorData[i][j] = openDoorImage.getData().getPixel(i, j, (int[]) null);
                 floorData[i][j] = floorImage.getData().getPixel(i, j, (int[]) null);
                 ceilingData[i][j] = ceilingImage.getData().getPixel(i, j, (int[]) null);
+                bullet2Data[i][j] = bullet2Image.getData().getPixel(i, j, (int[]) null);
             }
         }
 
@@ -130,6 +136,7 @@ public class Player {
         textureData[6] = openDoorData;
         textureData[7] = floorData;
         textureData[8] = ceilingData;
+        textureData[9] = bullet2Data;
 
 
         
