@@ -24,6 +24,7 @@ public class Hub {
     Image img2 = Toolkit.getDefaultToolkit().getImage("Muni.png");
     public void draw(Graphics2D g2d){
         munition =  MachineGun.magazine;
+        munition = Rifle.magazine;
         int j = 0;
         int k = 0;
         for(int i = 0; i < 10; i ++){

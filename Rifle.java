@@ -16,7 +16,7 @@ public class Rifle extends Weapons {
     double direction;
     Bullet b[] = new Bullet[1000];
     int totalAmmo = 100;
-    int magazine = 15;
+    static int magazine = 15;
     int frameCount = 0;
     SoundHandler mgs = new SoundHandler();
     boolean weaponShootable = false;
