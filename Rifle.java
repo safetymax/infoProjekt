@@ -49,7 +49,7 @@ public class Rifle extends Weapons {
         
         if(weaponShootable){
             if(magazine >0){
-                Bullet bullet = new Bullet((int)x,(int) y, direction, 4,8f);
+                Bullet bullet = new Bullet((int)x,(int) y, direction, 4,8f,9);
                 magazine--;
                 for(int i = 0; i < b.length; i++){
                     if(b[i] == null){
