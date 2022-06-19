@@ -9,19 +9,19 @@ import java.util.logging.Level;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class MachineGun extends Weapons {
+public class Rifle extends Weapons {
     
     float x;
     float y;
     double direction;
     Bullet b[] = new Bullet[1000];
-    int totalAmmo = 250;
-    static int magazine = 25;
+    int totalAmmo = 100;
+    int magazine = 15;
     int frameCount = 0;
     SoundHandler mgs = new SoundHandler();
     boolean weaponShootable = false;
     double weaponCooldown = 0;
-    public MachineGun( int size){
+    public Rifle( int size){
         super(size);
         
         b = new Bullet[size];
@@ -33,8 +33,7 @@ public class MachineGun extends Weapons {
       x = player.posX;
       y = player.posY;
         direction = player.direction;
-        frameCount++;
-        
+       frameCount++;
         for(int i = 0; i < b.length; i++){
             if(b[i] != null){
                 b[i].moveBullet(player);
@@ -46,15 +45,18 @@ public class MachineGun extends Weapons {
     }
     }
     public void shoot(Boundary[] boundaries){
-        if(magazine >0){
-            Bullet bullet = new Bullet((int)x,(int) y, direction, 5f,5f, 2);
-            magazine--;
-            for(int i = 0; i < b.length; i++){
-                if(b[i] == null){
-                    b[i] = bullet;
-                    break;
+        
+        
+        if(weaponShootable){
+            if(magazine >0){
+                Bullet bullet = new Bullet((int)x,(int) y, direction, 4,8f,9);
+                magazine--;
+                for(int i = 0; i < b.length; i++){
+                    if(b[i] == null){
+                        b[i] = bullet;
+                        break;
+                    }
                 }
-            }
     
                 for(int i = 1; i < boundaries.length; i++){
                     if(boundaries[i] == null){
@@ -71,6 +73,9 @@ public class MachineGun extends Weapons {
             weaponCooldown = frameCount%20;
         }
         
+        
+       
+    }
     public void drawWeapons(Graphics2D g2d){
         for(int i = 0; i < b.length; i++){
             if(b[i] != null){
@@ -80,8 +85,8 @@ public class MachineGun extends Weapons {
     }
     public void reload(){
         
-        totalAmmo = totalAmmo -(25-magazine);
-        magazine = 25;
+        totalAmmo = totalAmmo -(15-magazine);
+        magazine = 15;
 
 
         
