@@ -258,7 +258,7 @@ public class Player {
 
             //results: [0] = distance, [1] = x, [2] = y, [3] = index of closest boundary
             float[] results = rays[i].cast(boundaries, g2d, minimap, i==0 || i==rays.length-1);
-            try {
+            //try {
                     float dist = results[0];
 
                     if(minimap == false){
@@ -266,7 +266,7 @@ public class Player {
                         float colour = (float) dist/1000;
                         colour = 1 - colour;
 
-                        if(colour < 0){
+                        if(colour < 0 || colour > 1){
                             colour = 0;
                         }
 
@@ -296,7 +296,7 @@ public class Player {
 
                         //floor / ceiling
                         if(results[3] == -1){
-                            dist = 500;
+                            dist = 1000;
                         }                         
                         int wallHeight = (int)(450+(64*DV/4)/(dist*Math.cos(correctionFactor)));
                         for(int y = wallHeight; y <= 904; y+=4){
@@ -305,6 +305,10 @@ public class Player {
 
                             colour = (float) hypotenuse[i][y]/1000;
                             colour = 1 - colour;
+
+                            if(colour < 0 || colour > 1){
+                                colour = 0;
+                            }
 
                             if(xFloor < 0){
                                 xFloor = 64 - xFloor%64;
@@ -332,11 +336,11 @@ public class Player {
                             g2d.drawLine(rays.length-i, 900-y, rays.length-i, 900-y+5);
                         }
                     }
-            }
-            catch(Exception e){
+            //}
+            /*catch(Exception e){
                 System.out.println("Error: " + e);
                 System.exit(0);
-            }
+            }*/
         }
 
         for(int i = 0; i < sprites.length; i++){

@@ -86,12 +86,8 @@ public class Surface extends JPanel implements Runnable {
 
         if(!keyH.controlPressed){  //controlPressed = minimap
             //Himmel
-            g2d.setPaint(new Color(240f/255f, 140f/255f, 140f/255f));
-            g2d.fillRect(0, 0, 900, 450);
-
-            //Boden
-            g2d.setPaint(new Color(30, 30, 30));
-            g2d.fillRect(0, 450, 900, 450);
+            g2d.setPaint(new Color(0,0,0));
+            g2d.fillRect(0, 0, 900, 900);
         }
 
         //Player
