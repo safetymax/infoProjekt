@@ -69,31 +69,37 @@ public class SoundHandler{
             int totalVolumeSFX = Overlay.VolumeA*Overlay.SFXA;
             
             if(fileName == "laserShoot"){
-                laserShootvolume.setValue(-10f);
-                laserShootclip.loop(1);
+                laserShootvolume.setValue(-10f/totalVolumeSFX);
+                laserShootclip.setFramePosition(0);
+                laserShootclip.start();
                
                 
             } else if(fileName == "playerWalking"){
                 playerWalkingvolume.setValue(-25f/totalVolumeSFX);
-                playerWalkingclip.loop(1);
+                playerWalkingclip.setFramePosition(0);
+                playerWalkingclip.start();
 
             } else if(fileName == "alien1Walking"){
-                alien1Walkingvolume.setValue((-30f/totalVolumeSFX)*(param/100));
-                alien1Walkingclip.loop(1);
+                alien1Walkingvolume.setValue((-30f/totalVolumeSFX)*(param/200));
+                alien1Walkingclip.setFramePosition(0);
+                alien1Walkingclip.start();
                 
             } else if(fileName == "alien2Walking"){
                 alien2Walkingvolume.setValue(-30f/totalVolumeSFX);
-                alien2Walkingclip.loop(1);
+                alien2Walkingclip.setFramePosition(0);
+                alien2Walkingclip.start();
                 
             } else if(fileName == "doorOpen"){
                 doorOpenvolume.setValue(-25f/totalVolumeSFX);
-                doorOpenclip.loop(1);
+                doorOpenclip.setFramePosition(0);
+                doorOpenclip.start();
                 
 
 
             } else if(fileName == "emptyMag"){
                 emptyMagvolume.setValue(-25f/totalVolumeSFX);
-                emptyMagclip.loop(1);
+                emptyMagclip.setFramePosition(0);
+                emptyMagclip.start();
                 
 
             }
