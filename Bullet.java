@@ -64,11 +64,11 @@ public class Bullet extends Boundary{
         
         if(x >= 800 || y >= 800 || x/64 < 0 || y/64 < 0) {
             destroyBullet(boundaries);
-            System.out.println("Collision");
+            
             return null;
         }else if(collisions[(int)y/64][(int)x/64] == 1) {
             destroyBullet(boundaries);
-            System.out.println("Collision");
+            
             return null;
         }else{
             return b;
