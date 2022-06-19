@@ -523,6 +523,7 @@ options = true;
             button1.draw(g2d, 515, 640, 85, 45, 0, "Strg");
             button3.draw(g2d, 300, 720, 300, 45, -80 - 20, "Shoot");
             button1.draw(g2d, 515, 720, 85, 45, 0, "Space");
+            
 
             if (BindingsA == 0) {
                 button6.selectedChange(g2d, 20, 20, 100, 45);
@@ -530,23 +531,76 @@ options = true;
                 optionsA = 0;
             } else if (BindingsA == 1) {
                 button1.selectedChange(g2d, 515, 80, 85, 45);
+                downA = 30;
             } else if (BindingsA == 2) {
                 button1.selectedChange(g2d, 515, 80 * 2, 85, 45);
+                downA = 31;
             } else if (BindingsA == 3) {
                 button1.selectedChange(g2d, 515, 80 * 3, 85, 45);
+                downA = 32;
             } else if (BindingsA == 4) {
                 button1.selectedChange(g2d, 515, 80 * 4, 85, 45);
+                downA = 33;
             } else if (BindingsA == 5) {
                 button1.selectedChange(g2d, 515, 80 * 5, 85, 45);
+                downA = 35;
             } else if (BindingsA == 6) {
                 button1.selectedChange(g2d, 515, 80 * 6, 85, 45);
+                downA = 36;
             } else if (BindingsA == 7) {
                 button1.selectedChange(g2d, 515, 80 * 7, 85, 45);
+                downA = 37;
             } else if (BindingsA == 8) {
                 button1.selectedChange(g2d, 515, 80 * 8, 85, 45);
+                downA = 38;
             } else if (BindingsA == 9) {
                 button1.selectedChange(g2d, 515, 80 * 9, 85, 45);
+                downA = 39;
             }
+
+        }
+        if(enterA == 31){
+            enterA = 6;
+
+        }
+        if(enterA == 32){
+            enterA = 6;
+
+        }
+        if(enterA == 33){
+            enterA = 6;
+
+        }
+        if(enterA == 34){
+            enterA = 6;
+
+        }
+        if(enterA == 35){
+            enterA = 6;
+
+        }
+        if(enterA == 36){
+            enterA = 6;
+
+        }
+        if(enterA == 37){
+            enterA = 6;
+
+        }
+        if(enterA == 38){
+            enterA = 6;
+
+        }
+        if(enterA == 39){
+            enterA = 6;
+
+        }
+        if(enterA == 40){
+            enterA = 6;
+
+        }
+        if(enterA == 41){
+            enterA = 6;
 
         }
         // Sound
