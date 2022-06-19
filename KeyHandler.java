@@ -4,7 +4,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener{
 
     //Key pressed variables
-    public boolean upPressed, downPressed, leftPressed, rightPressed, lookLeftPressed, lookRightPressed, shiftPressed, controlPressed, enterPressed, escapePressed,ePressed,pPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, lookLeftPressed, lookRightPressed, shiftPressed, controlPressed, enterPressed, escapePressed,ePressed,pPressed,rPressed;
 
     //Key Pressed (If new Key Added, dont forget to turn off in keyReleased)
     @Override
@@ -84,6 +84,11 @@ public class KeyHandler implements KeyListener{
             pPressed = true;
 
         }
+        if(code == KeyEvent.VK_R){
+            rPressed = true;
+
+
+        }
     }
 
     //Key Released
@@ -144,6 +149,9 @@ public class KeyHandler implements KeyListener{
         }
         if(code == KeyEvent.VK_P){
             pPressed = false;
+        }
+        if(code == KeyEvent.VK_R){
+            rPressed = false;
         }
     }
 

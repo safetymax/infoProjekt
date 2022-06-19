@@ -232,9 +232,14 @@ public class Player {
 
         if(shoot){
             mg.shoot(boundaries);
-            ps.playSound("laserShoot", -1);
+            
         }
 
+    }
+    public void reload(boolean reload) {
+        if(reload) {
+            mg.reload();
+        }
     }
     public void draw(Graphics2D g2d, boolean minimap) {
 

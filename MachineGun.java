@@ -15,7 +15,9 @@ public class MachineGun extends Weapons {
     float y;
     double direction;
     Bullet b[] = new Bullet[1000];
-    
+    int totalAmmo = 250;
+    int magazine = 25;
+    SoundHandler mgs = new SoundHandler();
     public MachineGun( int size){
         super(size);
         
@@ -37,21 +39,26 @@ public class MachineGun extends Weapons {
        }
     }
     public void shoot(Boundary[] boundaries){
-
-        Bullet bullet = new Bullet((int)x,(int) y, direction, 5f,5f);
-
-        for(int i = 0; i < b.length; i++){
-            if(b[i] == null){
-                b[i] = bullet;
-                break;
+        if(magazine >0){
+            Bullet bullet = new Bullet((int)x,(int) y, direction, 5f,5f);
+            magazine--;
+            for(int i = 0; i < b.length; i++){
+                if(b[i] == null){
+                    b[i] = bullet;
+                    break;
+                }
             }
-        }
 
-        for(int i = 1; i < boundaries.length; i++){
-            if(boundaries[i] == null){
-                boundaries[i] = bullet;
-                break;
+            for(int i = 1; i < boundaries.length; i++){
+                if(boundaries[i] == null){
+                    boundaries[i] = bullet;
+                    break;
+                }
             }
+            mgs.playSound("laserShoot",-1);
+        } else{
+            System.out.println("U empty");
+            mgs.playSound("emptyMag",-1);
         }
     }
     public void drawWeapons(Graphics2D g2d){
@@ -61,7 +68,16 @@ public class MachineGun extends Weapons {
             }
         }
     }
-    
+    public void reload(){
+        
+        totalAmmo = totalAmmo -(25-magazine);
+        magazine = 25;
+
+
+        
+
+
+    }
 
 
 }

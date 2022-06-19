@@ -126,7 +126,7 @@ public class Surface extends JPanel implements Runnable {
             weaponCooldown = frameCount%20;
         }
         player.move(keyH.upPressed, keyH.downPressed, keyH.leftPressed, keyH.rightPressed, keyH.lookLeftPressed, keyH.lookRightPressed, keyH.shiftPressed, collisions);
-
+        player.reload(keyH.rPressed);
         for(int i = 0; i < sprites.length; i++){
             if(sprites[i] != null){
                 if(sprites[i].type == 3 || sprites[i].type == 4){

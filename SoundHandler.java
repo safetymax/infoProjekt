@@ -8,18 +8,21 @@ public class SoundHandler{
     AudioInputStream alien1Walking = null;
     AudioInputStream alien2Walking = null;
     AudioInputStream doorOpen = null;
+    AudioInputStream emptyMag = null;
     
     Clip playerWalkingclip = null;
     Clip laserShootclip = null;
     Clip alien1Walkingclip = null;
     Clip alien2Walkingclip = null;
     Clip doorOpenclip = null;
-
+    Clip emptyMagclip = null;
+    
     FloatControl laserShootvolume;
     FloatControl playerWalkingvolume;
     FloatControl alien1Walkingvolume;
     FloatControl alien2Walkingvolume;
     FloatControl doorOpenvolume;
+    FloatControl emptyMagvolume;
     public SoundHandler(){
         try{
             laserShoot = AudioSystem.getAudioInputStream(new File("laserShoot.wav").getAbsoluteFile());
@@ -42,7 +45,9 @@ public class SoundHandler{
             doorOpenclip = AudioSystem.getClip();
             doorOpenclip.open(doorOpen);
 
-
+            emptyMag = AudioSystem.getAudioInputStream(new File("emptyMag.wav").getAbsoluteFile());
+            emptyMagclip = AudioSystem.getClip();
+            emptyMagclip.open(emptyMag);
             
             
             laserShootvolume = (FloatControl) laserShootclip.getControl(FloatControl.Type.MASTER_GAIN);
@@ -50,6 +55,8 @@ public class SoundHandler{
             alien1Walkingvolume = (FloatControl) alien1Walkingclip.getControl(FloatControl.Type.MASTER_GAIN);
             alien2Walkingvolume = (FloatControl) alien2Walkingclip.getControl(FloatControl.Type.MASTER_GAIN);
             doorOpenvolume = (FloatControl) doorOpenclip.getControl(FloatControl.Type.MASTER_GAIN);
+            emptyMagvolume = (FloatControl) emptyMagclip.getControl(FloatControl.Type.MASTER_GAIN);
+        
         }catch(Exception e){
 
             e.printStackTrace();
@@ -83,6 +90,11 @@ public class SoundHandler{
                 doorOpenclip.loop(1);
                 
 
+
+            } else if(fileName == "emptyMag"){
+                emptyMagvolume.setValue(-25f/totalVolumeSFX);
+                emptyMagclip.loop(1);
+                
 
             }
             
