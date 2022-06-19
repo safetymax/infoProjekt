@@ -30,6 +30,7 @@ public class Player {
     public double[][] hypotenuse = new double[900][905];
 
     MachineGun mg = new MachineGun(150);
+    Rifle rfl = new Rifle(150);
     SoundHandler ps = new SoundHandler();
     //DONT FORGET TO LOAD PIXELS INTO ARRAY
     File f1 = new File("wall.png");
@@ -231,14 +232,15 @@ public class Player {
     public void shootKey(boolean shoot, Boundary[] boundaries) {
 
         if(shoot){
-            mg.shoot(boundaries);
-            
+            //mg.shoot(boundaries);
+            rfl.shoot(boundaries);
         }
 
     }
     public void reload(boolean reload) {
         if(reload) {
             mg.reload();
+            rfl.reload();
         }
     }
     public void draw(Graphics2D g2d, boolean minimap) {
@@ -409,8 +411,7 @@ public class Player {
     
     public void updatePlayer(Boundary[] boundaries, int[][] collisions){
         mg.updateWeapons(this, boundaries, collisions);
-
-
+        rfl.updateWeapons(this, boundaries, collisions);
 
 
     }
