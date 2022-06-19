@@ -350,7 +350,7 @@ if(enterA == 13){
             SFXB = false;
             MusicB = false;
             move = true;
-          
+           
         }
         // Load
         if (enterA == 2) {
@@ -361,26 +361,8 @@ if(enterA == 13){
             VolumeB = false;
             SFXB = false;
             MusicB = false;
-            g2d.drawImage(img1, 0, 0, null);
-
-            // exit
-
-            button6.draw(g2d, 20, 20, 100, 45, 0, "<Exit");
-            if (optionsA == 0) {
-                // exit
-                button6.selectedChange(g2d, 20, 20, 100, 45);
-                downA = -1;
-
-            } else if (optionsA == 1) {
-                // Bindings
-                button12.selectedChange(g2d, 250 + 20, 200, 150, 150);
-                downA = 5;
-            } else if (optionsA == 2) {
-                // Sound
-                button13.selectedChange(g2d, 450 + 20, 200, 150, 150);
-                downA = 6;
-            }
-
+            loadScore();
+           move = true;
         }
 
         // Credits
@@ -458,7 +440,7 @@ options = false;
         }
         // quit
         if (enterA == 5) {
-
+saveScore();
             System.exit(0);
         }
     }
@@ -668,7 +650,23 @@ options = true;
             storage.VolumeA = VolumeA;
             storage.SFXA = SFXA;
             storage.MusicA = MusicA;
+        
+            oos.writeObject(storage);
+            oos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void saveScore() {
+        try {
+            FileOutputStream fos = new FileOutputStream("save.bat");
+            BufferedOutputStream bos = new BufferedOutputStream(fos);
+            ObjectOutputStream oos = new ObjectOutputStream(bos);
+
+            Storage storage = new Storage();
+          
+            storage.surface = surface;
             oos.writeObject(storage);
             oos.close();
         } catch (Exception e) {
@@ -688,6 +686,24 @@ options = true;
             VolumeA = storage.VolumeA;
             SFXA = storage.SFXA;
             MusicA = storage.MusicA;
+
+            ois.close();
+            loadB = true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void loadScore() {
+        try {
+            FileInputStream fis = new FileInputStream("save.bat");
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            ObjectInputStream ois = new ObjectInputStream(bis);
+
+            Storage storage = (Storage) ois.readObject();
+
+            surface = storage.surface;
 
             ois.close();
             loadB = true;
