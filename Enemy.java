@@ -18,6 +18,7 @@ public class Enemy extends Boundary{
         lastPos = new float[2];
         lastPos[0] = 10;
         lastPos[1] = 10;
+        this.type = type;
     }
 
     public void move(Boundary[] boundaries, Player player){
@@ -34,13 +35,17 @@ public class Enemy extends Boundary{
     
         float distX = posX - lastPos[0];
         float distY = posY - lastPos[1];
-
+        
         if(Math.sqrt(Math.pow(distX,2) +Math.pow(distY,2)) > 50)  {
             lastPos[0] = posX;
             lastPos[1] = posY;
-            
-            es.playSound("alien1Walking",(int) dist);
-            
+            if(this.type==3){
+                es.playSound("alien1Walking",(int) dist);
+            } else if(this.type == 4){
+                es.playSound("alien2Walking",(int) dist);
+
+
+            }
 
         }
     

@@ -18,7 +18,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 public class Overlay {
-    private int downA, enterA, optionsA, counter, BindingsA, SoundA, VolumeA, SFXA, MusicA;
+    public static int downA, enterA, optionsA, counter, BindingsA, SoundA, VolumeA, SFXA, MusicA;
 
     private boolean a, b, c, d, e, f, g, h, i, j, downB, optionsB, BindingsB, SoundB, VolumeB, SFXB, MusicB, counterB,
             enterVolume, enterSFX, enterMusic, loadB, pauseMenueB,options;
