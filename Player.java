@@ -240,8 +240,8 @@ public class Player {
     public void shootKey(boolean shoot, Boundary[] boundaries) {
 
         if(shoot){
-            mg.shoot(boundaries);
-            //rfl.shoot(boundaries);
+            //mg.shoot(boundaries);
+            rfl.shoot(boundaries);
             //ml.shoot(boundaries);
         }
 
@@ -418,10 +418,10 @@ public class Player {
         }
     }
     
-    public void updatePlayer(Boundary[] boundaries, int[][] collisions){
-        mg.updateWeapons(this, boundaries, collisions);
-        rfl.updateWeapons(this, boundaries, collisions);
-        ml.updateWeapons(this, boundaries, collisions);
+    public void updatePlayer(Boundary[] sprites, int[][] collisions){
+        mg.updateWeapons(this, sprites, collisions);
+        rfl.updateWeapons(this, sprites, collisions);
+        ml.updateWeapons(this, sprites, collisions);
 
     }
 }
