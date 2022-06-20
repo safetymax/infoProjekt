@@ -85,6 +85,10 @@ public class Player {
     BufferedImage bullet3Image = null;
     int[][][] bullet3Data = new int[64][64][4];
 
+    File f13 = new File("boss2.png");
+    BufferedImage boss2Image = null;
+    int[][][] boss2Data = new int[64][64][4];
+
     int[][][][] textureData = new int[256][64][64][4];
 
 
@@ -130,6 +134,7 @@ public class Player {
             nothingImage = ImageIO.read(f10);
             boss1Image = ImageIO.read(f11);
             bullet3Image = ImageIO.read(f12);
+            boss2Image = ImageIO.read(f13);
         }
         catch(Exception e){
             System.out.println("Error");
@@ -150,6 +155,7 @@ public class Player {
                 nothingData[i][j] = nothingImage.getData().getPixel(i, j, (int[]) null);
                 boss1Data[i][j] = boss1Image.getData().getPixel(i, j, (int[]) null);
                 bullet3Data[i][j] = bullet3Image.getData().getPixel(i, j, (int[]) null);
+                boss2Data[i][j] = boss2Image.getData().getPixel(i, j, (int[]) null);
             }
         }
 
@@ -166,6 +172,7 @@ public class Player {
         textureData[10] = nothingData;
         textureData[11] = boss1Data;
         textureData[12] = bullet3Data;
+        textureData[13] = boss2Data;
 
 
         
