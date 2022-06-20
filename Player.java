@@ -101,7 +101,8 @@ public class Player {
         lastPos[1] = 10;
         
         health = 10;
-        damage = new float[]{1};
+        //0 = type 10; 1 = type 11;
+        damage = new float[]{1,1,1};
         //create Rays
         for(int i = 0; i < rays.length; i++) {
             rays[i] = new Ray(posX, posY, direction+Math.atan((rays.length/2-i)/(450/Math.tan(Math.toRadians(fov)/2))));
@@ -446,19 +447,15 @@ public class Player {
         
         for (int i = 0; i < sprites.length; i++) {
             if (sprites[i] != null) {
-                //System.out.println("es is nich null");
                 
-                if (sprites[i].type == 10 ) {
+                
+                if (sprites[i].type == 10 || sprites[i].type == 11 || sprites[i].type == 12) {
                     int disttoBullet = (int) Math.sqrt(
                             Math.pow(posX - sprites[i].posX, 2) + Math.pow(posY - sprites[i].posY, 2));
                     if (disttoBullet < 150) {
                         
-                        if(sprites[i].type == 10){
-                            health -= damage[0];
-                            sprites[i] = null;
-                        }
-                        
-                        
+                        health--;
+                        sprites[i] =null;
                         
 
                     }
@@ -477,8 +474,8 @@ public class Player {
             
        
         }
-       
+    }
 
     
     
-}
+
