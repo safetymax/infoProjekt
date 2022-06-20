@@ -93,6 +93,10 @@ public class Player {
     BufferedImage bullet4Image = null;
     int[][][] bullet4Data = new int[64][64][4];
 
+    File f15 = new File("bullet5.png");
+    BufferedImage bullet5Image = null;
+    int[][][] bullet5Data = new int[64][64][4];
+
     int[][][][] textureData = new int[256][64][64][4];
 
 
@@ -140,6 +144,7 @@ public class Player {
             bullet3Image = ImageIO.read(f12);
             boss2Image = ImageIO.read(f13);
             bullet4Image = ImageIO.read(f14);
+            bullet5Image = ImageIO.read(f15);
         }
         catch(Exception e){
             System.out.println("Error");
@@ -162,6 +167,7 @@ public class Player {
                 bullet3Data[i][j] = bullet3Image.getData().getPixel(i, j, (int[]) null);
                 boss2Data[i][j] = boss2Image.getData().getPixel(i, j, (int[]) null);
                 bullet4Data[i][j] = bullet4Image.getData().getPixel(i, j, (int[]) null);
+                bullet5Data[i][j] = bullet5Image.getData().getPixel(i, j, (int[]) null);
             }
         }
 
@@ -180,6 +186,7 @@ public class Player {
         textureData[12] = bullet3Data;
         textureData[13] = boss2Data;
         textureData[14] = bullet4Data;
+        textureData[15] = bullet5Data;
 
 
         
