@@ -75,7 +75,7 @@ public class MachineGun extends Weapons {
     public void drawWeapons(Graphics2D g2d){
         for(int i = 0; i < b.length; i++){
             if(b[i] != null){
-                b[i].drawBullet(g2d);
+                //b[i].drawBullet(g2d);
             }
         }
     }
