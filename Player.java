@@ -80,6 +80,10 @@ public class Player {
     BufferedImage boss1Image = null;
     int[][][] boss1Data = new int[64][64][4];
 
+    File f12 = new File("bullet3.png");
+    BufferedImage bullet3Image = null;
+    int[][][] bullet3Data = new int[64][64][4];
+
     int[][][][] textureData = new int[256][64][64][4];
 
 
@@ -142,6 +146,7 @@ public class Player {
                 bullet2Data[i][j] = bullet2Image.getData().getPixel(i, j, (int[]) null);
                 nothingData[i][j] = nothingImage.getData().getPixel(i, j, (int[]) null);
                 boss1Data[i][j] = boss1Image.getData().getPixel(i, j, (int[]) null);
+                bullet3Data[i][j] = bullet3Image.getData().getPixel(i, j, (int[]) null);
             }
         }
 
@@ -157,6 +162,7 @@ public class Player {
         textureData[9] = bullet2Data;
         textureData[10] = nothingData;
         textureData[11] = boss1Data;
+        textureData[12] = bullet3Data;
 
 
         
