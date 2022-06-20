@@ -31,6 +31,7 @@ public class Player {
 
     MachineGun mg = new MachineGun(150);
     Rifle rfl = new Rifle(150);
+    Melee ml = new Melee(150);
     SoundHandler ps = new SoundHandler();
     //DONT FORGET TO LOAD PIXELS INTO ARRAY
     File f1 = new File("wall.png");
@@ -241,6 +242,7 @@ public class Player {
         if(shoot){
             //mg.shoot(boundaries);
             rfl.shoot(boundaries);
+            //ml.shoot(boundaries);
         }
 
     }
@@ -416,10 +418,10 @@ public class Player {
         }
     }
     
-    public void updatePlayer(Boundary[] boundaries, int[][] collisions){
-        mg.updateWeapons(this, boundaries, collisions);
-        rfl.updateWeapons(this, boundaries, collisions);
-
+    public void updatePlayer(Boundary[] sprites, int[][] collisions){
+        mg.updateWeapons(this, sprites, collisions);
+        rfl.updateWeapons(this, sprites, collisions);
+        ml.updateWeapons(this, sprites, collisions);
 
     }
 }
