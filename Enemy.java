@@ -15,6 +15,7 @@ public class Enemy extends Boundary {
     float health;
     float[] damage;
     double alpha;
+    int maxdist;
     SoundHandler es = new SoundHandler();
     Melee ml;
     VomitGun vg;
@@ -32,24 +33,26 @@ public class Enemy extends Boundary {
             hitbox = 32;
             health = 15;
             ml = new Melee(150);
-            
+            maxdist =64;
         } else if (type == 4) {
 
             hitbox = 32;
             health = 10;
             vg = new VomitGun(150);
+            maxdist = 280;
         }
 
     }
 
     public void move(Boundary[] sprites, Player player, int[][] map, double dist) {
-
-        if (dist > 64) {
+        
+            
+        if (dist > maxdist) {
             alpha = Math.atan2((posY - player.posY), (posX - player.posX)) + Math.PI;
             posX += Math.cos(alpha) * speed;
             posY += Math.sin(alpha) * speed;
         }
-
+        
         float distX = posX - lastPos[0];
         float distY = posY - lastPos[1];
 
@@ -112,7 +115,7 @@ public class Enemy extends Boundary {
         g2d.drawLine(x1, y1, x2, y2);
     }
 
-    public Boundary takeDamage(Boundary[] sprites, Player player) {
+    public void takeDamage(Boundary[] sprites, Player player) {
 
         for (int i = 0; i < sprites.length; i++) {
             if (sprites[i] != null) {
@@ -140,14 +143,42 @@ public class Enemy extends Boundary {
             for (int i = 0; i < sprites.length; i++) {
                 if (sprites[i] == this) {
                     sprites[i] = null;
+                    /*if(this.type == 4){
+                    for(int j = 0;j < sprites.length; j++){
+                        if(sprites[j] != null && sprites[j] != this){
+                            if(sprites[j].type == 4){
+                                for(int k = 0; k<sprites.length; k++){
+                                    Enemy ally = (Enemy) sprites[k];
+                                    if(this.vg.b[k] ==  null){
+                                        for(int l = 0; l<sprites.length; l++){
+                                            VomitGun allyvg = ally.vg;
+                                            if(allyvg.b[l] == null){
+                                                ally.vg.b[l] = this.vg.b[k];
+                                                this.vg.b[k] = null;
+                                                break;
 
-                }
+
+                                            }
+
+                                    }
+                                    
+
+
+                                }
+                            }
+                        }
+
+                    }
+                    }
+                    
+
+                }*/
 
             }
 
         }
-        return this;
-
+        
+    }
     }
 
     // called when a Ray hits the wall

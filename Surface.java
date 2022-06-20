@@ -171,6 +171,7 @@ public class Surface extends JPanel implements Runnable {
             collisions =LevelGeneration.loadNextLevel(currentLevel, boundaries, sprites, collisions, player);
             frameCount = 0;
             player.touchedDoor = false;
+            player.health = 10;
         }
     }
 

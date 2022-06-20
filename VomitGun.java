@@ -14,7 +14,7 @@ public class VomitGun extends Weapons {
     float x;
     float y;
     double direction;
-    Bullet b[] = new Bullet[1000];
+    public Bullet b[] = new Bullet[1000];
     
     int frameCount = 0;
     SoundHandler mgs = new SoundHandler();
