@@ -126,6 +126,7 @@ public class Player {
             bullet2Image = ImageIO.read(f9);
             nothingImage = ImageIO.read(f10);
             boss1Image = ImageIO.read(f11);
+            bullet3Image = ImageIO.read(f12);
         }
         catch(Exception e){
             System.out.println("Error");
