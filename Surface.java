@@ -51,6 +51,8 @@ public class Surface extends JPanel implements Runnable {
 
     int levelScore = 0;
     int totalScore = 0;
+
+    boolean playedDoorSound = false;
     public Surface() {
         //Setup function, runs before game loop (Put everything in here that is only supposed to run once)
         addKeyListener(keyH);
@@ -123,7 +125,7 @@ public class Surface extends JPanel implements Runnable {
         frameCount++;
         
         player.updatePlayer(sprites, collisions);
-
+        sound.playSound("RammNein", -1);
         
         
         if(keyH.ePressed){
@@ -141,7 +143,11 @@ public class Surface extends JPanel implements Runnable {
             }
         }
         if(player.isFinished){
+            if(!playedDoorSound){
             sound.playSound("doorOpen", -1);
+            playedDoorSound = true;
+            }
+        }
             for(int i = 0; i<boundaries.length; i++){
                 if(boundaries[i] !=null){
                     if(boundaries[i].type == 5){
@@ -151,7 +157,7 @@ public class Surface extends JPanel implements Runnable {
                 }
             }
             
-        }
+        
         if(player.touchedDoor){
             levelScore = frameCount/10;
             System.out.println("Level Score: " + levelScore);
@@ -160,6 +166,7 @@ public class Surface extends JPanel implements Runnable {
             collisions =LevelGeneration.loadNextLevel(currentLevel, boundaries, sprites, collisions, player);
             frameCount = 0;
             player.touchedDoor = false;
+            playedDoorSound = false;
             player.health = 10;
             System.out.println(currentLevel);
             if(currentLevel == 3){

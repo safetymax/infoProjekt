@@ -10,7 +10,8 @@ public class SoundHandler{
     AudioInputStream doorOpen = null;
     AudioInputStream emptyMag = null;
     AudioInputStream melee = null;
-    
+    AudioInputStream RammNein = null;
+
     Clip playerWalkingclip = null;
     Clip laserShootclip = null;
     Clip alien1Walkingclip = null;
@@ -18,6 +19,7 @@ public class SoundHandler{
     Clip doorOpenclip = null;
     Clip emptyMagclip = null;
     Clip meleeclip = null;
+    Clip RammNeinclip = null;
 
     FloatControl laserShootvolume;
     FloatControl playerWalkingvolume;
@@ -26,12 +28,14 @@ public class SoundHandler{
     FloatControl doorOpenvolume;
     FloatControl emptyMagvolume;
     FloatControl meleevolume;
+    FloatControl RammNeinvolume;
+
     public SoundHandler(){
         try{
             laserShoot = AudioSystem.getAudioInputStream(new File("laserShoot.wav").getAbsoluteFile());
             laserShootclip = AudioSystem.getClip();
             laserShootclip.open(laserShoot);
-            
+
             playerWalking = AudioSystem.getAudioInputStream(new File("walk.wav").getAbsoluteFile());
             playerWalkingclip = AudioSystem.getClip();
             playerWalkingclip.open(playerWalking);
@@ -56,7 +60,10 @@ public class SoundHandler{
             meleeclip = AudioSystem.getClip();
             meleeclip.open(melee);
             
-            
+            RammNein = AudioSystem.getAudioInputStream(new File("RammNein.wav").getAbsoluteFile());
+            RammNeinclip = AudioSystem.getClip();
+            RammNeinclip.open(RammNein);
+
             laserShootvolume = (FloatControl) laserShootclip.getControl(FloatControl.Type.MASTER_GAIN);
             playerWalkingvolume = (FloatControl) playerWalkingclip.getControl(FloatControl.Type.MASTER_GAIN);
             alien1Walkingvolume = (FloatControl) alien1Walkingclip.getControl(FloatControl.Type.MASTER_GAIN);
@@ -64,7 +71,7 @@ public class SoundHandler{
             doorOpenvolume = (FloatControl) doorOpenclip.getControl(FloatControl.Type.MASTER_GAIN);
             emptyMagvolume = (FloatControl) emptyMagclip.getControl(FloatControl.Type.MASTER_GAIN);
             meleevolume = (FloatControl) meleeclip.getControl(FloatControl.Type.MASTER_GAIN);
-        
+            RammNeinvolume = (FloatControl) RammNeinclip.getControl(FloatControl.Type.MASTER_GAIN);
         }catch(Exception e){
 
             e.printStackTrace();
@@ -114,6 +121,10 @@ public class SoundHandler{
                 meleevolume.setValue(-25f/totalVolumeSFX);
                 meleeclip.setFramePosition(0);
                 meleeclip.start();
+                
+            } else if(fileName == "RammNein"){
+                RammNeinvolume.setValue(-25f/(Overlay.VolumeA*Overlay.MusicA));
+                RammNeinclip.loop(Clip.LOOP_CONTINUOUSLY);
                 
             }
             
