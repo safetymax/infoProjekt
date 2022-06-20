@@ -65,43 +65,19 @@ public class Surface extends JPanel implements Runnable {
 
     private void doDrawing(Graphics g) {
         //Everything drawing related in here
-
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setPaint(new Color(30,30,30));
-        g2d.fillRect(0, 0, 900, 900);
 
         //Enviroment
         g2d.setPaint(Color.BLUE);
-        if(keyH.controlPressed){  //controlPressed = minimap
-            //Loop through all game entities
-            for(int i = 0; i < boundaries.length; i++) {
-                if(boundaries[i] != null) {
-                    g2d.setPaint(new Color(90f/255f,90f/255f,90f/255f));
-                    g2d.drawLine(boundaries[i].x1, boundaries[i].y1, boundaries[i].x2, boundaries[i].y2);
-                }
-                if(sprites[i] != null) {
-                    g2d.setPaint(new Color(255f/255f,255f/255f,255f/255f));
-                    g2d.drawLine(sprites[i].x1, sprites[i].y1, sprites[i].x2, sprites[i].y2);
 
-                }
-            }
-            
-
-
-        }
-
-        if(!keyH.controlPressed){  //controlPressed = minimap
-            //Himmel
-            g2d.setPaint(new Color(0,0,0));
-            g2d.fillRect(0, 0, 900, 900);
-        }
+        //Himmel
+        g2d.setPaint(new Color(0,0,0));
+        g2d.fillRect(0, 0, 900, 900);
 
         //Player
-        player.draw(g2d, keyH.controlPressed);
-        player.cast(boundaries, sprites, g2d, keyH.controlPressed);
+        player.cast(boundaries, sprites, g2d);
 
-        //ingame hub
-
+        //ingame hud
         hud.draw(g2d, player);
         //save/load
         if(Overlay.save){
@@ -114,6 +90,20 @@ public class Surface extends JPanel implements Runnable {
         }
 
         //overlay
+        g2d.setPaint(new Color(30,30,30));
+        g2d.fillRect(0, 0, collisions.length*64/6, collisions[0].length*64/6);
+        //Loop through all game entities
+        for(int i = 0; i < boundaries.length; i++) {
+            if(boundaries[i] != null) {
+                g2d.setPaint(new Color(90f/255f,90f/255f,90f/255f));
+                g2d.drawLine(boundaries[i].x1/6, boundaries[i].y1/6, boundaries[i].x2/6, boundaries[i].y2/6);
+            }
+            if(sprites[i] != null) {
+                g2d.setPaint(new Color(255f/255f,0,0));
+                g2d.fillOval(sprites[i].x1/6, sprites[i].y1/6, 5, 5);
+            }
+        }
+        player.draw(g2d, true); //draw player on minimap
       
         overlay.drawMainMenue(g2d, keyH.downPressed, keyH.rightPressed, keyH.upPressed, keyH.leftPressed, keyH.enterPressed, keyH.escapePressed);
         

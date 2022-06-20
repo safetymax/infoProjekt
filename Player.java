@@ -291,22 +291,21 @@ public class Player {
         //Draw Player on minimap
         if(minimap == true){
             g2d.setPaint(Color.WHITE);
-            g2d.fillOval((int) posX-10, (int) posY-10, 20, 20);
+            g2d.fillOval((int) (posX-10)/6, (int) (posY-10)/6, 5, 5);
             mg.drawWeapons(g2d);
         }
         
     }
 
     //Casts all Rays
-    public void cast(Boundary[] boundaries,Boundary[] sprites, Graphics2D g2d, boolean minimap) {
+    public void cast(Boundary[] boundaries,Boundary[] sprites, Graphics2D g2d) {
         for(int i = 0; i < rays.length; i++) {
 
             //results: [0] = distance, [1] = x, [2] = y, [3] = index of closest boundary
-            float[] results = rays[i].cast(boundaries, g2d, minimap, i==0 || i==rays.length-1);
+            float[] results = rays[i].cast(boundaries, g2d, i==0 || i==rays.length-1);
             //try {
                     float dist = results[0];
 
-                    if(minimap == false){
                         //map the distance to a color
                         float colour = (float) dist/1000;
                         colour = 1 - colour;
@@ -380,7 +379,6 @@ public class Player {
 
                             g2d.drawLine(rays.length-i, 900-y, rays.length-i, 900-y+5);
                         }
-                    }
             //}
             /*catch(Exception e){
                 System.out.println("Error: " + e);
