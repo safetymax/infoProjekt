@@ -22,7 +22,7 @@ public class Enemy extends Boundary {
     public Enemy(int x, int y, int type) {
         super(x, y, x, y, x + 100, y + 100, type);
         // 3.141
-        speed = 3.141;
+        speed = 1.5;
         lastPos = new float[2];
         lastPos[0] = 10;
         lastPos[1] = 10;
@@ -48,7 +48,7 @@ public class Enemy extends Boundary {
         
             
         if (dist > maxdist) {
-            alpha = Math.atan2((posY - player.posY), (posX - player.posX)) + Math.PI;
+            
             posX += Math.cos(alpha) * speed;
             posY += Math.sin(alpha) * speed;
         }
@@ -88,6 +88,7 @@ public class Enemy extends Boundary {
 
     public void update(Boundary[] sprites, Player player, int[][] collisions) {
         double dist = Math.sqrt(Math.pow(posY - player.posY, 2) + Math.pow(posX - player.posX, 2));
+        alpha = Math.atan2((posY - player.posY), (posX - player.posX)) + Math.PI;
         if(dist<400){
         move(sprites, player, collisions,dist);
         takeDamage(sprites, player);
