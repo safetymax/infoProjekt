@@ -177,7 +177,17 @@ public class Enemy extends Boundary {
             }
 
         }
-        
+        boolean enemiesDead = true;
+        for(int i = 0;i<sprites.length;i++){
+            if(sprites[i] != null){
+                if(sprites[i].type == 3|| sprites[i].type == 4 || sprites[i].type == 11){
+                    enemiesDead = false;
+                }
+            }
+        }
+        if(enemiesDead){
+            player.isFinished = true;
+        }
     }
     }
 
