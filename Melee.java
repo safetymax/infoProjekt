@@ -28,7 +28,7 @@ public class Melee extends Weapons {
         
 
     }
-    public void updateWeapons(Player player, Boundary[] boundaries, int[][] collisions){
+    public void updateWeapons(Player player, Boundary[] sprites, int[][] collisions){
       x = player.posX;
       y = player.posY;
         direction = player.direction;
@@ -37,7 +37,7 @@ public class Melee extends Weapons {
         for(int i = 0; i < b.length; i++){
             if(b[i] != null){
                 b[i].moveBullet(player);
-                b[i] = b[i].isOutOfBounds(b[i], boundaries, collisions);
+                b[i] = b[i].isOutOfBounds(b[i], sprites, collisions);
             }
        }
        if (frameCount % 100 == (0 + weaponCooldown) && !weaponShootable) {
@@ -77,7 +77,22 @@ public class Melee extends Weapons {
             }
         }
     }
-    
+    public void updateWeaponsEnemy(Enemy enemy,Player player, Boundary[] sprites, int[][] collisions){
+        x = enemy.posX;
+        y = enemy.posY;
+          direction = enemy.alpha;
+          frameCount++;
+          
+          for(int i = 0; i < b.length; i++){
+              if(b[i] != null){
+                  b[i].moveBullet(player);
+                  b[i] = b[i].isOutOfBounds(b[i], sprites, collisions);
+              }
+         }
+         if (frameCount % 100 == (0 + weaponCooldown) && !weaponShootable) {
+          weaponShootable = true;
+      }
+      }
 
 
 }

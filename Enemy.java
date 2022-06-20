@@ -14,7 +14,9 @@ public class Enemy extends Boundary {
     int hitbox;
     float health;
     float[] damage;
+    double alpha;
     SoundHandler es = new SoundHandler();
+    Melee ml;
 
     public Enemy(int x, int y, int type) {
         super(x, y, x, y, x + 100, y + 100, type);
@@ -29,8 +31,10 @@ public class Enemy extends Boundary {
         if (type == 3) {
             hitbox = 32;
             health = 15;
+            ml = new Melee(150);
 
         } else if (type == 4) {
+            
             hitbox = 32;
             health = 10;
 
@@ -39,7 +43,7 @@ public class Enemy extends Boundary {
     }
 
     public void move(Boundary[] sprites, Player player, int[][] map, double dist) {
-        double alpha;
+        
         
 
         
@@ -92,6 +96,15 @@ public class Enemy extends Boundary {
         if(dist<500){
         move(sprites, player, collisions,dist);
         takeDamage(sprites, player);
+        
+        if(type ==3){
+        ml.updateWeaponsEnemy(this,player, sprites, collisions);
+        if(dist<100){
+            ml.shoot(sprites);
+
+
+        }
+        }
         }
     }
 
@@ -103,19 +116,12 @@ public class Enemy extends Boundary {
     }
 
     public Boundary takeDamage(Boundary[] sprites, Player player) {
-        /*for(int i = 0; i<sprites.length; i++){
-            if(sprites[i] !=null){
-            System.out.println(sprites[i].type);
-            }
-
-
-        }
-        System.exit(0);*/
+        
         for (int i = 0; i < sprites.length; i++) {
             if (sprites[i] != null) {
                 //System.out.println("es is nich null");
                 
-                if (sprites[i].type == 2 || sprites[i].type == 9 || sprites[i].type == 10) {
+                if (sprites[i].type == 2 || sprites[i].type == 9) {
                     int disttoBullet = (int) Math.sqrt(
                             Math.pow(posX - sprites[i].posX, 2) + Math.pow(posY - sprites[i].posY, 2));
                     System.out.println(disttoBullet);
@@ -129,10 +135,7 @@ public class Enemy extends Boundary {
                             health -= damage[1];
                             sprites[i] = null;
                         }
-                        else if(sprites[i].type == 10){
-                            health -= damage[2];
-                            sprites[i] = null;
-                        }
+                        
                         
 
                     }

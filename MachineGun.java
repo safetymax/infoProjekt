@@ -45,7 +45,7 @@ public class MachineGun extends Weapons {
         weaponShootable = true;
     }
     }
-    public void shoot(Boundary[] boundaries){
+    public void shoot(Boundary[] sprites){
         if(weaponShootable){
         
         if(magazine >0){
@@ -58,9 +58,9 @@ public class MachineGun extends Weapons {
                 }
             }
     
-                for(int i = 1; i < boundaries.length; i++){
-                    if(boundaries[i] == null){
-                        boundaries[i] = bullet;
+                for(int i = 1; i < sprites.length; i++){
+                    if(sprites[i] == null){
+                        sprites[i] = bullet;
                         break;
                     }
                 }

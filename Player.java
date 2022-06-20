@@ -29,9 +29,11 @@ public class Player {
     public double alpha;
     public double[][] hypotenuse = new double[900][905];
 
+    public int health;
     MachineGun mg = new MachineGun(150);
     Rifle rfl = new Rifle(150);
     Melee ml = new Melee(150);
+    float[] damage;
     SoundHandler ps = new SoundHandler();
     //DONT FORGET TO LOAD PIXELS INTO ARRAY
     File f1 = new File("wall.png");
@@ -90,6 +92,8 @@ public class Player {
         lastPos[0] = 10;
         lastPos[1] = 10;
         
+        health = 10;
+        damage = new float[]{1};
         //create Rays
         for(int i = 0; i < rays.length; i++) {
             rays[i] = new Ray(posX, posY, direction+Math.atan((rays.length/2-i)/(450/Math.tan(Math.toRadians(fov)/2))));
@@ -237,10 +241,10 @@ public class Player {
         
     }
     //shoot function
-    public void shootKey(boolean shoot, Boundary[] boundaries) {
+    public void shootKey(boolean shoot, Boundary[] sprites) {
 
         if(shoot){
-            mg.shoot(boundaries);
+            mg.shoot(sprites);
             //rfl.shoot(boundaries);
             //ml.shoot(boundaries);
         }
@@ -422,6 +426,47 @@ public class Player {
         mg.updateWeapons(this, sprites, collisions);
         rfl.updateWeapons(this, sprites, collisions);
         ml.updateWeapons(this, sprites, collisions);
+        takeDamage(sprites, this);
 
     }
+    public void takeDamage(Boundary[] sprites, Player player) {
+        System.out.println(health);
+        for (int i = 0; i < sprites.length; i++) {
+            if (sprites[i] != null) {
+                //System.out.println("es is nich null");
+                
+                if (sprites[i].type == 2 || sprites[i].type == 9) {
+                    int disttoBullet = (int) Math.sqrt(
+                            Math.pow(posX - sprites[i].posX, 2) + Math.pow(posY - sprites[i].posY, 2));
+                    System.out.println(disttoBullet);
+                    if (disttoBullet < 150) {
+                        System.out.println("ligma " + sprites[i].type);
+                        if(sprites[i].type == 10){
+                            health -= damage[0];
+                            sprites[i] = null;
+                        }
+                        
+                        
+                        
+
+                    }
+                    
+                        
+
+                    }
+                } 
+            }
+            
+            if (health <= 0) {
+                System.out.println("u ded");
+                System.exit(0);
+
+            } 
+            
+       
+        }
+       
+
+    
+    
 }
