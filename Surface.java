@@ -102,7 +102,7 @@ public class Surface extends JPanel implements Runnable {
 
         //ingame hub
 
-        hud.draw(g2d);
+        hud.draw(g2d, player);
         //save/load
         if(Overlay.save){
             saveScore();

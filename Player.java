@@ -33,6 +33,7 @@ public class Player {
     MachineGun mg = new MachineGun(150);
     Rifle rfl = new Rifle(150);
     Melee ml = new Melee(150);
+    int weaponType;
     float[] damage;
     SoundHandler ps = new SoundHandler();
     //DONT FORGET TO LOAD PIXELS INTO ARRAY
@@ -107,6 +108,7 @@ public class Player {
         health = 10;
         //0 = type 10; 1 = type 11;
         damage = new float[]{1,1,1};
+        weaponType = 1;
         //create Rays
         for(int i = 0; i < rays.length; i++) {
             rays[i] = new Ray(posX, posY, direction+Math.atan((rays.length/2-i)/(450/Math.tan(Math.toRadians(fov)/2))));
@@ -265,9 +267,16 @@ public class Player {
     public void shootKey(boolean shoot, Boundary[] sprites) {
 
         if(shoot){
-            mg.shoot(sprites);
-            //rfl.shoot(boundaries);
-            //ml.shoot(boundaries);
+            if(weaponType ==1){
+                mg.shoot(sprites);
+            } else if(weaponType == 2){
+                rfl.shoot(sprites);
+            } else if(weaponType == 3){
+                ml.shoot(sprites);
+            }
+            
+               
+           
         }
 
     }
