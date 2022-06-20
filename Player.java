@@ -484,7 +484,7 @@ public class Player {
             if (sprites[i] != null) {
                 
                 
-                if (sprites[i].type == 10 || sprites[i].type == 11 || sprites[i].type == 12) {
+                if (sprites[i].type == 10 || sprites[i].type == 14 || sprites[i].type == 12) {
                     int disttoBullet = (int) Math.sqrt(
                             Math.pow(posX - sprites[i].posX, 2) + Math.pow(posY - sprites[i].posY, 2));
                     if (disttoBullet < 32) {
