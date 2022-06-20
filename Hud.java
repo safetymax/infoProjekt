@@ -16,12 +16,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Image;
 import java.awt.Toolkit;
-public class Hub {
+public class Hud {
     private int munition;
 
   
     Image img1 = Toolkit.getDefaultToolkit().getImage("Heart.png");
     Image img2 = Toolkit.getDefaultToolkit().getImage("Muni.png");
+    Image img3 = Toolkit.getDefaultToolkit().getImage("Cross.png");
     public void draw(Graphics2D g2d){
         munition =  MachineGun.magazine;
         munition = Rifle.magazine;
@@ -47,6 +48,7 @@ public class Hub {
         g2d.drawImage(img2, 50 + 15*k, 800 + j, null);
         
     }
+    g2d.drawImage(img3,405,430,null);
     }
 
 }
