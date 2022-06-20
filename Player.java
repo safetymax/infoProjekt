@@ -240,8 +240,8 @@ public class Player {
     public void shootKey(boolean shoot, Boundary[] boundaries) {
 
         if(shoot){
-            //mg.shoot(boundaries);
-            rfl.shoot(boundaries);
+            mg.shoot(boundaries);
+            //rfl.shoot(boundaries);
             //ml.shoot(boundaries);
         }
 

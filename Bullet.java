@@ -30,6 +30,7 @@ public class Bullet extends Boundary{
 
 
         }
+        this.type = type;
     }
     public void moveBullet(Player player){
         double alpha;

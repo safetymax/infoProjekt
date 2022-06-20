@@ -130,7 +130,8 @@ hud.draw(g2d);
         for(int i = 0; i < sprites.length; i++){
             if(sprites[i] != null){
                 if(sprites[i].type == 3 || sprites[i].type == 4){
-                    ((Enemy)sprites[i]).move(sprites, player);
+                    ((Enemy)sprites[i]).update(sprites, player, collisions);
+                    //System.out.println(((Enemy)sprites[i]).health);
                 }
             }
         }
