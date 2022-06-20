@@ -32,9 +32,9 @@ public class VomitGun extends Weapons {
       
     }
     
-    public void shoot(Boundary[] boundaries){
+    public void shoot(Boundary[] boundaries,int type){
         if(weaponShootable){
-            Bullet bullet = new Bullet((int)x,(int) y, direction, 3f,5f, 12);
+            Bullet bullet = new Bullet((int)x,(int) y, direction, 3f,5f, type);
         
             for(int i = 0; i < b.length; i++){
                 if(b[i] == null){

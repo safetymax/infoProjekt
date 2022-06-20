@@ -45,7 +45,7 @@ public class MachineGun extends Weapons {
         weaponShootable = true;
     }
     }
-    public void shoot(Boundary[] sprites){
+    public void shoot(Boundary[] sprites, int type){
         if(weaponShootable){
         
         if(magazine >0){

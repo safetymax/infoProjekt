@@ -44,7 +44,7 @@ public class Rifle extends Weapons {
         weaponShootable = true;
     }
     }
-    public void shoot(Boundary[] boundaries){
+    public void shoot(Boundary[] boundaries, int type){
         
         
         if(weaponShootable){

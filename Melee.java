@@ -44,7 +44,7 @@ public class Melee extends Weapons {
         weaponShootable = true;
     }
     }
-    public void shoot(Boundary[] boundaries){
+    public void shoot(Boundary[] boundaries, int type){
         if(weaponShootable){
             Bullet bullet = new Bullet((int)x,(int) y, direction, 5f,5f, 10);
         
