@@ -82,7 +82,6 @@ public class Bullet extends Boundary{
         } else if(type == 10){
             if(Math.sqrt(Math.pow(x-lastPos[0],2) +Math.pow(y-lastPos[1],2)) > 50)  {
                 destroyBullet(boundaries);
-                System.out.println("plopp");
                 return null;
                 
             } else{

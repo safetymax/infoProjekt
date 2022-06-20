@@ -442,10 +442,10 @@ public class Player {
             if (sprites[i] != null) {
                 //System.out.println("es is nich null");
                 
-                if (sprites[i].type == 2 || sprites[i].type == 9) {
+                if (sprites[i].type == 10 ) {
                     int disttoBullet = (int) Math.sqrt(
                             Math.pow(posX - sprites[i].posX, 2) + Math.pow(posY - sprites[i].posY, 2));
-                    
+                    System.out.println("Distanz:" + disttoBullet);
                     if (disttoBullet < 150) {
                         
                         if(sprites[i].type == 10){

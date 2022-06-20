@@ -98,7 +98,11 @@ public class Enemy extends Boundary {
         takeDamage(sprites, player);
         
         if(type ==3){
-        ml.updateWeaponsEnemy(this,player, sprites, collisions);
+            try{
+            ml.updateWeaponsEnemy(this,player, sprites, collisions);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         if(dist<100){
             ml.shoot(sprites);
 
@@ -124,7 +128,7 @@ public class Enemy extends Boundary {
                 if (sprites[i].type == 2 || sprites[i].type == 9) {
                     int disttoBullet = (int) Math.sqrt(
                             Math.pow(posX - sprites[i].posX, 2) + Math.pow(posY - sprites[i].posY, 2));
-                    
+                        
                     if (disttoBullet < hitbox) {
                         if(sprites[i].type == 2){
                             health -= damage[0];
