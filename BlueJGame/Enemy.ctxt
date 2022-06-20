@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Enemy
+comment1.params=x\ y\ type
+comment1.target=Enemy(int,\ int,\ int)
+comment2.params=sprites\ player\ map\ dist
+comment2.target=void\ move(Boundary[],\ Player,\ int[][],\ double)
+comment3.params=sprites\ player\ collisions
+comment3.target=void\ update(Boundary[],\ Player,\ int[][])
+comment4.params=g2d
+comment4.target=void\ draw(java.awt.Graphics2D)
+comment5.params=sprites\ player
+comment5.target=void\ takeDamage(Boundary[],\ Player)
+comment6.params=x\ y
+comment6.target=void\ isHitByRay(int,\ int)
+comment7.params=x1\ y1\ x2\ y2
+comment7.target=void\ updatePosition(int,\ int,\ int,\ int)
+numComments=8

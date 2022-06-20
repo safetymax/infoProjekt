@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=SoundHandler
+comment1.params=
+comment1.target=SoundHandler()
+comment2.params=fileName\ param
+comment2.target=void\ playSound(java.lang.String,\ int)
+numComments=3

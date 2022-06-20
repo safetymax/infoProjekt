@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=LevelGeneration
+comment1.params=levelName
+comment1.target=java.lang.String[]\ readFile(java.lang.String)
+comment2.params=level\ startx\ starty\ size\ rows\ columns
+comment2.target=Boundary[]\ generateLevel(java.lang.String,\ int,\ int,\ int,\ int,\ int)
+comment3.params=level\ startx\ starty\ size\ rows\ columns
+comment3.target=int[][]\ generateLevelInt(java.lang.String,\ int,\ int,\ int,\ int,\ int)
+comment4.params=b
+comment4.target=Boundary[]\ removeDuplicateWalls(Boundary[])
+comment5.params=Enemies
+comment5.target=Enemy[]\ LoadEnemies(java.lang.String)
+comment6.params=level\ b\ s\ cols\ player
+comment6.target=int[][]\ loadNextLevel(int,\ Boundary[],\ Boundary[],\ int[][],\ Player)
+numComments=7

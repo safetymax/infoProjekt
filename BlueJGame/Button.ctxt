@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Button
+comment1.params=g2d\ x\ y\ widht\ hight\ bt\ text
+comment1.target=void\ draw(java.awt.Graphics2D,\ int,\ int,\ int,\ int,\ int,\ java.lang.String)
+comment2.params=g2d\ x\ y\ widht\ hight
+comment2.target=void\ selectedChange(java.awt.Graphics2D,\ int,\ int,\ int,\ int)
+comment3.params=g2d\ x\ y\ text\ size
+comment3.target=void\ write(java.awt.Graphics2D,\ int,\ int,\ java.lang.String,\ int)
+numComments=4

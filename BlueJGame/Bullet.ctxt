@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Bullet
+comment1.params=x\ y\ direction\ s\ d\ type
+comment1.target=Bullet(int,\ int,\ double,\ float,\ float,\ int)
+comment2.params=player
+comment2.target=void\ moveBullet(Player)
+comment3.params=g2d
+comment3.target=void\ draw(java.awt.Graphics2D)
+comment4.params=x\ y
+comment4.target=void\ isHitByRay(int,\ int)
+comment5.params=x1\ y1\ x2\ y2
+comment5.target=void\ updatePosition(int,\ int,\ int,\ int)
+comment6.params=g2d
+comment6.target=void\ drawBullet(java.awt.Graphics2D)
+comment7.params=b\ boundaries\ collisions
+comment7.target=Bullet\ isOutOfBounds(Bullet,\ Boundary[],\ int[][])
+comment8.params=boundaries
+comment8.target=void\ destroyBullet(Boundary[])
+numComments=9

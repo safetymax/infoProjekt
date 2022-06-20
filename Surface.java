@@ -17,7 +17,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import javafx.scene.text.Font;
 
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -54,7 +53,7 @@ public class Surface extends JPanel implements Runnable {
 
     int frameCount = 0;
 
-    public int currentLevel= 8;
+    public int currentLevel= 0;
 
     int levelScore = 0;
     int totalScore = 0;

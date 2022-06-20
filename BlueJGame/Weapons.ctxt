@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Weapons
+comment1.params=size
+comment1.target=Weapons(int)
+comment2.params=player\ boundaries\ collisions
+comment2.target=void\ updateWeapons(Player,\ Boundary[],\ int[][])
+comment3.params=boundaries\ type
+comment3.target=void\ shoot(Boundary[],\ int)
+numComments=4

@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=Player
+comment1.params=
+comment1.target=Player()
+comment2.params=up\ down\ left\ right\ lookLeft\ lookRight\ sprint\ map
+comment2.target=void\ move(boolean,\ boolean,\ boolean,\ boolean,\ boolean,\ boolean,\ boolean,\ int[][])
+comment3.params=shoot\ sprites
+comment3.target=void\ shootKey(boolean,\ Boundary[])
+comment4.params=reload
+comment4.target=void\ reload(boolean)
+comment5.params=g2d\ minimap
+comment5.target=void\ draw(java.awt.Graphics2D,\ boolean)
+comment6.params=boundaries\ sprites\ g2d
+comment6.target=void\ cast(Boundary[],\ Boundary[],\ java.awt.Graphics2D)
+comment7.params=spriteD\ spriteO
+comment7.target=void\ sortSprites(float[],\ int[])
+comment8.params=sprites\ collisions
+comment8.target=void\ updatePlayer(Boundary[],\ int[][])
+comment9.params=sprites\ player
+comment9.target=void\ takeDamage(Boundary[],\ Player)
+numComments=10

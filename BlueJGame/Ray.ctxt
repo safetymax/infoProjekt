@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Ray
+comment1.params=x\ y\ direction
+comment1.target=Ray(float,\ float,\ double)
+comment2.params=x\ y\ direction
+comment2.target=void\ update(float,\ float,\ double)
+comment3.params=boundaries\ g2d\ drawRay
+comment3.target=float[]\ cast(Boundary[],\ java.awt.Graphics2D,\ boolean)
+numComments=4

@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=MachineGun
+comment1.params=size
+comment1.target=MachineGun(int)
+comment2.params=player\ boundaries\ collisions
+comment2.target=void\ updateWeapons(Player,\ Boundary[],\ int[][])
+comment3.params=sprites\ type
+comment3.target=void\ shoot(Boundary[],\ int)
+comment4.params=g2d
+comment4.target=void\ drawWeapons(java.awt.Graphics2D)
+comment5.params=
+comment5.target=void\ reload()
+numComments=6
