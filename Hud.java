@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import java.awt.Image;
 import java.awt.Toolkit;
 public class Hud {
-    private int munition;
+    private int munition, health;
 
   
     Image img1 = Toolkit.getDefaultToolkit().getImage("Heart.png");
@@ -28,9 +28,10 @@ public class Hud {
     public void draw(Graphics2D g2d){
         munition =  MachineGun.magazine;
         munition = Rifle.magazine;
+        health = Player.health;
         int j = 0;
         int k = 0;
-        for(int i = 0; i < 9; i ++){
+        for(int i = 0; i < health; i ++){
         g2d.drawImage(img1, 620+25*i, 790, null);
         }
         for(int i = 0; i < 10; i ++){

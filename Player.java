@@ -29,7 +29,7 @@ public class Player {
     public double alpha;
     public double[][] hypotenuse = new double[900][905];
 
-    public int health;
+    public static int health;
     MachineGun mg = new MachineGun(150);
     Rifle rfl = new Rifle(150);
     Melee ml = new Melee(150);
