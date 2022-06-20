@@ -2,6 +2,8 @@ import java.io.Serializable;
 
 public class Storage implements Serializable {
     int VolumeA, SFXA, MusicA;
-    Surface surface;
+    int currentLevel;
+    int levelScore;
+    int totalScore;
    
 }

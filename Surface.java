@@ -16,8 +16,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Surface extends JPanel implements Runnable {
-    public static Surface surface;
-    public static boolean loaded;
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
 
@@ -49,7 +47,7 @@ public class Surface extends JPanel implements Runnable {
 
     int frameCount = 0;
 
-    int currentLevel= 1;
+    public int currentLevel= 1;
 
     int levelScore = 0;
     int totalScore = 0;
@@ -102,18 +100,18 @@ public class Surface extends JPanel implements Runnable {
         player.draw(g2d, keyH.controlPressed);
         player.cast(boundaries, sprites, g2d, keyH.controlPressed);
 
-//ingame hub
+        //ingame hub
 
-hud.draw(g2d);
-//save/load
-if(Overlay.save){
-    saveScore();
-    System.out.println("a");
-}
-if(Overlay.loading){
-    loadScore();
-    System.out.println("a");
-}
+        hud.draw(g2d);
+        //save/load
+        if(Overlay.save){
+            saveScore();
+            System.out.println("saving");
+        }
+        if(Overlay.loading){
+            loadScore();
+            System.out.println("loading");
+        }
 
         //overlay
       
@@ -231,10 +229,17 @@ if(Overlay.loading){
             ObjectOutputStream oos = new ObjectOutputStream(bos);
 
             Storage storage = new Storage();
-          
-            storage.surface = surface;
+            
+            storage.VolumeA = Overlay.VolumeA;
+            storage.SFXA = Overlay.SFXA;
+            storage.MusicA = Overlay.MusicA;
+            storage.currentLevel = currentLevel;
+            storage.levelScore = levelScore;
+            storage.totalScore = totalScore;
             oos.writeObject(storage);
             oos.close();
+
+            Overlay.save = false;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -247,10 +252,18 @@ if(Overlay.loading){
 
             Storage storage = (Storage) ois.readObject();
 
-            surface = storage.surface;
+            Overlay.VolumeA = storage.VolumeA;
+            Overlay.SFXA = storage.SFXA;
+            Overlay.MusicA = storage.MusicA;
+            currentLevel = storage.currentLevel;
+            levelScore = storage.levelScore;
+            totalScore = storage.totalScore;
 
             ois.close();
-
+            
+            Overlay.loading = false;
+            Overlay.enterA = 1;
+            collisions = LevelGeneration.loadNextLevel(currentLevel, boundaries, sprites, collisions, player);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -51,13 +51,13 @@ public class Overlay {
     public void drawMainMenue(Graphics2D g2d, Boolean down, Boolean right, Boolean up, Boolean left, boolean enter,
             Boolean menue) {
         if (!loadB) {
-            load();
+            //load();
         }
         if (menue && move) {
             pauseMenueB = true;
             downA = 10;
         }
-        save();
+        //save();
         // enter
         if (enter && counter > 10) {
 
@@ -368,9 +368,6 @@ if(enterA == 13){
            loading = true;
            move = true;
            mainMenue = true;
-        }
-        if(!Surface.loaded){
-            loading = false;
         }
         // Credits
         if (enterA == 4) {
@@ -716,47 +713,47 @@ options = true;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void save() {
-        try {
-            FileOutputStream fos = new FileOutputStream("save.bat");
-            BufferedOutputStream bos = new BufferedOutputStream(fos);
-            ObjectOutputStream oos = new ObjectOutputStream(bos);
+    // public void save() {
+    //     try {
+    //         FileOutputStream fos = new FileOutputStream("save.bat");
+    //         BufferedOutputStream bos = new BufferedOutputStream(fos);
+    //         ObjectOutputStream oos = new ObjectOutputStream(bos);
 
-            Storage storage = new Storage();
-            storage.VolumeA = VolumeA;
-            storage.SFXA = SFXA;
-            storage.MusicA = MusicA;
+    //         Storage storage = new Storage();
+    //         storage.VolumeA = VolumeA;
+    //         storage.SFXA = SFXA;
+    //         storage.MusicA = MusicA;
         
-            oos.writeObject(storage);
-            oos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    //         oos.writeObject(storage);
+    //         oos.close();
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+    // }
 
   
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void load() {
-        try {
-            FileInputStream fis = new FileInputStream("save.bat");
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            ObjectInputStream ois = new ObjectInputStream(bis);
+    // public void load() {
+    //     try {
+    //         FileInputStream fis = new FileInputStream("save.bat");
+    //         BufferedInputStream bis = new BufferedInputStream(fis);
+    //         ObjectInputStream ois = new ObjectInputStream(bis);
 
-            Storage storage = (Storage) ois.readObject();
+    //         Storage storage = (Storage) ois.readObject();
 
-            VolumeA = storage.VolumeA;
-            SFXA = storage.SFXA;
-            MusicA = storage.MusicA;
+    //         VolumeA = storage.VolumeA;
+    //         SFXA = storage.SFXA;
+    //         MusicA = storage.MusicA;
 
-            ois.close();
-            loadB = true;
+    //         ois.close();
+    //         loadB = true;
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
 
-    }
+    // }
    
 
 }
