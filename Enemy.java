@@ -30,18 +30,22 @@ public class Enemy extends Boundary {
         currentPos = new int[2];
         damage = new float[] { 5, 5, 5 };
         if (type == 3) {
-            hitbox = 32;
+            hitbox = 40;
             health = 15;
             ml = new Melee(150);
             maxdist =64;
         } else if (type == 4) {
 
-            hitbox = 32;
+            hitbox = 40;
             health = 10;
             vg = new VomitGun(150);
             maxdist = 280;
+        } else if (type == 11) {
+            hitbox= 40;
+            health =120;
+            vg = new VomitGun(150);
+            maxdist = 350;
         }
-
     }
 
     public void move(Boundary[] sprites, Player player, int[][] map, double dist) {
