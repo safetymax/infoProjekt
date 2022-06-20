@@ -66,7 +66,6 @@ public class MachineGun extends Weapons {
                 }
                 mgs.playSound("laserShoot",-1);
             } else{
-                System.out.println("U empty");
                 mgs.playSound("emptyMag",-1);
             }
             weaponShootable = false;

@@ -118,9 +118,8 @@ public class Enemy extends Boundary {
                 if (sprites[i].type == 2 || sprites[i].type == 9 || sprites[i].type == 10) {
                     int disttoBullet = (int) Math.sqrt(
                             Math.pow(posX - sprites[i].posX, 2) + Math.pow(posY - sprites[i].posY, 2));
-                    System.out.println(disttoBullet);
+                    //System.out.println(disttoBullet);
                     if (disttoBullet < hitbox) {
-                        System.out.println("ligma " + sprites[i].type);
                         if(sprites[i].type == 2){
                             health -= damage[0];
                             sprites[i] = null;
