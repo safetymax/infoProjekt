@@ -2,15 +2,22 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Surface extends JPanel implements Runnable {
-    
+    public static Surface surface;
+    public static boolean loaded;
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
 
@@ -98,6 +105,16 @@ public class Surface extends JPanel implements Runnable {
 //ingame hub
 
 hud.draw(g2d);
+//save/load
+if(Overlay.save){
+    saveScore();
+    System.out.println("a");
+}
+if(Overlay.loading){
+    loadScore();
+    System.out.println("a");
+}
+
         //overlay
       
         overlay.drawMainMenue(g2d, keyH.downPressed, keyH.rightPressed, keyH.upPressed, keyH.leftPressed, keyH.enterPressed, keyH.escapePressed);
@@ -206,6 +223,39 @@ hud.draw(g2d);
             }
         }
         
+    }
+    public void saveScore() {
+        try {
+            FileOutputStream fos = new FileOutputStream("save.bat");
+            BufferedOutputStream bos = new BufferedOutputStream(fos);
+            ObjectOutputStream oos = new ObjectOutputStream(bos);
+
+            Storage storage = new Storage();
+          
+            storage.surface = surface;
+            oos.writeObject(storage);
+            oos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void loadScore() {
+        try {
+            FileInputStream fis = new FileInputStream("save.bat");
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            ObjectInputStream ois = new ObjectInputStream(bis);
+
+            Storage storage = (Storage) ois.readObject();
+
+            surface = storage.surface;
+
+            ois.close();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
     
 }
