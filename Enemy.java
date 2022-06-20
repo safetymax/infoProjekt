@@ -88,7 +88,7 @@ public class Enemy extends Boundary {
 
     public void update(Boundary[] sprites, Player player, int[][] collisions) {
         double dist = Math.sqrt(Math.pow(posY - player.posY, 2) + Math.pow(posX - player.posX, 2));
-        if(dist<500){
+        if(dist<400){
         move(sprites, player, collisions,dist);
         takeDamage(sprites, player);
         
