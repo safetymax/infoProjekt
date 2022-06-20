@@ -161,7 +161,8 @@ public class Surface extends JPanel implements Runnable {
             frameCount = 0;
             player.touchedDoor = false;
             player.health = 10;
-            if(currentLevel == 4){
+            System.out.println(currentLevel);
+            if(currentLevel == 3){
                 player.weaponType =2;
             }
         }
