@@ -134,7 +134,7 @@ public class Surface extends JPanel implements Runnable {
         player.reload(keyH.rPressed);
         for(int i = 0; i < sprites.length; i++){
             if(sprites[i] != null){
-                if(sprites[i].type == 3 || sprites[i].type == 4){
+                if(sprites[i].type == 3 || sprites[i].type == 4 || sprites[i].type == 11){
                     ((Enemy)sprites[i]).update(sprites, player, collisions);
                     
                 }

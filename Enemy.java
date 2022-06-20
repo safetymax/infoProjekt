@@ -197,6 +197,20 @@ public class Enemy extends Boundary {
                     enemiesDead = false;
                 }
             }
+            if(type == 3){
+                for(int j = 0;j<ml.b.length;j++){
+                    if(sprites[i] == ml.b[j]){
+                        sprites[i] = null;
+                    }
+                }
+            }
+            else if(type == 4){
+                for(int j = 0;j<vg.b.length;j++){
+                    if(sprites[i] == vg.b[j]){
+                        sprites[i] = null;
+                    }
+                }
+            }
         }
         if(enemiesDead){
             player.isFinished = true;
