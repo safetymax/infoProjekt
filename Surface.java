@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -12,9 +13,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import javafx.scene.text.Font;
+
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 public class Surface extends JPanel implements Runnable {
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
@@ -53,6 +60,10 @@ public class Surface extends JPanel implements Runnable {
     int totalScore = 0;
 
     boolean playedDoorSound = false;
+    File f1 = new File("DeathScreen.png");
+    BufferedImage endscreen;
+   
+    boolean hasWon = false;
     public Surface() {
         //Setup function, runs before game loop (Put everything in here that is only supposed to run once)
         addKeyListener(keyH);
@@ -63,6 +74,11 @@ public class Surface extends JPanel implements Runnable {
 
         Overlay.surface = this;
         Overlay.keyH = keyH;
+        try{
+        endscreen = ImageIO.read(f1);
+        }catch(IOException e){
+            System.out.println("Error loading endscreen");
+        }
     }
 
     private void doDrawing(Graphics g) {
@@ -108,9 +124,28 @@ public class Surface extends JPanel implements Runnable {
         player.draw(g2d, true); //draw player on minimap
       
         overlay.drawMainMenue(g2d, keyH.downPressed, keyH.rightPressed, keyH.upPressed, keyH.leftPressed, keyH.enterPressed, keyH.escapePressed);
-        
+        if(player.health <=0) {
+            g2d.drawImage(endscreen, null, 0, 0);
+            
+           
+            
+            g2d.drawString("Dein Score:" +totalScore, 400, 800);
+            Overlay.move = false;
+            
+            
+        }
+        if(hasWon){
+            g2d.setPaint(Color.BLACK);
+            g2d.drawRect(0,0,900,900);
+            g2d.drawString("Dein Score:" +totalScore, 400, 450);
+            Overlay.move = false;
+
+
+        }
         //debug
         g2d.dispose();
+
+        
     }
 
     @Override
@@ -164,6 +199,10 @@ public class Surface extends JPanel implements Runnable {
             System.out.println("Level Score: " + levelScore);
             totalScore += levelScore;
             currentLevel++;
+            if(currentLevel == 9){
+                hasWon = true;
+
+            } else if(currentLevel <9){
             collisions =LevelGeneration.loadNextLevel(currentLevel, boundaries, sprites, collisions, player);
             frameCount = 0;
             player.touchedDoor = false;
@@ -173,6 +212,7 @@ public class Surface extends JPanel implements Runnable {
             if(currentLevel == 3){
                 player.weaponType =2;
             }
+        }   
         }
     }
 

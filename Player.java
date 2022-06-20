@@ -501,11 +501,7 @@ public class Player {
                 } 
             }
             
-            if (health <= 0) {
-                System.out.println("u ded");
-                System.exit(0);
-
-            } 
+            
             
        
         }

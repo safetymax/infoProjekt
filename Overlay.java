@@ -27,7 +27,7 @@ public class Overlay {
     private boolean a, b, c, d, e, f, g, h, i, j, downB, optionsB, BindingsB, SoundB, VolumeB, SFXB, MusicB, counterB,
             enterVolume, enterSFX, enterMusic, loadB, pauseMenueB,options;
 
-    private static boolean move,mainMenue;
+    public static boolean move,mainMenue;
     Image img1 = Toolkit.getDefaultToolkit().getImage("Bild.png");
 
     Image img5 = Toolkit.getDefaultToolkit().getImage("Sound 3.png");
