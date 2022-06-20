@@ -115,7 +115,7 @@ public class Enemy extends Boundary {
             vg.updateWeaponsEnemy(this, player, sprites, collisions);
             if(dist<300){
 
-                vg.shoot(sprites, 13);
+                vg.shoot(sprites, 14);
 
             }
 
