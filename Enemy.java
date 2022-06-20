@@ -32,12 +32,12 @@ public class Enemy extends Boundary {
             hitbox = 32;
             health = 15;
             ml = new Melee(150);
-            vg = new VomitGun(150);
+            
         } else if (type == 4) {
 
             hitbox = 32;
             health = 10;
-
+            vg = new VomitGun(150);
         }
 
     }

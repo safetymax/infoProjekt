@@ -54,7 +54,7 @@ public class VomitGun extends Weapons {
                
             
             weaponShootable = false;
-            weaponCooldown = frameCount%20;
+            weaponCooldown = frameCount%85;
         
             } 
         } 
