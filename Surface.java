@@ -28,7 +28,7 @@ public class Surface extends JPanel implements Runnable {
     boolean overlayActive = true;
 
     Overlay overlay = new Overlay();
-    Hub hub = new Hub();
+    Hud hud = new Hud();
     
     //Empty level Information
     String[] info;
@@ -97,7 +97,7 @@ public class Surface extends JPanel implements Runnable {
 
 //ingame hub
 
-hub.draw(g2d);
+hud.draw(g2d);
         //overlay
       
         overlay.drawMainMenue(g2d, keyH.downPressed, keyH.rightPressed, keyH.upPressed, keyH.leftPressed, keyH.enterPressed, keyH.escapePressed);
