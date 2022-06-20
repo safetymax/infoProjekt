@@ -17,7 +17,7 @@ public class Enemy extends Boundary {
     double alpha;
     SoundHandler es = new SoundHandler();
     Melee ml;
-
+    VomitGun vg;
     public Enemy(int x, int y, int type) {
         super(x, y, x, y, x + 100, y + 100, type);
         // 3.141
@@ -27,14 +27,14 @@ public class Enemy extends Boundary {
         lastPos[1] = 10;
         this.type = type;
         currentPos = new int[2];
-        damage = new float[]{5,5,5};
+        damage = new float[] { 5, 5, 5 };
         if (type == 3) {
             hitbox = 32;
             health = 15;
             ml = new Melee(150);
-
+            vg = new VomitGun(150);
         } else if (type == 4) {
-            
+
             hitbox = 32;
             health = 10;
 
@@ -43,10 +43,7 @@ public class Enemy extends Boundary {
     }
 
     public void move(Boundary[] sprites, Player player, int[][] map, double dist) {
-        
-        
 
-        
         if (dist > 64) {
             alpha = Math.atan2((posY - player.posY), (posX - player.posX)) + Math.PI;
             posX += Math.cos(alpha) * speed;
@@ -56,27 +53,22 @@ public class Enemy extends Boundary {
         float distX = posX - lastPos[0];
         float distY = posY - lastPos[1];
 
-        if(map[(int)posY/64][(int)posX/64] == 1 || map[(int)posY/64][(int)posX/64] == 2){
-            //slide on walls / ignore one axis
-            if(map[(int)currentPos[1]/64][(int)posX/64] == 0) {
+        if (map[(int) posY / 64][(int) posX / 64] == 1 || map[(int) posY / 64][(int) posX / 64] == 2) {
+            // slide on walls / ignore one axis
+            if (map[(int) currentPos[1] / 64][(int) posX / 64] == 0) {
                 posY = currentPos[1];
-            }
-            else if(map[(int)posY/64][(int)currentPos[0]/64] == 0) {
+            } else if (map[(int) posY / 64][(int) currentPos[0] / 64] == 0) {
                 posX = currentPos[0];
-            }
-            else {
+            } else {
                 posX = currentPos[0];
                 posY = currentPos[1];
             }
         }
-        if(map[(int)posY/64][(int)posX/64] == 0) {
+        if (map[(int) posY / 64][(int) posX / 64] == 0) {
             currentPos[0] = posX;
             currentPos[1] = posY;
         }
-        
-        
-        
-        
+
         if (Math.sqrt(Math.pow(distX, 2) + Math.pow(distY, 2)) > 50) {
             lastPos[0] = posX;
             lastPos[1] = posY;
@@ -98,20 +90,21 @@ public class Enemy extends Boundary {
         takeDamage(sprites, player);
         
         if(type ==3){
-            try{
             ml.updateWeaponsEnemy(this,player, sprites, collisions);
-            }catch(Exception e){
-                e.printStackTrace();
+            if(dist<100){
+                ml.shoot(sprites);
+
+
             }
-        if(dist<100){
-            ml.shoot(sprites);
-
-
-        }
-        }
-        }
+        } else if(type ==4){
+            
+            vg.updateWeaponsEnemy(this,player, sprites, collisions);
+            if(dist<300){
+                vg.shoot(sprites);
+            }
+        } else{}
     }
-
+    }
     @Override
     public void draw(Graphics2D g2d) {
         // g2d.setPaint(new Color(60f/255f,60f/255f,60f/255f));
@@ -120,53 +113,43 @@ public class Enemy extends Boundary {
     }
 
     public Boundary takeDamage(Boundary[] sprites, Player player) {
-        
+
         for (int i = 0; i < sprites.length; i++) {
             if (sprites[i] != null) {
-                
-                
+
                 if (sprites[i].type == 2 || sprites[i].type == 9) {
                     int disttoBullet = (int) Math.sqrt(
                             Math.pow(posX - sprites[i].posX, 2) + Math.pow(posY - sprites[i].posY, 2));
-                        
+
                     if (disttoBullet < hitbox) {
-                        if(sprites[i].type == 2){
+                        if (sprites[i].type == 2) {
                             health -= damage[0];
                             sprites[i] = null;
-                        }
-                        else if(sprites[i].type == 9){
+                        } else if (sprites[i].type == 9) {
                             health -= damage[1];
                             sprites[i] = null;
                         }
-                        
-                        
 
                     }
-                    
-                        
 
-                    }
-                } 
+                }
             }
-            
-            if (health <= 0) {
-                for(int i = 0; i<sprites.length; i++){
-                    if(sprites[i] == this){
-                        sprites[i] = null;
+        }
 
-                    }
-
+        if (health <= 0) {
+            for (int i = 0; i < sprites.length; i++) {
+                if (sprites[i] == this) {
+                    sprites[i] = null;
 
                 }
 
-            } 
-            return this;
-       
-        }
-       
+            }
 
-    
-    
+        }
+        return this;
+
+    }
+
     // called when a Ray hits the wall
     public void isHitByRay(int x, int y) {
     }
@@ -174,4 +157,3 @@ public class Enemy extends Boundary {
     public void updatePosition(int x1, int y1, int x2, int y2) {
     }
 }
-
