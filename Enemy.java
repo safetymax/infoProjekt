@@ -19,6 +19,7 @@ public class Enemy extends Boundary {
     SoundHandler es = new SoundHandler();
     Melee ml;
     VomitGun vg;
+    BoxThrower bx;
     public Enemy(int x, int y, int type) {
         super(x, y, x, y, x + 100, y + 100, type);
         // 3.141
@@ -45,6 +46,13 @@ public class Enemy extends Boundary {
             health =120;
             vg = new VomitGun(150);
             maxdist = 350;
+        } else if(type == 13){
+            hitbox = 40;
+            health =200;
+            bx = new BoxThrower(150);
+            maxdist = 250;
+
+
         }
     }
 
@@ -120,11 +128,16 @@ public class Enemy extends Boundary {
             }
 
 
-        }
+        } else if(type ==13){
+            bx.updateWeaponsEnemy(this, player, sprites, collisions);
+            if(dist<350){
+                bx.shoot(sprites, 15);
+            }
+        
+        
     }
     }
-
-    
+}
     public void draw(Graphics2D g2d) {
     }
 

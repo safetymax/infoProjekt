@@ -47,7 +47,7 @@ public class Surface extends JPanel implements Runnable {
 
     int frameCount = 0;
 
-    public int currentLevel= 0;
+    public int currentLevel= 8;
 
     int levelScore = 0;
     int totalScore = 0;
@@ -136,7 +136,7 @@ public class Surface extends JPanel implements Runnable {
         player.reload(keyH.rPressed);
         for(int i = 0; i < sprites.length; i++){
             if(sprites[i] != null){
-                if(sprites[i].type == 3 || sprites[i].type == 4 || sprites[i].type == 11){
+                if(sprites[i].type == 3 || sprites[i].type == 4 || sprites[i].type == 11 || sprites[i].type == 13){
                     ((Enemy)sprites[i]).update(sprites, player, collisions);
                     
                 }
