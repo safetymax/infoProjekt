@@ -451,7 +451,6 @@ public class Player {
                 if (sprites[i].type == 10 ) {
                     int disttoBullet = (int) Math.sqrt(
                             Math.pow(posX - sprites[i].posX, 2) + Math.pow(posY - sprites[i].posY, 2));
-                    System.out.println("Distanz:" + disttoBullet);
                     if (disttoBullet < 150) {
                         
                         if(sprites[i].type == 10){

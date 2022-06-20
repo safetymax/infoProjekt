@@ -89,7 +89,7 @@ public class Melee extends Weapons {
                   b[i] = b[i].isOutOfBounds(b[i], sprites, collisions);
               }
          }
-         if (frameCount % 100 == (0 + weaponCooldown) && !weaponShootable) {
+         if (frameCount % 85 == (0 + weaponCooldown) && !weaponShootable) {
           weaponShootable = true;
       }
       }
