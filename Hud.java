@@ -23,14 +23,19 @@ public class Hud {
     Image img1 = Toolkit.getDefaultToolkit().getImage("Heart.png");
     Image img2 = Toolkit.getDefaultToolkit().getImage("Muni.png");
     Image img3 = Toolkit.getDefaultToolkit().getImage("Cross.png");
+    Image img4 = Toolkit.getDefaultToolkit().getImage("Heart2.png");
+    Image img5 = Toolkit.getDefaultToolkit().getImage("Gun.png");
     public void draw(Graphics2D g2d){
         munition =  MachineGun.magazine;
         munition = Rifle.magazine;
         int j = 0;
         int k = 0;
-        for(int i = 0; i < 10; i ++){
-        g2d.drawImage(img1, 700+15*i, 800, null);
+        for(int i = 0; i < 9; i ++){
+        g2d.drawImage(img1, 620+25*i, 790, null);
         }
+        for(int i = 0; i < 10; i ++){
+            g2d.drawImage(img4, 620+25*i, 790, null);
+            }
         for(int i = 0; i < munition; i ++){
            if(i <10){
             k = i;
@@ -49,6 +54,8 @@ public class Hud {
         
     }
     g2d.drawImage(img3,405,430,null);
+    g2d.drawImage(img5, 135, 400, null);
     }
+   
 
 }

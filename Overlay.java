@@ -21,6 +21,8 @@ public class Overlay {
     public static KeyHandler keyH;
     public static int downA, enterA, optionsA, counter, BindingsA, SoundA, VolumeA, SFXA, MusicA;
     public static Surface surface;
+    public static boolean loading;
+    public static boolean save;
 
     private boolean a, b, c, d, e, f, g, h, i, j, downB, optionsB, BindingsB, SoundB, VolumeB, SFXB, MusicB, counterB,
             enterVolume, enterSFX, enterMusic, loadB, pauseMenueB,options;
@@ -363,11 +365,13 @@ if(enterA == 13){
             VolumeB = false;
             SFXB = false;
             MusicB = false;
-            loadScore();
+           loading = true;
            move = true;
            mainMenue = true;
         }
-
+        if(!Surface.loaded){
+            loading = false;
+        }
         // Credits
         if (enterA == 4) {
             downB = false;
@@ -438,14 +442,17 @@ options = false;
                 optionsA = 0;
             } else if (downA == 12) {
                 button3.selectedChange(g2d, 300, 410, 300, 45);
-                
+                save = true;
             }
         }
+    
         }
+        
         // quit
         if (enterA == 5) {
-saveScore();
+            
             System.exit(0);
+           
         }
     }
 
@@ -727,21 +734,7 @@ options = true;
         }
     }
 
-    public void saveScore() {
-        try {
-            FileOutputStream fos = new FileOutputStream("save.bat");
-            BufferedOutputStream bos = new BufferedOutputStream(fos);
-            ObjectOutputStream oos = new ObjectOutputStream(bos);
-
-            Storage storage = new Storage();
-          
-            storage.surface = surface;
-            oos.writeObject(storage);
-            oos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+  
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void load() {
@@ -764,23 +757,6 @@ options = true;
         }
 
     }
-    public void loadScore() {
-        try {
-            FileInputStream fis = new FileInputStream("save.bat");
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            ObjectInputStream ois = new ObjectInputStream(bis);
-
-            Storage storage = (Storage) ois.readObject();
-
-            surface = storage.surface;
-
-            ois.close();
-            loadB = true;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
+   
 
 }
