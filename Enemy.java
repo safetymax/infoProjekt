@@ -96,7 +96,7 @@ public class Enemy extends Boundary {
         if(type ==3){
             ml.updateWeaponsEnemy(this,player, sprites, collisions);
             if(dist<100){
-                ml.shoot(sprites);
+                ml.shoot(sprites, -1);
 
 
             }
@@ -104,9 +104,19 @@ public class Enemy extends Boundary {
             
             vg.updateWeaponsEnemy(this,player, sprites, collisions);
             if(dist<300){
-                vg.shoot(sprites);
+                vg.shoot(sprites, 12);
             }
-        } else{}
+
+        } else if(type ==11){
+            vg.updateWeaponsEnemy(this, player, sprites, collisions);
+            if(dist<300){
+
+                vg.shoot(sprites, 13);
+
+            }
+
+
+        }
     }
     }
     @Override

@@ -26,7 +26,7 @@ public abstract class Weapons {
     }
 
     public abstract void updateWeapons(Player player, Boundary[] boundaries, int[][] collisions);
-    public abstract void shoot(Boundary[] boundaries);
+    public abstract void shoot(Boundary[] boundaries, int type);
     
 
 }

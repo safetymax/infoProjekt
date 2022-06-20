@@ -268,11 +268,11 @@ public class Player {
 
         if(shoot){
             if(weaponType ==1){
-                mg.shoot(sprites);
+                mg.shoot(sprites, -1);
             } else if(weaponType == 2){
-                rfl.shoot(sprites);
+                rfl.shoot(sprites, -1);
             } else if(weaponType == 3){
-                ml.shoot(sprites);
+                ml.shoot(sprites, -1);
             }
             
                
