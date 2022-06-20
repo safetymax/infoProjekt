@@ -9,6 +9,7 @@ public class SoundHandler{
     AudioInputStream alien2Walking = null;
     AudioInputStream doorOpen = null;
     AudioInputStream emptyMag = null;
+    AudioInputStream melee = null;
     
     Clip playerWalkingclip = null;
     Clip laserShootclip = null;
@@ -16,13 +17,15 @@ public class SoundHandler{
     Clip alien2Walkingclip = null;
     Clip doorOpenclip = null;
     Clip emptyMagclip = null;
-    
+    Clip meleeclip = null;
+
     FloatControl laserShootvolume;
     FloatControl playerWalkingvolume;
     FloatControl alien1Walkingvolume;
     FloatControl alien2Walkingvolume;
     FloatControl doorOpenvolume;
     FloatControl emptyMagvolume;
+    FloatControl meleevolume;
     public SoundHandler(){
         try{
             laserShoot = AudioSystem.getAudioInputStream(new File("laserShoot.wav").getAbsoluteFile());
@@ -48,6 +51,10 @@ public class SoundHandler{
             emptyMag = AudioSystem.getAudioInputStream(new File("emptyMag.wav").getAbsoluteFile());
             emptyMagclip = AudioSystem.getClip();
             emptyMagclip.open(emptyMag);
+
+            melee = AudioSystem.getAudioInputStream(new File("melee.wav").getAbsoluteFile());
+            meleeclip = AudioSystem.getClip();
+            meleeclip.open(melee);
             
             
             laserShootvolume = (FloatControl) laserShootclip.getControl(FloatControl.Type.MASTER_GAIN);
@@ -56,6 +63,7 @@ public class SoundHandler{
             alien2Walkingvolume = (FloatControl) alien2Walkingclip.getControl(FloatControl.Type.MASTER_GAIN);
             doorOpenvolume = (FloatControl) doorOpenclip.getControl(FloatControl.Type.MASTER_GAIN);
             emptyMagvolume = (FloatControl) emptyMagclip.getControl(FloatControl.Type.MASTER_GAIN);
+            meleevolume = (FloatControl) meleeclip.getControl(FloatControl.Type.MASTER_GAIN);
         
         }catch(Exception e){
 
@@ -80,7 +88,7 @@ public class SoundHandler{
                 playerWalkingclip.start();
 
             } else if(fileName == "alien1Walking"){
-                alien1Walkingvolume.setValue((-30f/totalVolumeSFX)*(param/200));
+                alien1Walkingvolume.setValue(-40f/totalVolumeSFX);
                 alien1Walkingclip.setFramePosition(0);
                 alien1Walkingclip.start();
                 
@@ -102,6 +110,11 @@ public class SoundHandler{
                 emptyMagclip.start();
                 
 
+            } else if(fileName == "melee"){
+                meleevolume.setValue(-25f/totalVolumeSFX);
+                meleeclip.setFramePosition(0);
+                meleeclip.start();
+                
             }
             
         

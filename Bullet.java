@@ -13,6 +13,7 @@ public class Bullet extends Boundary{
     public double direction;
     public float speed;
     public float damage;
+    public float[] lastPos;
     public Bullet(int x, int y, double direction, float s, float d, int type) {
         super(x, y ,x, y, x+5, y+5,type);
         this.x = x;
@@ -20,7 +21,15 @@ public class Bullet extends Boundary{
         this.direction = direction;
         this.speed = s;
         this.damage = d;
-        
+        if(type == 10){
+            lastPos = new float[2];
+            lastPos[0] = x;
+            lastPos[1] = y;
+            
+
+
+
+        }
     }
     public void moveBullet(Player player){
         double alpha;
@@ -35,7 +44,9 @@ public class Bullet extends Boundary{
         x1 = (int) (Math.cos(Math.PI-alpha) * (-32) + x);
         y1 = (int) (Math.sin(Math.PI-alpha) * (-32) + y);
         x2 = (int) (Math.cos(Math.PI-alpha) * 32 + x);
-        y2 = (int) (Math.sin(Math.PI-alpha) * 32 + y);      
+        y2 = (int) (Math.sin(Math.PI-alpha) * 32 + y);     
+        
+        
     }
     public void draw(Graphics2D g2d){
         g2d.setPaint(Color.RED);
@@ -70,9 +81,21 @@ public class Bullet extends Boundary{
             destroyBullet(boundaries);
             
             return null;
-        }else{
-            return b;
+        } else if(type == 10){
+            if(Math.sqrt(Math.pow(x-lastPos[0],2) +Math.pow(y-lastPos[1],2)) > 50)  {
+                destroyBullet(boundaries);
+                System.out.println("plopp");
+                return null;
+                
+            } else{
+                return b;
+
+
+            }
         }
+        else{
+            return b;
+        } 
         
     }
 
