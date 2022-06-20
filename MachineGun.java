@@ -15,7 +15,7 @@ public class MachineGun extends Weapons {
     float y;
     double direction;
     Bullet b[] = new Bullet[1000];
-    int totalAmmo = 250;
+    
     static int magazine = 25;
     int frameCount = 0;
     SoundHandler mgs = new SoundHandler();
@@ -46,6 +46,8 @@ public class MachineGun extends Weapons {
     }
     }
     public void shoot(Boundary[] boundaries){
+        if(weaponShootable){
+        
         if(magazine >0){
             Bullet bullet = new Bullet((int)x,(int) y, direction, 5f,5f, 2);
             magazine--;
@@ -70,7 +72,7 @@ public class MachineGun extends Weapons {
             weaponShootable = false;
             weaponCooldown = frameCount%20;
         }
-        
+    }
     public void drawWeapons(Graphics2D g2d){
         for(int i = 0; i < b.length; i++){
             if(b[i] != null){
@@ -80,7 +82,7 @@ public class MachineGun extends Weapons {
     }
     public void reload(){
         
-        totalAmmo = totalAmmo -(25-magazine);
+        
         magazine = 25;
 
 

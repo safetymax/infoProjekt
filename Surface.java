@@ -42,7 +42,7 @@ public class Surface extends JPanel implements Runnable {
 
     int frameCount = 0;
 
-    int currentLevel= 3;
+    int currentLevel= 1;
 
     int levelScore = 0;
     int totalScore = 0;

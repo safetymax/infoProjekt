@@ -15,7 +15,7 @@ public class Rifle extends Weapons {
     float y;
     double direction;
     Bullet b[] = new Bullet[1000];
-    int totalAmmo = 100;
+    
     static int magazine = 15;
     int frameCount = 0;
     SoundHandler mgs = new SoundHandler();
@@ -40,7 +40,7 @@ public class Rifle extends Weapons {
                 b[i] = b[i].isOutOfBounds(b[i], boundaries, collisions);
             }
        }
-       if (frameCount % 25 == (0 + weaponCooldown) && !weaponShootable) {
+       if (frameCount % 30 == (0 + weaponCooldown) && !weaponShootable) {
         weaponShootable = true;
     }
     }
@@ -70,7 +70,7 @@ public class Rifle extends Weapons {
                 mgs.playSound("emptyMag",-1);
             }
             weaponShootable = false;
-            weaponCooldown = frameCount%20;
+            weaponCooldown = frameCount%30;
         }
         
         
@@ -85,7 +85,7 @@ public class Rifle extends Weapons {
     }
     public void reload(){
         
-        totalAmmo = totalAmmo -(15-magazine);
+        
         magazine = 15;
 
 
