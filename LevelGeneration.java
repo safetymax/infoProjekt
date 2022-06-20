@@ -161,7 +161,7 @@ public class LevelGeneration {
     
     public static int[][] loadNextLevel(int level, Boundary[] b, Boundary[] s, int[][] cols, Player player){
         
-        String[] levels = new String[]{"Level1.txt", "Level2.txt","Level3.txt","Level4.txt"};
+        String[] levels = new String[]{"Level1.txt", "Level2.txt","Level3.txt","Level4.txt","level5.txt","level6.txt"};
         
         String[] nextLevelInfo = null;
         int[][] nextcols = null;
