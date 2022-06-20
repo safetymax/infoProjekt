@@ -69,10 +69,10 @@ public class Bullet extends Boundary{
     }
     // 900 is window size
     public Bullet isOutOfBounds(Bullet b, Boundary[] boundaries, int[][] collisions){
-        /*if(b.x < 0 || b.x > 900 || b.y < 0 || b.y > 900){
+        if(b.x < 0 || b.x > collisions.length*64 || b.y < 0 || b.y > collisions.length*64){
             destroyBullet(boundaries);
             return null;
-        }*/
+        }
         
         
         if(collisions[(int)y/64][(int)x/64] == 1) {
