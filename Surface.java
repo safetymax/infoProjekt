@@ -147,7 +147,6 @@ public class Surface extends JPanel implements Runnable {
             sound.playSound("doorOpen", -1);
             playedDoorSound = true;
             }
-        }
             for(int i = 0; i<boundaries.length; i++){
                 if(boundaries[i] !=null){
                     if(boundaries[i].type == 5){
@@ -156,6 +155,8 @@ public class Surface extends JPanel implements Runnable {
 
                 }
             }
+        }
+            
             
         
         if(player.touchedDoor){
